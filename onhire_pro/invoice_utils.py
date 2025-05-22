@@ -35,8 +35,8 @@ def get_damage_charges_for_rental_job(rental_job_name):
                 if rule.charge_type == "Fixed Amount":
                     charge_amount = rule.fixed_charge_amount
                 elif rule.charge_type == "Percentage of Item Value":
-                    item_value = frappe.db.get_value("Item Price", {"item_code": ca.item_code, "price_list": frappe.db.get_single_value("Buying Settings", "buying_price_list")}, "price_list_rate") or 
-                                 frappe.db.get_value("Item", ca.item_code, "standard_rate") or 0
+                    item_value = frappe.db.get_value("Item Price", {"item_code": ca.item_code, "price_list": frappe.db.get_single_value("Buying Settings", "buying_price_list")}, "price_list_rate") \
+                                 or frappe.db.get_value("Item", ca.item_code, "standard_rate") or 0
                     charge_amount = (flt(item_value) * flt(rule.percentage_of_item_value)) / 100
                 # Add other charge types if necessary (e.g., Replacement Cost)
             elif ca.estimated_repair_cost and flt(ca.estimated_repair_cost) > 0:
