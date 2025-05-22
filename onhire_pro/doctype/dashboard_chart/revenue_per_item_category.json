@@ -1,0 +1,18 @@
+{
+    "doctype": "Dashboard Chart",
+    "name": "Revenue per Item Category",
+    "chart_name": "Revenue per Item Category",
+    "chart_type": "Bar",
+    "source": "DCS - Revenue per Item Category",
+    "report_name": null,
+    "timeseries": 0,
+    "time_interval": "Daily",
+    "filters_json": "{}",
+    "custom_options": "{}",
+    "module": "OnHire Pro",
+    "owner": "Administrator",
+    "restrict_to_roles": [
+        "Finance Manager",
+        "Sales Manager"
+    ]
+}

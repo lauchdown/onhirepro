@@ -1,0 +1,15 @@
+{
+    "doctype": "Dashboard Chart Source",
+    "name": "DCS - Jobs Due for Dispatch",
+    "chart_name": "Jobs Due for Dispatch",
+    "source_name": "DCS - Jobs Due for Dispatch",
+    "report_name": null,
+    "timeseries": 0,
+    "time_interval": "Daily",
+    "filters_json": "{}",
+    "data_source_type": "Python Method",
+    "source_type": "Python Method",
+    "method_name": "onhire_pro.utils.kpi_calculations.calculate_jobs_due_dispatch",
+    "cache_seconds": 300,
+    "module": "OnHire Pro"
+}

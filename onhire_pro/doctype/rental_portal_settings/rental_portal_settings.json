@@ -1,0 +1,562 @@
+{
+ "actions": [],
+ "allow_rename": 0,
+ "creation": "2025-05-16 15:00:00.000000",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "general_settings_section",
+  "enable_rental_portal",
+  "portal_title",
+  "portal_description",
+  "company",
+  "column_break_5",
+  "enable_sales_catalog",
+  "enable_rental_catalog",
+  "enable_booking_requests",
+  "enable_document_access",
+  "pricing_calculation_section",
+  "weekly_rate_multiplier",
+  "monthly_rate_multiplier",
+  "column_break_12",
+  "default_tax_rate",
+  "enable_price_comparison",
+  "user_authentication_section",
+  "allow_guest_browsing",
+  "require_login_for_booking",
+  "enable_registration",
+  "column_break_18",
+  "default_customer_group",
+  "default_territory",
+  "portal_navigation_section",
+  "show_dashboard_link",
+  "show_bookings_link",
+  "show_rentals_link",
+  "column_break_24",
+  "show_calendar_link",
+  "show_documents_link",
+  "show_profile_link",
+  "rental_catalog_section",
+  "default_sort_field",
+  "default_sort_order",
+  "items_per_page",
+  "column_break_31",
+  "show_availability_indicator",
+  "show_pricing_options",
+  "enable_advanced_search",
+  "sales_catalog_section",
+  "sales_items_per_page",
+  "sales_default_sort_field",
+  "sales_default_sort_order",
+  "column_break_38",
+  "show_stock_availability",
+  "enable_sales_item_selection",
+  "sales_item_selection",
+  "booking_request_section",
+  "min_booking_days",
+  "max_booking_days",
+  "advance_booking_days",
+  "column_break_45",
+  "require_job_reference",
+  "require_project_details",
+  "enable_delivery_options",
+  "notification_section",
+  "send_booking_confirmation",
+  "send_approval_notification",
+  "send_rejection_notification",
+  "column_break_52",
+  "send_reminder_notification",
+  "reminder_days_before",
+  "send_return_reminder",
+  "booking_form_field_section",
+  "contact_fields",
+  "job_reference_fields",
+  "column_break_59",
+  "project_detail_fields",
+  "delivery_fields",
+  "branding_section",
+  "primary_color",
+  "secondary_color",
+  "accent_color",
+  "column_break_65",
+  "logo",
+  "favicon",
+  "custom_css"
+ ],
+ "fields": [
+  {
+   "fieldname": "general_settings_section",
+   "fieldtype": "Section Break",
+   "label": "General Settings"
+  },
+  {
+   "default": "1",
+   "fieldname": "enable_rental_portal",
+   "fieldtype": "Check",
+   "label": "Enable Rental Portal"
+  },
+  {
+   "default": "RentalHub",
+   "fieldname": "portal_title",
+   "fieldtype": "Data",
+   "label": "Portal Title"
+  },
+  {
+   "default": "Your one-stop solution for equipment rental and sales",
+   "fieldname": "portal_description",
+   "fieldtype": "Text",
+   "label": "Portal Description"
+  },
+  {
+   "fieldname": "company",
+   "fieldtype": "Link",
+   "label": "Company",
+   "options": "Company",
+   "reqd": 1
+  },
+  {
+   "fieldname": "column_break_5",
+   "fieldtype": "Column Break"
+  },
+  {
+   "default": "1",
+   "fieldname": "enable_sales_catalog",
+   "fieldtype": "Check",
+   "label": "Enable Sales Catalog"
+  },
+  {
+   "default": "1",
+   "fieldname": "enable_rental_catalog",
+   "fieldtype": "Check",
+   "label": "Enable Rental Catalog"
+  },
+  {
+   "default": "1",
+   "fieldname": "enable_booking_requests",
+   "fieldtype": "Check",
+   "label": "Enable Booking Requests"
+  },
+  {
+   "default": "1",
+   "fieldname": "enable_document_access",
+   "fieldtype": "Check",
+   "label": "Enable Document Access"
+  },
+  {
+   "fieldname": "pricing_calculation_section",
+   "fieldtype": "Section Break",
+   "label": "Pricing Calculation"
+  },
+  {
+   "default": "5",
+   "description": "Daily rate multiplier for weekly pricing (e.g., 5 means weekly rate = daily rate * 5)",
+   "fieldname": "weekly_rate_multiplier",
+   "fieldtype": "Float",
+   "label": "Weekly Rate Multiplier"
+  },
+  {
+   "default": "20",
+   "description": "Daily rate multiplier for monthly pricing (e.g., 20 means monthly rate = daily rate * 20)",
+   "fieldname": "monthly_rate_multiplier",
+   "fieldtype": "Float",
+   "label": "Monthly Rate Multiplier"
+  },
+  {
+   "fieldname": "column_break_12",
+   "fieldtype": "Column Break"
+  },
+  {
+   "default": "10",
+   "fieldname": "default_tax_rate",
+   "fieldtype": "Percent",
+   "label": "Default Tax Rate"
+  },
+  {
+   "default": "1",
+   "fieldname": "enable_price_comparison",
+   "fieldtype": "Check",
+   "label": "Enable Price Comparison"
+  },
+  {
+   "fieldname": "user_authentication_section",
+   "fieldtype": "Section Break",
+   "label": "User Authentication"
+  },
+  {
+   "default": "1",
+   "fieldname": "allow_guest_browsing",
+   "fieldtype": "Check",
+   "label": "Allow Guest Browsing"
+  },
+  {
+   "default": "1",
+   "fieldname": "require_login_for_booking",
+   "fieldtype": "Check",
+   "label": "Require Login for Booking"
+  },
+  {
+   "default": "1",
+   "fieldname": "enable_registration",
+   "fieldtype": "Check",
+   "label": "Enable Registration"
+  },
+  {
+   "fieldname": "column_break_18",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "default_customer_group",
+   "fieldtype": "Link",
+   "label": "Default Customer Group",
+   "options": "Customer Group"
+  },
+  {
+   "fieldname": "default_territory",
+   "fieldtype": "Link",
+   "label": "Default Territory",
+   "options": "Territory"
+  },
+  {
+   "fieldname": "portal_navigation_section",
+   "fieldtype": "Section Break",
+   "label": "Portal Navigation"
+  },
+  {
+   "default": "1",
+   "fieldname": "show_dashboard_link",
+   "fieldtype": "Check",
+   "label": "Show Dashboard Link"
+  },
+  {
+   "default": "1",
+   "fieldname": "show_bookings_link",
+   "fieldtype": "Check",
+   "label": "Show Bookings Link"
+  },
+  {
+   "default": "1",
+   "fieldname": "show_rentals_link",
+   "fieldtype": "Check",
+   "label": "Show Rentals Link"
+  },
+  {
+   "fieldname": "column_break_24",
+   "fieldtype": "Column Break"
+  },
+  {
+   "default": "1",
+   "fieldname": "show_calendar_link",
+   "fieldtype": "Check",
+   "label": "Show Calendar Link"
+  },
+  {
+   "default": "1",
+   "fieldname": "show_documents_link",
+   "fieldtype": "Check",
+   "label": "Show Documents Link"
+  },
+  {
+   "default": "1",
+   "fieldname": "show_profile_link",
+   "fieldtype": "Check",
+   "label": "Show Profile Link"
+  },
+  {
+   "fieldname": "rental_catalog_section",
+   "fieldtype": "Section Break",
+   "label": "Rental Catalog"
+  },
+  {
+   "default": "item_name",
+   "fieldname": "default_sort_field",
+   "fieldtype": "Select",
+   "label": "Default Sort Field",
+   "options": "item_name\nitem_group\nprice\navailability"
+  },
+  {
+   "default": "asc",
+   "fieldname": "default_sort_order",
+   "fieldtype": "Select",
+   "label": "Default Sort Order",
+   "options": "asc\ndesc"
+  },
+  {
+   "default": "12",
+   "fieldname": "items_per_page",
+   "fieldtype": "Int",
+   "label": "Items Per Page"
+  },
+  {
+   "fieldname": "column_break_31",
+   "fieldtype": "Column Break"
+  },
+  {
+   "default": "1",
+   "fieldname": "show_availability_indicator",
+   "fieldtype": "Check",
+   "label": "Show Availability Indicator"
+  },
+  {
+   "default": "1",
+   "fieldname": "show_pricing_options",
+   "fieldtype": "Check",
+   "label": "Show Pricing Options"
+  },
+  {
+   "default": "1",
+   "fieldname": "enable_advanced_search",
+   "fieldtype": "Check",
+   "label": "Enable Advanced Search"
+  },
+  {
+   "fieldname": "sales_catalog_section",
+   "fieldtype": "Section Break",
+   "label": "Sales Catalog"
+  },
+  {
+   "default": "12",
+   "fieldname": "sales_items_per_page",
+   "fieldtype": "Int",
+   "label": "Sales Items Per Page"
+  },
+  {
+   "default": "item_name",
+   "fieldname": "sales_default_sort_field",
+   "fieldtype": "Select",
+   "label": "Default Sort Field",
+   "options": "item_name\nitem_group\nprice\navailability"
+  },
+  {
+   "default": "asc",
+   "fieldname": "sales_default_sort_order",
+   "fieldtype": "Select",
+   "label": "Default Sort Order",
+   "options": "asc\ndesc"
+  },
+  {
+   "fieldname": "column_break_38",
+   "fieldtype": "Column Break"
+  },
+  {
+   "default": "1",
+   "fieldname": "show_stock_availability",
+   "fieldtype": "Check",
+   "label": "Show Stock Availability"
+  },
+  {
+   "default": "1",
+   "fieldname": "enable_sales_item_selection",
+   "fieldtype": "Check",
+   "label": "Enable Sales Item Selection"
+  },
+  {
+   "depends_on": "eval:doc.enable_sales_item_selection == 1",
+   "fieldname": "sales_item_selection",
+   "fieldtype": "Table",
+   "label": "Sales Item Selection",
+   "options": "Sales Item Selection"
+  },
+  {
+   "fieldname": "booking_request_section",
+   "fieldtype": "Section Break",
+   "label": "Booking Request"
+  },
+  {
+   "default": "1",
+   "fieldname": "min_booking_days",
+   "fieldtype": "Int",
+   "label": "Minimum Booking Days"
+  },
+  {
+   "default": "90",
+   "fieldname": "max_booking_days",
+   "fieldtype": "Int",
+   "label": "Maximum Booking Days"
+  },
+  {
+   "default": "180",
+   "fieldname": "advance_booking_days",
+   "fieldtype": "Int",
+   "label": "Advance Booking Days"
+  },
+  {
+   "fieldname": "column_break_45",
+   "fieldtype": "Column Break"
+  },
+  {
+   "default": "0",
+   "fieldname": "require_job_reference",
+   "fieldtype": "Check",
+   "label": "Require Job Reference"
+  },
+  {
+   "default": "0",
+   "fieldname": "require_project_details",
+   "fieldtype": "Check",
+   "label": "Require Project Details"
+  },
+  {
+   "default": "1",
+   "fieldname": "enable_delivery_options",
+   "fieldtype": "Check",
+   "label": "Enable Delivery Options"
+  },
+  {
+   "fieldname": "notification_section",
+   "fieldtype": "Section Break",
+   "label": "Notifications"
+  },
+  {
+   "default": "1",
+   "fieldname": "send_booking_confirmation",
+   "fieldtype": "Check",
+   "label": "Send Booking Confirmation"
+  },
+  {
+   "default": "1",
+   "fieldname": "send_approval_notification",
+   "fieldtype": "Check",
+   "label": "Send Approval Notification"
+  },
+  {
+   "default": "1",
+   "fieldname": "send_rejection_notification",
+   "fieldtype": "Check",
+   "label": "Send Rejection Notification"
+  },
+  {
+   "fieldname": "column_break_52",
+   "fieldtype": "Column Break"
+  },
+  {
+   "default": "1",
+   "fieldname": "send_reminder_notification",
+   "fieldtype": "Check",
+   "label": "Send Reminder Notification"
+  },
+  {
+   "default": "1",
+   "depends_on": "eval:doc.send_reminder_notification == 1",
+   "fieldname": "reminder_days_before",
+   "fieldtype": "Int",
+   "label": "Reminder Days Before"
+  },
+  {
+   "default": "1",
+   "fieldname": "send_return_reminder",
+   "fieldtype": "Check",
+   "label": "Send Return Reminder"
+  },
+  {
+   "fieldname": "booking_form_field_section",
+   "fieldtype": "Section Break",
+   "label": "Booking Form Field Configuration"
+  },
+  {
+   "fieldname": "contact_fields",
+   "fieldtype": "Table",
+   "label": "Contact Fields",
+   "options": "Booking Form Field"
+  },
+  {
+   "fieldname": "job_reference_fields",
+   "fieldtype": "Table",
+   "label": "Job Reference Fields",
+   "options": "Booking Form Field"
+  },
+  {
+   "fieldname": "column_break_59",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "project_detail_fields",
+   "fieldtype": "Table",
+   "label": "Project Detail Fields",
+   "options": "Booking Form Field"
+  },
+  {
+   "fieldname": "delivery_fields",
+   "fieldtype": "Table",
+   "label": "Delivery Fields",
+   "options": "Booking Form Field"
+  },
+  {
+   "fieldname": "branding_section",
+   "fieldtype": "Section Break",
+   "label": "Branding"
+  },
+  {
+   "default": "#3498db",
+   "fieldname": "primary_color",
+   "fieldtype": "Color",
+   "label": "Primary Color"
+  },
+  {
+   "default": "#2c3e50",
+   "fieldname": "secondary_color",
+   "fieldtype": "Color",
+   "label": "Secondary Color"
+  },
+  {
+   "default": "#e74c3c",
+   "fieldname": "accent_color",
+   "fieldtype": "Color",
+   "label": "Accent Color"
+  },
+  {
+   "fieldname": "column_break_65",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "logo",
+   "fieldtype": "Attach Image",
+   "label": "Logo"
+  },
+  {
+   "fieldname": "favicon",
+   "fieldtype": "Attach Image",
+   "label": "Favicon"
+  },
+  {
+   "fieldname": "custom_css",
+   "fieldtype": "Code",
+   "label": "Custom CSS",
+   "options": "CSS"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "issingle": 1,
+ "links": [],
+ "modified": "2025-05-16 15:00:00.000000",
+ "modified_by": "Administrator",
+ "module": "OnHire Pro",
+ "name": "Rental Portal Settings",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "print": 1,
+   "read": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "create": 1,
+   "delete": 0,
+   "email": 1,
+   "print": 1,
+   "read": 1,
+   "role": "Sales Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": [],
+ "track_changes": 1
+}

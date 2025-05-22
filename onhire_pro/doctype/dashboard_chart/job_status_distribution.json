@@ -1,0 +1,18 @@
+{
+    "doctype": "Dashboard Chart",
+    "name": "Job Status Distribution",
+    "chart_name": "Job Status Distribution",
+    "chart_type": "Pie",
+    "source": "DCS - Job Status Distribution",
+    "report_name": null,
+    "timeseries": 0,
+    "time_interval": "Daily",
+    "filters_json": "{}",
+    "custom_options": "{}",
+    "module": "OnHire Pro",
+    "owner": "Administrator",
+    "restrict_to_roles": [
+        "Operations Manager",
+        "Rental Staff"
+    ]
+}

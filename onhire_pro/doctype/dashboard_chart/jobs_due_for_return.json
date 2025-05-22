@@ -1,0 +1,18 @@
+{
+    "doctype": "Dashboard Chart",
+    "name": "Jobs Due for Return",
+    "chart_name": "Jobs Due for Return Today/This Week",
+    "chart_type": "Number Card",
+    "source": "DCS - Jobs Due for Return",
+    "report_name": null,
+    "timeseries": 0,
+    "time_interval": "Daily",
+    "filters_json": "{}",
+    "custom_options": "{}",
+    "module": "OnHire Pro",
+    "owner": "Administrator",
+    "restrict_to_roles": [
+        "Operations Manager",
+        "Rental Staff"
+    ]
+}

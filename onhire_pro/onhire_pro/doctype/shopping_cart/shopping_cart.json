@@ -1,0 +1,78 @@
+{
+  "actions": [],
+  "allow_rename": 0,
+  "creation": "2024-01-01 00:00:00.000000",
+  "doctype": "DocType",
+  "engine": "InnoDB",
+  "field_order": [
+    "owner",
+    "status",
+    "total_amount",
+    "items"
+  ],
+  "fields": [
+    {
+      "fieldname": "owner",
+      "fieldtype": "Link",
+      "label": "Owner",
+      "options": "User",
+      "read_only": 1
+    },
+    {
+      "default": "Open",
+      "fieldname": "status",
+      "fieldtype": "Select",
+      "label": "Status",
+      "options": "Open\nSubmitted\nCancelled"
+    },
+    {
+      "fieldname": "total_amount",
+      "fieldtype": "Currency",
+      "label": "Total Amount",
+      "read_only": 1
+    },
+    {
+      "fieldname": "items",
+      "fieldtype": "Table",
+      "label": "Items",
+      "options": "Shopping Cart Item"
+    }
+  ],
+  "index_web_pages_for_search": 1,
+  "links": [],
+  "modified": "2024-01-01 00:00:00.000000",
+  "modified_by": "Administrator",
+  "module": "OnHire Pro",
+  "name": "Shopping Cart",
+  "owner": "Administrator",
+  "permissions": [
+    {
+      "create": 1,
+      "delete": 1,
+      "email": 1,
+      "export": 1,
+      "print": 1,
+      "read": 1,
+      "report": 1,
+      "role": "System Manager",
+      "share": 1,
+      "write": 1
+    },
+    {
+      "create": 1,
+      "delete": 0,
+      "email": 1,
+      "export": 0,
+      "print": 1,
+      "read": 1,
+      "report": 0,
+      "role": "All",
+      "share": 0,
+      "write": 1
+    }
+  ],
+  "sort_field": "modified",
+  "sort_order": "DESC",
+  "states": [],
+  "track_changes": 1
+}

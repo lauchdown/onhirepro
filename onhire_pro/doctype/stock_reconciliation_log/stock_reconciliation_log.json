@@ -1,0 +1,161 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "autoname": "format:SRL-{####}",
+ "creation": "2025-05-15 22:02:40",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "log_datetime",
+  "item_code",
+  "serial_no",
+  "warehouse",
+  "column_break_4",
+  "reservation_document_type",
+  "reservation_document_name",
+  "discrepancy_type",
+  "status",
+  "section_break_9",
+  "details",
+  "section_break_11",
+  "resolved_by",
+  "resolution_notes"
+ ],
+ "fields": [
+  {
+   "default": "Now",
+   "fieldname": "log_datetime",
+   "fieldtype": "Datetime",
+   "in_list_view": 1,
+   "label": "Log Datetime",
+   "reqd": 1
+  },
+  {
+   "fieldname": "item_code",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Item Code",
+   "options": "Item",
+   "reqd": 1
+  },
+  {
+   "fieldname": "serial_no",
+   "fieldtype": "Link",
+   "label": "Serial No",
+   "options": "Serial No"
+  },
+  {
+   "fieldname": "warehouse",
+   "fieldtype": "Link",
+   "label": "Warehouse",
+   "options": "Warehouse"
+  },
+  {
+   "fieldname": "column_break_4",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "reservation_document_type",
+   "fieldtype": "Link",
+   "label": "Reservation Document Type",
+   "options": "DocType"
+  },
+  {
+   "fieldname": "reservation_document_name",
+   "fieldtype": "Dynamic Link",
+   "label": "Reservation Document Name",
+   "options": "reservation_document_type"
+  },
+  {
+   "fieldname": "discrepancy_type",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "label": "Discrepancy Type",
+   "options": "Missing Item\nIncorrect Status\nIncorrect Location\nQuantity Mismatch\nOther",
+   "reqd": 1
+  },
+  {
+   "default": "Open",
+   "fieldname": "status",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "label": "Status",
+   "options": "Open\nIn Progress\nResolved",
+   "reqd": 1
+  },
+  {
+   "fieldname": "section_break_9",
+   "fieldtype": "Section Break",
+   "label": "Details"
+  },
+  {
+   "fieldname": "details",
+   "fieldtype": "Text Editor",
+   "label": "Details",
+   "reqd": 1
+  },
+  {
+   "depends_on": "eval:doc.status=='Resolved'",
+   "fieldname": "section_break_11",
+   "fieldtype": "Section Break",
+   "label": "Resolution"
+  },
+  {
+   "fieldname": "resolved_by",
+   "fieldtype": "Link",
+   "label": "Resolved By",
+   "options": "User"
+  },
+  {
+   "fieldname": "resolution_notes",
+   "fieldtype": "Text Editor",
+   "label": "Resolution Notes"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2025-05-15 22:02:40",
+ "modified_by": "Administrator",
+ "module": "OnHire Pro",
+ "name": "Stock Reconciliation Log",
+ "naming_rule": "Expression",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "create": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Rental Manager",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Rental User",
+   "share": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": [],
+ "track_changes": 1
+}

@@ -1,0 +1,164 @@
+/* Add to existing menu.css */
+
+/* Search Input Styling */
+.menu-search {
+  width: 100%;
+  padding: 0.5rem;
+  margin-bottom: 0.5rem;
+  border: 1px solid var(--menu-border);
+  border-radius: var(--radius-md);
+  font-size: 0.875rem;
+}
+
+.menu-search:focus {
+  outline: none;
+  border-color: var(--primary);
+  box-shadow: 0 0 0 2px var(--primary-light);
+}
+
+/* Menu Groups */
+.menu-group {
+  border-bottom: 1px solid var(--menu-border);
+}
+
+.menu-group-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.75rem 1rem;
+  cursor: pointer;
+  user-select: none;
+}
+
+.menu-group-content {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height var(--transition-normal);
+}
+
+.menu-group-content.expanded {
+  max-height: none;
+}
+
+/* Tooltips */
+.menu-tooltip {
+  position: fixed;
+  background-color: var(--gray-800);
+  color: white;
+  padding: 0.5rem 0.75rem;
+  border-radius: var(--radius-md);
+  font-size: 0.875rem;
+  z-index: 1100;
+  pointer-events: none;
+  animation: fadeIn var(--transition-fast);
+}
+
+.menu-tooltip::before {
+  content: '';
+  position: absolute;
+  top: -4px;
+  left: 50%;
+  transform: translateX(-50%) rotate(45deg);
+  width: 8px;
+  height: 8px;
+  background-color: var(--gray-800);
+}
+
+/* Focus Styles */
+.menu-item:focus,
+.dropdown-item:focus {
+  outline: none;
+  box-shadow: 0 0 0 2px var(--primary);
+}
+
+/* Loading States */
+.menu-item.loading,
+.dropdown-item.loading {
+  position: relative;
+  pointer-events: none;
+}
+
+.menu-item.loading::after,
+.dropdown-item.loading::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-color: rgba(255, 255, 255, 0.7);
+  border-radius: inherit;
+}
+
+/* Error States */
+.menu-item.error,
+.dropdown-item.error {
+  color: var(--danger);
+  background-color: var(--danger-light);
+}
+
+/* Success States */
+.menu-item.success,
+.dropdown-item.success {
+  color: var(--success);
+  background-color: var(--success-light);
+}
+
+/* Menu Transitions */
+.menu-item,
+.dropdown-item,
+.sidebar-item {
+  transition: all var(--transition-normal);
+  will-change: transform, opacity, background-color;
+}
+
+/* Nested Menu Improvements */
+.nested-menu {
+  padding-left: 1.5rem;
+  margin: 0.5rem 0;
+  border-left: 2px solid var(--menu-border);
+}
+
+.nested-menu .menu-item {
+  font-size: 0.9em;
+}
+
+/* Mobile Improvements */
+@media (max-width: 768px) {
+  .menu-search {
+    position: sticky;
+    top: 0;
+    background-color: var(--menu-bg);
+    z-index: 1;
+    margin: 0;
+    padding: 1rem;
+  }
+
+  .menu-group-header {
+    padding: 1rem;
+  }
+
+  .nested-menu {
+    padding-left: 1rem;
+  }
+}
+
+/* Accessibility Improvements */
+[role="menuitem"],
+[role="menuitemcheckbox"],
+[role="menuitemradio"] {
+  outline: none;
+}
+
+[role="menuitem"]:focus-visible,
+[role="menuitemcheckbox"]:focus-visible,
+[role="menuitemradio"]:focus-visible {
+  box-shadow: 0 0 0 2px var(--primary);
+}
+
+/* High Contrast Mode */
+@media (forced-colors: active) {
+  .menu-item:hover,
+  .dropdown-item:hover {
+    forced-color-adjust: none;
+    background-color: Highlight;
+    color: HighlightText;
+  }
+}

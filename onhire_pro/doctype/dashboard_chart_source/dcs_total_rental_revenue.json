@@ -1,0 +1,15 @@
+{
+    "doctype": "Dashboard Chart Source",
+    "name": "DCS - Total Rental Revenue",
+    "chart_name": "Total Rental Revenue",
+    "source_name": "DCS - Total Rental Revenue",
+    "report_name": null,
+    "timeseries": 0,
+    "time_interval": "Daily",
+    "filters_json": "{}",
+    "data_source_type": "Python Method",
+    "source_type": "Python Method",
+    "method_name": "onhire_pro.reports.kpi_utils.calculate_total_rental_revenue",
+    "cache_seconds": 3600,
+    "module": "OnHire Pro"
+}

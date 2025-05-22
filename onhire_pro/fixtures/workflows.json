@@ -1,0 +1,95 @@
+[
+    {
+        "doctype": "Workflow",
+        "workflow_name": "Rental Quotation Approval",
+        "document_type": "Quotation",
+        "workflow_state_field": "workflow_state",
+        "is_active": 1,
+        "send_email_alert": 1,
+        "name": "Rental Quotation Approval",
+        "states": [
+            {
+                "state": "Draft",
+                "doc_status": 0,
+                "allow_edit": "Sales User, Rental User"
+            },
+            {
+                "state": "Pending Approval",
+                "doc_status": 1,
+                "allow_edit": "Sales Manager, Rental Manager"
+            },
+            {
+                "state": "Approved",
+                "doc_status": 1,
+                "allow_edit": "Sales Manager, Rental Manager",
+                "update_field": "status",
+                "update_value": "Approved"
+            },
+            {
+                "state": "Rejected",
+                "doc_status": 1,
+                "allow_edit": "Sales User, Rental User",
+                "update_field": "status",
+                "update_value": "Rejected"
+            },
+            {
+                "state": "Expired",
+                "doc_status": 1,
+                "allow_edit": "Sales Manager, Rental Manager",
+                "update_field": "status",
+                "update_value": "Expired"
+            },
+            {
+                "state": "Ordered",
+                "doc_status": 1,
+                "allow_edit": "Sales Manager, Rental Manager",
+                "update_field": "status",
+                "update_value": "Ordered"
+            }
+        ],
+        "transitions": [
+            {
+                "state": "Draft",
+                "action": "Submit for Approval",
+                "next_state": "Pending Approval",
+                "allowed": "Sales User, Rental User",
+                "allow_self_approval": 0
+            },
+            {
+                "state": "Pending Approval",
+                "action": "Approve",
+                "next_state": "Approved",
+                "allowed": "Sales Manager, Rental Manager",
+                "allow_self_approval": 0
+            },
+            {
+                "state": "Pending Approval",
+                "action": "Reject",
+                "next_state": "Rejected",
+                "allowed": "Sales Manager, Rental Manager",
+                "allow_self_approval": 0
+            },
+            {
+                "state": "Approved",
+                "action": "Mark as Ordered",
+                "next_state": "Ordered",
+                "allowed": "Sales User, Rental User, Sales Manager, Rental Manager",
+                "allow_self_approval": 1
+            },
+            {
+                "state": "Approved",
+                "action": "Mark as Expired",
+                "next_state": "Expired",
+                "allowed": "Sales Manager, Rental Manager",
+                "allow_self_approval": 1
+            },
+            {
+                "state": "Rejected",
+                "action": "Resubmit",
+                "next_state": "Draft",
+                "allowed": "Sales User, Rental User",
+                "allow_self_approval": 1
+            }
+        ]
+    }
+]

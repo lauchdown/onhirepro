@@ -1,0 +1,360 @@
+{% extends "templates/includes/rental_portal_base.html" %}
+
+{% block portal_content %}
+<div class="checkout-container">
+    <div class="row mb-4">
+        <div class="col-12">
+            <h2>Checkout</h2>
+            <p>Complete your booking by providing the required information below. All bookings require approval by our staff.</p>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-8">
+            <form id="booking-form">
+                <!-- Booking Details Section -->
+                <div class="card mb-4">
+                    <div class="card-header bg-primary text-white">
+                        <h5 class="card-title mb-0">Booking Details</h5>
+                    </div>
+                    <div class="card-body">
+                        {% for field in booking_fields %}
+                        <div class="mb-3">
+                            <label for="{{ field.fieldname }}" class="form-label">
+                                {{ field.label }}{% if field.required %} <span class="text-danger">*</span>{% endif %}
+                            </label>
+                            {% if field.fieldtype == "Data" %}
+                            <input type="text" class="form-control" id="{{ field.fieldname }}" name="{{ field.fieldname }}" 
+                                   {% if field.required %}required{% endif %}
+                                   {% if field.default %}value="{{ field.default }}"{% endif %}>
+                            {% elif field.fieldtype == "Date" %}
+                            <input type="date" class="form-control" id="{{ field.fieldname }}" name="{{ field.fieldname }}" 
+                                   {% if field.required %}required{% endif %}
+                                   {% if field.default %}value="{{ field.default }}"{% endif %}>
+                            {% elif field.fieldtype == "Text" %}
+                            <textarea class="form-control" id="{{ field.fieldname }}" name="{{ field.fieldname }}" rows="3"
+                                      {% if field.required %}required{% endif %}>{% if field.default %}{{ field.default }}{% endif %}</textarea>
+                            {% endif %}
+                            {% if field.description %}
+                            <div class="form-text text-muted">{{ field.description }}</div>
+                            {% endif %}
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+
+                <!-- Job Reference Section -->
+                <div class="card mb-4">
+                    <div class="card-header bg-primary text-white">
+                        <h5 class="card-title mb-0">Job Reference</h5>
+                    </div>
+                    <div class="card-body">
+                        {% for field in job_reference_fields %}
+                        <div class="mb-3">
+                            <label for="{{ field.fieldname }}" class="form-label">
+                                {{ field.label }}{% if field.required %} <span class="text-danger">*</span>{% endif %}
+                            </label>
+                            {% if field.fieldtype == "Data" %}
+                            <input type="text" class="form-control" id="{{ field.fieldname }}" name="{{ field.fieldname }}" 
+                                   {% if field.required %}required{% endif %}
+                                   {% if field.default %}value="{{ field.default }}"{% endif %}>
+                            {% elif field.fieldtype == "Text" %}
+                            <textarea class="form-control" id="{{ field.fieldname }}" name="{{ field.fieldname }}" rows="3"
+                                      {% if field.required %}required{% endif %}>{% if field.default %}{{ field.default }}{% endif %}</textarea>
+                            {% endif %}
+                            {% if field.description %}
+                            <div class="form-text text-muted">{{ field.description }}</div>
+                            {% endif %}
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+
+                <!-- Contact Details Section -->
+                <div class="card mb-4">
+                    <div class="card-header bg-primary text-white">
+                        <h5 class="card-title mb-0">Contact Details</h5>
+                    </div>
+                    <div class="card-body">
+                        {% for field in contact_fields %}
+                        <div class="mb-3">
+                            <label for="{{ field.fieldname }}" class="form-label">
+                                {{ field.label }}{% if field.required %} <span class="text-danger">*</span>{% endif %}
+                            </label>
+                            {% if field.fieldtype == "Data" %}
+                            <input type="{% if 'email' in field.fieldname %}email{% else %}text{% endif %}" 
+                                   class="form-control" id="{{ field.fieldname }}" name="{{ field.fieldname }}" 
+                                   {% if field.required %}required{% endif %}
+                                   {% if field.default %}value="{{ field.default }}"{% endif %}
+                                   {% if customer and field.fieldname == 'contact_name' %}value="{{ customer.customer_name }}"{% endif %}
+                                   {% if customer and field.fieldname == 'contact_email' %}value="{{ customer.email_id }}"{% endif %}
+                                   {% if customer and field.fieldname == 'contact_phone' %}value="{{ customer.mobile_no }}"{% endif %}>
+                            {% elif field.fieldtype == "Text" %}
+                            <textarea class="form-control" id="{{ field.fieldname }}" name="{{ field.fieldname }}" rows="3"
+                                      {% if field.required %}required{% endif %}>{% if field.default %}{{ field.default }}{% endif %}</textarea>
+                            {% endif %}
+                            {% if field.description %}
+                            <div class="form-text text-muted">{{ field.description }}</div>
+                            {% endif %}
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+
+                <!-- Delivery Options Section -->
+                <div class="card mb-4">
+                    <div class="card-header bg-primary text-white">
+                        <h5 class="card-title mb-0">Delivery Options</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="mb-3">
+                            <label class="form-label">Delivery Method</label>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="delivery_method" id="pickup" value="pickup" checked>
+                                <label class="form-check-label" for="pickup">
+                                    Pickup from our location
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="delivery_method" id="delivery" value="delivery">
+                                <label class="form-check-label" for="delivery">
+                                    Delivery to your location
+                                </label>
+                            </div>
+                        </div>
+                        
+                        <div id="delivery-address-container" class="d-none">
+                            <div class="mb-3">
+                                <label for="delivery_address" class="form-label">Delivery Address <span class="text-danger">*</span></label>
+                                <textarea class="form-control" id="delivery_address" name="delivery_address" rows="3"></textarea>
+                            </div>
+                            <div class="mb-3">
+                                <label for="delivery_instructions" class="form-label">Delivery Instructions</label>
+                                <textarea class="form-control" id="delivery_instructions" name="delivery_instructions" rows="2"></textarea>
+                                <div class="form-text text-muted">Any special instructions for delivery (e.g., access codes, loading dock information)</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Terms and Conditions Section -->
+                <div class="card mb-4">
+                    <div class="card-header bg-primary text-white">
+                        <h5 class="card-title mb-0">Terms and Conditions</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="mb-3">
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="terms_accepted" name="terms_accepted" required>
+                                <label class="form-check-label" for="terms_accepted">
+                                    I have read and agree to the <a href="#" data-bs-toggle="modal" data-bs-target="#termsModal">Terms and Conditions</a>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="d-grid gap-2">
+                    <button type="submit" class="btn btn-success btn-lg">
+                        <i class="fa fa-check-circle me-1"></i> Submit Booking Request
+                    </button>
+                    <p class="text-center text-muted mt-2">
+                        <small>Your booking will be reviewed by our staff before confirmation.</small>
+                    </p>
+                </div>
+            </form>
+        </div>
+        
+        <div class="col-md-4">
+            <!-- Order Summary -->
+            <div class="card mb-4">
+                <div class="card-header bg-primary text-white">
+                    <h5 class="card-title mb-0">Order Summary</h5>
+                </div>
+                <div class="card-body p-0">
+                    <div class="list-group list-group-flush">
+                        {% for item in cart.items %}
+                        <div class="list-group-item">
+                            <div class="d-flex justify-content-between">
+                                <div>
+                                    <h6 class="mb-0">{{ item.item_name }}</h6>
+                                    <small class="text-muted">
+                                        {{ item.qty }} x {{ frappe.format_value(item.rate, {"fieldtype": "Currency"}) }}
+                                        {% if item.is_rental_item %}
+                                        /day ({{ item.start_date }} to {{ item.end_date }})
+                                        {% endif %}
+                                    </small>
+                                </div>
+                                <span>{{ frappe.format_value(item.amount, {"fieldtype": "Currency"}) }}</span>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <div class="d-flex justify-content-between mb-2">
+                        <span>Subtotal:</span>
+                        <span>{{ frappe.format_value(cart.total, {"fieldtype": "Currency"}) }}</span>
+                    </div>
+                    <div class="d-flex justify-content-between mb-2">
+                        <span>Tax (estimated):</span>
+                        <span>{{ frappe.format_value(cart.total * 0.1, {"fieldtype": "Currency"}) }}</span>
+                    </div>
+                    <hr>
+                    <div class="d-flex justify-content-between">
+                        <span class="fw-bold">Total:</span>
+                        <span class="fw-bold">{{ frappe.format_value(cart.total * 1.1, {"fieldtype": "Currency"}) }}</span>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Need Help? -->
+            <div class="card">
+                <div class="card-header bg-light">
+                    <h5 class="card-title mb-0">Need Help?</h5>
+                </div>
+                <div class="card-body">
+                    <p>If you have any questions about your booking, please contact our customer service team:</p>
+                    <p><i class="fa fa-phone me-2"></i> (555) 123-4567</p>
+                    <p><i class="fa fa-envelope me-2"></i> support@example.com</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Terms and Conditions Modal -->
+<div class="modal fade" id="termsModal" tabindex="-1" aria-labelledby="termsModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="termsModalLabel">Terms and Conditions</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <h5>Rental Agreement Terms</h5>
+                <p>This Rental Agreement ("Agreement") is entered into between the customer ("Renter") and our company ("Owner") for the rental of equipment as specified in the booking.</p>
+                
+                <h6>1. Rental Period</h6>
+                <p>The rental period begins on the start date and ends on the end date specified in the booking. Late returns may incur additional charges.</p>
+                
+                <h6>2. Payment</h6>
+                <p>Payment is due at the time of booking confirmation. For extended rentals, periodic billing may apply.</p>
+                
+                <h6>3. Damage and Loss</h6>
+                <p>Renter is responsible for any damage to or loss of equipment during the rental period. Damage charges will be assessed based on repair or replacement costs.</p>
+                
+                <h6>4. Cancellation Policy</h6>
+                <p>Cancellations made more than 48 hours before the rental start date will receive a full refund. Cancellations within 48 hours may be subject to a cancellation fee.</p>
+                
+                <h6>5. Equipment Use</h6>
+                <p>Equipment must be used in accordance with manufacturer specifications and safety guidelines. Improper use may result in additional charges.</p>
+                
+                <h6>6. Liability</h6>
+                <p>Renter assumes all liability for injuries or damages arising from the use of the rented equipment.</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-bs-dismiss="modal">I Understand</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Booking Confirmation Modal -->
+<div class="modal fade" id="confirmationModal" tabindex="-1" aria-labelledby="confirmationModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header bg-success text-white">
+                <h5 class="modal-title" id="confirmationModalLabel">Booking Request Submitted</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="text-center mb-4">
+                    <i class="fa fa-check-circle fa-4x text-success"></i>
+                </div>
+                <p>Your booking request has been submitted successfully. Our team will review your request and contact you shortly.</p>
+                <p>Booking Reference: <strong id="booking-reference">REF-12345</strong></p>
+                <p>A confirmation email has been sent to your email address.</p>
+            </div>
+            <div class="modal-footer">
+                <a href="/my-bookings" class="btn btn-primary">View My Bookings</a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block script %}
+{{ super() }}
+<script>
+    $(document).ready(function() {
+        // Toggle delivery address based on delivery method
+        $('input[name="delivery_method"]').change(function() {
+            if ($(this).val() === 'delivery') {
+                $('#delivery-address-container').removeClass('d-none');
+                $('#delivery_address').prop('required', true);
+            } else {
+                $('#delivery-address-container').addClass('d-none');
+                $('#delivery_address').prop('required', false);
+            }
+        });
+        
+        // Date validation for booking dates
+        $('#booking_start_date').change(function() {
+            const startDate = $(this).val();
+            $('#booking_end_date').attr('min', startDate);
+            
+            // If end date is before start date, update it
+            if($('#booking_end_date').val() && $('#booking_end_date').val() < startDate) {
+                $('#booking_end_date').val(startDate);
+            }
+        });
+        
+        // Form submission
+        $('#booking-form').submit(function(e) {
+            e.preventDefault();
+            
+            // Disable submit button to prevent double submission
+            $(this).find('button[type="submit"]').prop('disabled', true).html('<i class="fa fa-spinner fa-spin me-1"></i> Processing...');
+            
+            // Get form data
+            const formData = $(this).serialize();
+            
+            // Submit booking request via AJAX
+            $.ajax({
+                url: '/api/method/onhire_pro.api.create_booking_request',
+                type: 'POST',
+                data: formData,
+                success: function(data) {
+                    // Set booking reference in confirmation modal
+                    $('#booking-reference').text(data.message.booking_reference);
+                    
+                    // Show confirmation modal
+                    $('#confirmationModal').modal('show');
+                    
+                    // Clear cart after successful booking
+                    $.ajax({
+                        url: '/api/method/onhire_pro.api.clear_cart',
+                        type: 'POST'
+                    });
+                },
+                error: function(xhr) {
+                    // Re-enable submit button
+                    $('#booking-form').find('button[type="submit"]').prop('disabled', false).html('<i class="fa fa-check-circle me-1"></i> Submit Booking Request');
+                    
+                    // Show error message
+                    let errorMsg = 'Failed to submit booking request. Please try again.';
+                    if (xhr.responseJSON && xhr.responseJSON._server_messages) {
+                        try {
+                            const messages = JSON.parse(xhr.responseJSON._server_messages);
+                            errorMsg = JSON.parse(messages[0]).message || errorMsg;
+                        } catch (e) {}
+                    }
+                    
+                    frappe.msgprint(errorMsg);
+                }
+            });
+        });
+    });
+</script>
+{% endblock %}

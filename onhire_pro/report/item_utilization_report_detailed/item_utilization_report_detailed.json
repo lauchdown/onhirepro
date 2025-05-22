@@ -1,0 +1,22 @@
+{
+ "add_total_row": 1,
+ "creation": "2025-05-15 15:03:00.000000",
+ "disabled": 0,
+ "docstatus": 0,
+ "doctype": "Report",
+ "idx": 0,
+ "is_standard": "Yes",
+ "modified": "2025-05-15 15:03:00.000000",
+ "modified_by": "Administrator",
+ "module": "OnHire Pro",
+ "name": "Item Utilization Report Detailed",
+ "owner": "Administrator",
+ "ref_doctype": "Item",
+ "report_name": "Item Utilization Report (Detailed)",
+ "report_type": "Script Report",
+ "roles": [
+  {"role": "Stock Manager"},
+  {"role": "Rental Manager"},
+  {"role": "Accounts Manager"}
+ ]
+}

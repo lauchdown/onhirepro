@@ -1,0 +1,30 @@
+import frappe
+from frappe.utils import nowdate, add_days, date_diff, getdate, add_months
+
+def calculate_active_rental_jobs(filters=None):
+    """
+    Calculate the number of active rental jobs.
+    
+    Args:
+        filters (dict, optional): Filters to apply to the calculation
+            - as_of_date (str, optional): Date to check active status
+            - company (str, optional): Filter by company
+    
+    Returns:
+        dict: {"value": active_jobs_count}
+    """
+    if not filters:
+        filters = {}
+        
+    # Default to current date if not specified
+    as_of_date = filters.get("as_of_date") or nowdate()
+    
+    # Placeholder calculation - replace with actual logic
+    # In a real implementation, this would query rental jobs where:
+    # - rental_start_date <= as_of_date
+    # - rental_end_date >= as_of_date
+    # - status is 'Active' or similar
+    
+    # Placeholder: Return a random value between 10-30
+    import random
+    return {"value": random.randint(10, 30)}

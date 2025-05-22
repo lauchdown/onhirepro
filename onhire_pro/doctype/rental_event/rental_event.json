@@ -1,0 +1,191 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "autoname": "format:RE-{####}",
+ "creation": "2025-05-15 21:33:20",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "event_type",
+  "title",
+  "start_date",
+  "end_date",
+  "all_day",
+  "column_break_5",
+  "status",
+  "color",
+  "repeat_this_event",
+  "section_break_9",
+  "customer",
+  "item_details_section",
+  "items",
+  "section_break_13",
+  "description",
+  "section_break_15",
+  "reminders",
+  "amended_from"
+ ],
+ "fields": [
+  {
+   "fieldname": "event_type",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "label": "Event Type",
+   "options": "Rental\nDelivery\nPickup\nMaintenance\nOther",
+   "reqd": 1
+  },
+  {
+   "fieldname": "title",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Title",
+   "reqd": 1
+  },
+  {
+   "fieldname": "start_date",
+   "fieldtype": "Datetime",
+   "in_list_view": 1,
+   "label": "Start Date",
+   "reqd": 1
+  },
+  {
+   "fieldname": "end_date",
+   "fieldtype": "Datetime",
+   "in_list_view": 1,
+   "label": "End Date",
+   "reqd": 1
+  },
+  {
+   "default": "0",
+   "fieldname": "all_day",
+   "fieldtype": "Check",
+   "label": "All Day"
+  },
+  {
+   "fieldname": "column_break_5",
+   "fieldtype": "Column Break"
+  },
+  {
+   "default": "Scheduled",
+   "fieldname": "status",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "label": "Status",
+   "options": "Scheduled\nConfirmed\nIn Progress\nCompleted\nCancelled",
+   "reqd": 1
+  },
+  {
+   "fieldname": "color",
+   "fieldtype": "Color",
+   "label": "Color"
+  },
+  {
+   "default": "0",
+   "fieldname": "repeat_this_event",
+   "fieldtype": "Check",
+   "label": "Repeat This Event"
+  },
+  {
+   "fieldname": "section_break_9",
+   "fieldtype": "Section Break",
+   "label": "Customer Details"
+  },
+  {
+   "fieldname": "customer",
+   "fieldtype": "Link",
+   "label": "Customer",
+   "options": "Customer"
+  },
+  {
+   "fieldname": "item_details_section",
+   "fieldtype": "Section Break",
+   "label": "Item Details"
+  },
+  {
+   "fieldname": "items",
+   "fieldtype": "Table",
+   "label": "Items",
+   "options": "Rental Event Item"
+  },
+  {
+   "fieldname": "section_break_13",
+   "fieldtype": "Section Break",
+   "label": "Description"
+  },
+  {
+   "fieldname": "description",
+   "fieldtype": "Text Editor",
+   "label": "Description"
+  },
+  {
+   "fieldname": "section_break_15",
+   "fieldtype": "Section Break",
+   "label": "Reminders"
+  },
+  {
+   "fieldname": "reminders",
+   "fieldtype": "Table",
+   "label": "Reminders",
+   "options": "Event Reminder"
+  },
+  {
+   "fieldname": "amended_from",
+   "fieldtype": "Link",
+   "label": "Amended From",
+   "no_copy": 1,
+   "options": "Rental Event",
+   "print_hide": 1,
+   "read_only": 1
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "is_submittable": 1,
+ "links": [],
+ "modified": "2025-05-15 21:33:20",
+ "modified_by": "Administrator",
+ "module": "OnHire Pro",
+ "name": "Rental Event",
+ "naming_rule": "Expression",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Rental Manager",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "create": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Rental User",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": [],
+ "track_changes": 1
+}

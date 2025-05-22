@@ -1,0 +1,839 @@
+import frappe
+from frappe.utils import nowdate, add_days, date_diff, getdate, add_months
+
+def calculate_item_utilization_rate(filters=None):
+    """
+    Calculate the utilization rate of rental items.
+    
+    Args:
+        filters (dict, optional): Filters to apply to the calculation
+            - from_date (str): Start date for calculation period
+            - to_date (str): End date for calculation period
+            - item_group (str, optional): Filter by item group
+            - company (str, optional): Filter by company
+    
+    Returns:
+        dict: {"value": utilization_rate_percentage}
+    """
+    if not filters:
+        filters = {}
+        
+    # Default to last 30 days if not specified
+    from_date = filters.get("from_date") or add_days(nowdate(), -30)
+    to_date = filters.get("to_date") or nowdate()
+    
+    # Placeholder calculation - replace with actual logic
+    # In a real implementation, this would query rental records and calculate:
+    # Utilization Rate = (Total Time Rented / Total Time Available for Rent) * 100
+    
+    # Placeholder: Return a random value between 60-80%
+    import random
+    return {"value": random.uniform(60, 80)}
+
+def calculate_average_rental_duration(filters=None):
+    """
+    Calculate the average duration of rental jobs.
+    
+    Args:
+        filters (dict, optional): Filters to apply to the calculation
+            - from_date (str): Start date for calculation period
+            - to_date (str): End date for calculation period
+            - company (str, optional): Filter by company
+    
+    Returns:
+        dict: {"value": average_duration_days}
+    """
+    if not filters:
+        filters = {}
+        
+    # Default to last 30 days if not specified
+    from_date = filters.get("from_date") or add_days(nowdate(), -30)
+    to_date = filters.get("to_date") or nowdate()
+    
+    # Placeholder calculation - replace with actual logic
+    # In a real implementation, this would query rental records and calculate:
+    # Average Duration = Sum of (Return Date - Start Date) for all rentals / Number of Rentals
+    
+    # Placeholder: Return a random value between 5-15 days
+    import random
+    return {"value": random.uniform(5, 15)}
+
+def get_revenue_per_item_category(filters=None):
+    """
+    Calculate revenue per item category for the specified period.
+    
+    Args:
+        filters (dict, optional): Filters to apply to the calculation
+            - from_date (str): Start date for calculation period
+            - to_date (str): End date for calculation period
+            - company (str, optional): Filter by company
+    
+    Returns:
+        dict: {"labels": [category_names], "datasets": [{"name": "Revenue", "values": [values]}]}
+    """
+    if not filters:
+        filters = {}
+        
+    # Default to last 30 days if not specified
+    from_date = filters.get("from_date") or add_days(nowdate(), -30)
+    to_date = filters.get("to_date") or nowdate()
+    
+    # Placeholder data - replace with actual database query
+    categories = ["Equipment", "Tools", "Vehicles", "Electronics", "Furniture"]
+    
+    # Generate random revenue values for each category
+    import random
+    revenues = [random.uniform(5000, 20000) for _ in categories]
+    
+    return {
+        "labels": categories,
+        "datasets": [
+            {
+                "name": "Revenue",
+                "values": revenues
+            }
+        ]
+    }
+
+def calculate_avg_maintenance_turnaround_time(filters=None):
+    """
+    Calculate the average time taken to complete maintenance tasks.
+    
+    Args:
+        filters (dict, optional): Filters to apply to the calculation
+            - from_date (str): Start date for calculation period
+            - to_date (str): End date for calculation period
+            - company (str, optional): Filter by company
+    
+    Returns:
+        dict: {"value": average_turnaround_time_days}
+    """
+    if not filters:
+        filters = {}
+        
+    # Default to last 30 days if not specified
+    from_date = filters.get("from_date") or add_days(nowdate(), -30)
+    to_date = filters.get("to_date") or nowdate()
+    
+    # Placeholder calculation - replace with actual logic
+    # In a real implementation, this would query maintenance records and calculate:
+    # Average Turnaround Time = Sum of (Completion Date - Start Date) / Number of Maintenance Tasks
+    
+    # Placeholder: Return a random value between 1-5 days
+    import random
+    return {"value": random.uniform(1, 5)}
+
+def calculate_booking_conversion_rate(filters=None):
+    """
+    Calculate the rate at which rental quotations convert to confirmed bookings.
+    
+    Args:
+        filters (dict, optional): Filters to apply to the calculation
+            - from_date (str): Start date for calculation period
+            - to_date (str): End date for calculation period
+            - company (str, optional): Filter by company
+    
+    Returns:
+        dict: {"value": conversion_rate_percentage}
+    """
+    if not filters:
+        filters = {}
+        
+    # Default to last 30 days if not specified
+    from_date = filters.get("from_date") or add_days(nowdate(), -30)
+    to_date = filters.get("to_date") or nowdate()
+    
+    # Placeholder calculation - replace with actual logic
+    # In a real implementation, this would query quotations and rental jobs to calculate:
+    # Conversion Rate = (Number of Confirmed Bookings / Number of Quotations) * 100
+    
+    # Placeholder: Return a random value between 40-70%
+    import random
+    return {"value": random.uniform(40, 70)}
+
+def calculate_customer_churn_rate(filters=None):
+    """
+    Calculate the rate at which customers stop using the rental service.
+    
+    Args:
+        filters (dict, optional): Filters to apply to the calculation
+            - from_date (str): Start date for calculation period
+            - to_date (str): End date for calculation period
+            - company (str, optional): Filter by company
+    
+    Returns:
+        dict: {"value": churn_rate_percentage}
+    """
+    if not filters:
+        filters = {}
+        
+    # Default to last 30 days if not specified
+    from_date = filters.get("from_date") or add_days(nowdate(), -30)
+    to_date = filters.get("to_date") or nowdate()
+    
+    # Placeholder calculation - replace with actual logic
+    # In a real implementation, this would analyze customer rental patterns to calculate:
+    # Churn Rate = (Number of Customers Lost / Total Number of Customers at Start) * 100
+    
+    # Placeholder: Return a random value between 5-15%
+    import random
+    return {"value": random.uniform(5, 15)}
+
+def calculate_damage_rate(filters=None):
+    """
+    Calculate the percentage of rental items that are returned damaged.
+    
+    Args:
+        filters (dict, optional): Filters to apply to the calculation
+            - from_date (str): Start date for calculation period
+            - to_date (str): End date for calculation period
+            - item_group (str, optional): Filter by item group
+            - company (str, optional): Filter by company
+    
+    Returns:
+        dict: {"value": damage_rate_percentage}
+    """
+    if not filters:
+        filters = {}
+        
+    # Default to last 30 days if not specified
+    from_date = filters.get("from_date") or add_days(nowdate(), -30)
+    to_date = filters.get("to_date") or nowdate()
+    
+    # Placeholder calculation - replace with actual logic
+    # In a real implementation, this would query rental returns and damage reports to calculate:
+    # Damage Rate = (Number of Items Returned Damaged / Total Number of Items Returned) * 100
+    
+    # Placeholder: Return a random value between 2-8%
+    import random
+    return {"value": random.uniform(2, 8)}
+
+def get_total_cost_of_damages(filters=None):
+    """
+    Calculate the total cost of damages to rental items.
+    
+    Args:
+        filters (dict, optional): Filters to apply to the calculation
+            - from_date (str): Start date for calculation period
+            - to_date (str): End date for calculation period
+            - item_group (str, optional): Filter by item group
+            - company (str, optional): Filter by company
+    
+    Returns:
+        dict: {"value": total_damage_cost}
+    """
+    if not filters:
+        filters = {}
+        
+    # Default to last 30 days if not specified
+    from_date = filters.get("from_date") or add_days(nowdate(), -30)
+    to_date = filters.get("to_date") or nowdate()
+    
+    # Placeholder calculation - replace with actual logic
+    # In a real implementation, this would query damage reports and associated costs to calculate:
+    # Total Cost = Sum of all damage costs for the period
+    
+    # Placeholder: Return a random value between 1000-5000
+    import random
+    return {"value": random.uniform(1000, 5000)}
+
+def get_stock_reservation_conflicts(filters=None):
+    """
+    Count items where reservations conflict (reserved quantity exceeds available).
+    
+    Args:
+        filters (dict, optional): Filters to apply to the calculation
+            - from_date (str, optional): Start date for future reservations
+            - to_date (str, optional): End date for future reservations
+            - item_group (str, optional): Filter by item group
+            - company (str, optional): Filter by company
+    
+    Returns:
+        dict: {"value": conflict_count}
+    """
+    if not filters:
+        filters = {}
+        
+    # Default to current date for from_date if not specified
+    from_date = filters.get("from_date") or nowdate()
+    # Default to 30 days in the future for to_date if not specified
+    to_date = filters.get("to_date") or add_days(nowdate(), 30)
+    
+    # Placeholder calculation - replace with actual logic
+    # In a real implementation, this would compare stock levels with reservations to find conflicts
+    
+    # Placeholder: Return a random value between 0-5
+    import random
+    return {"value": random.randint(0, 5)}
+
+def get_overdue_returns_count(filters=None):
+    """
+    Count rental items that are overdue for return.
+    
+    Args:
+        filters (dict, optional): Filters to apply to the calculation
+            - as_of_date (str, optional): Date to check overdue status
+            - item_group (str, optional): Filter by item group
+            - company (str, optional): Filter by company
+    
+    Returns:
+        dict: {"value": overdue_count}
+    """
+    if not filters:
+        filters = {}
+        
+    # Default to current date if not specified
+    as_of_date = filters.get("as_of_date") or nowdate()
+    
+    # Placeholder calculation - replace with actual logic
+    # In a real implementation, this would query rental jobs where:
+    # - rental_end_date < as_of_date
+    # - actual_return_date is null (not yet returned)
+    # - status is not 'Completed' or 'Cancelled'
+    
+    # Placeholder: Return a random value between 0-10
+    import random
+    return {"value": random.randint(0, 10)}
+
+def get_active_rental_jobs_count(filters=None):
+    """
+    Count currently active rental jobs.
+    
+    Args:
+        filters (dict, optional): Filters to apply to the calculation
+            - as_of_date (str, optional): Date to check active status
+            - company (str, optional): Filter by company
+    
+    Returns:
+        dict: {"value": active_jobs_count}
+    """
+    if not filters:
+        filters = {}
+        
+    # Default to current date if not specified
+    as_of_date = filters.get("as_of_date") or nowdate()
+    
+    # Placeholder calculation - replace with actual logic
+    # In a real implementation, this would query rental jobs where:
+    # - rental_start_date <= as_of_date
+    # - rental_end_date >= as_of_date
+    # - status is 'Active' or similar
+    
+    # Placeholder: Return a random value between 10-30
+    import random
+    return {"value": random.randint(10, 30)}
+
+def get_jobs_due_for_dispatch_count(filters=None):
+    """
+    Count rental jobs that are due for dispatch.
+    
+    Args:
+        filters (dict, optional): Filters to apply to the calculation
+            - from_date (str, optional): Start date for dispatch period
+            - to_date (str, optional): End date for dispatch period
+            - company (str, optional): Filter by company
+    
+    Returns:
+        dict: {"value": dispatch_count}
+    """
+    if not filters:
+        filters = {}
+        
+    # Default to current date for from_date if not specified
+    from_date = filters.get("from_date") or nowdate()
+    # Default to 7 days in the future for to_date if not specified
+    to_date = filters.get("to_date") or add_days(nowdate(), 7)
+    
+    # Placeholder calculation - replace with actual logic
+    # In a real implementation, this would query rental jobs where:
+    # - rental_start_date is between from_date and to_date
+    # - status is 'Confirmed' or similar (not yet dispatched)
+    
+    # Placeholder: Return a random value between 5-15
+    import random
+    return {"value": random.randint(5, 15)}
+
+def get_jobs_due_for_return_count(filters=None):
+    """
+    Count rental jobs that are due for return.
+    
+    Args:
+        filters (dict, optional): Filters to apply to the calculation
+            - from_date (str, optional): Start date for return period
+            - to_date (str, optional): End date for return period
+            - company (str, optional): Filter by company
+    
+    Returns:
+        dict: {"value": return_count}
+    """
+    if not filters:
+        filters = {}
+        
+    # Default to current date for from_date if not specified
+    from_date = filters.get("from_date") or nowdate()
+    # Default to 7 days in the future for to_date if not specified
+    to_date = filters.get("to_date") or add_days(nowdate(), 7)
+    
+    # Placeholder calculation - replace with actual logic
+    # In a real implementation, this would query rental jobs where:
+    # - rental_end_date is between from_date and to_date
+    # - actual_return_date is null (not yet returned)
+    # - status is 'Active' or similar
+    
+    # Placeholder: Return a random value between 5-15
+    import random
+    return {"value": random.randint(5, 15)}
+
+def get_at_risk_stock_count(filters=None):
+    """
+    Count items where stock levels are at risk (e.g., reserved > actual).
+    
+    Args:
+        filters (dict, optional): Filters to apply to the calculation
+            - as_of_date (str, optional): Date to check stock risk
+            - item_group (str, optional): Filter by item group
+            - company (str, optional): Filter by company
+    
+    Returns:
+        dict: {"value": at_risk_count}
+    """
+    if not filters:
+        filters = {}
+        
+    # Default to current date if not specified
+    as_of_date = filters.get("as_of_date") or nowdate()
+    
+    # Placeholder calculation - replace with actual logic
+    # In a real implementation, this would compare current stock levels with reservations
+    # to identify items where reserved quantity exceeds or is close to actual quantity
+    
+    # Placeholder: Return a random value between 0-8
+    import random
+    return {"value": random.randint(0, 8)}
+
+def get_items_awaiting_assessment_count(filters=None):
+    """
+    Count items awaiting condition assessment after rental.
+    
+    Args:
+        filters (dict, optional): Filters to apply to the calculation
+            - as_of_date (str, optional): Date to check assessment status
+            - item_group (str, optional): Filter by item group
+            - company (str, optional): Filter by company
+    
+    Returns:
+        dict: {"value": awaiting_assessment_count}
+    """
+    if not filters:
+        filters = {}
+        
+    # Default to current date if not specified
+    as_of_date = filters.get("as_of_date") or nowdate()
+    
+    # Placeholder calculation - replace with actual logic
+    # In a real implementation, this would query condition assessments with status 'Pending'
+    
+    # Placeholder: Return a random value between 0-12
+    import random
+    return {"value": random.randint(0, 12)}
+
+def get_items_in_maintenance_count(filters=None):
+    """
+    Count items currently in maintenance.
+    
+    Args:
+        filters (dict, optional): Filters to apply to the calculation
+            - as_of_date (str, optional): Date to check maintenance status
+            - item_group (str, optional): Filter by item group
+            - company (str, optional): Filter by company
+    
+    Returns:
+        dict: {"value": in_maintenance_count}
+    """
+    if not filters:
+        filters = {}
+        
+    # Default to current date if not specified
+    as_of_date = filters.get("as_of_date") or nowdate()
+    
+    # Placeholder calculation - replace with actual logic
+    # In a real implementation, this would query maintenance tasks with status 'In Progress'
+    
+    # Placeholder: Return a random value between 3-10
+    import random
+    return {"value": random.randint(3, 10)}
+
+def get_total_rental_revenue(filters=None):
+    """
+    Calculate total rental revenue for the specified period.
+    
+    Args:
+        filters (dict, optional): Filters to apply to the calculation
+            - from_date (str): Start date for calculation period
+            - to_date (str): End date for calculation period
+            - company (str, optional): Filter by company
+    
+    Returns:
+        dict: {"value": total_revenue}
+    """
+    if not filters:
+        filters = {}
+        
+    # Default to current month start/end if not specified
+    today = getdate(nowdate())
+    from_date = filters.get("from_date") or getdate(f"{today.year}-{today.month}-01")
+    to_date = filters.get("to_date") or getdate(add_months(from_date, 1))
+    to_date = add_days(to_date, -1)  # Last day of the month
+    
+    # Placeholder calculation - replace with actual logic
+    # In a real implementation, this would sum the grand_total from Sales Invoices
+    # linked to rental jobs for the specified period
+    
+    # Placeholder: Return a random value between 50000-150000
+    import random
+    return {"value": random.uniform(50000, 150000)}
+
+def get_open_rental_quotation_value(filters=None):
+    """
+    Calculate the total value of open rental quotations.
+    
+    Args:
+        filters (dict, optional): Filters to apply to the calculation
+            - as_of_date (str, optional): Date to check quotation status
+            - company (str, optional): Filter by company
+    
+    Returns:
+        dict: {"value": open_quotation_value}
+    """
+    if not filters:
+        filters = {}
+        
+    # Default to current date if not specified
+    as_of_date = filters.get("as_of_date") or nowdate()
+    
+    # Placeholder calculation - replace with actual logic
+    # In a real implementation, this would sum the grand_total from Quotations
+    # with status 'Open' and is_rental_request = 1
+    
+    # Placeholder: Return a random value between 20000-80000
+    import random
+    return {"value": random.uniform(20000, 80000)}
+
+def get_overdue_invoice_amount(filters=None):
+    """
+    Calculate the total amount of overdue rental invoices.
+    
+    Args:
+        filters (dict, optional): Filters to apply to the calculation
+            - as_of_date (str, optional): Date to check overdue status
+            - company (str, optional): Filter by company
+    
+    Returns:
+        dict: {"value": overdue_amount}
+    """
+    if not filters:
+        filters = {}
+        
+    # Default to current date if not specified
+    as_of_date = filters.get("as_of_date") or nowdate()
+    
+    # Placeholder calculation - replace with actual logic
+    # In a real implementation, this would sum the outstanding_amount from Sales Invoices
+    # where due_date < as_of_date and status is not 'Paid'
+    
+    # Placeholder: Return a random value between 5000-25000
+    import random
+    return {"value": random.uniform(5000, 25000)}
+
+def get_average_revenue_per_rental_job(filters=None):
+    """
+    Calculate the average revenue per completed rental job.
+    
+    Args:
+        filters (dict, optional): Filters to apply to the calculation
+            - from_date (str): Start date for calculation period
+            - to_date (str): End date for calculation period
+            - company (str, optional): Filter by company
+    
+    Returns:
+        dict: {"value": average_revenue}
+    """
+    if not filters:
+        filters = {}
+        
+    # Default to last 30 days if not specified
+    from_date = filters.get("from_date") or add_days(nowdate(), -30)
+    to_date = filters.get("to_date") or nowdate()
+    
+    # Placeholder calculation - replace with actual logic
+    # In a real implementation, this would:
+    # 1. Calculate total revenue from completed rental jobs
+    # 2. Count the number of completed rental jobs
+    # 3. Divide total revenue by job count
+    
+    # Placeholder: Return a random value between 1000-3000
+    import random
+    return {"value": random.uniform(1000, 3000)}
+
+def get_rental_revenue_trend(filters=None):
+    """
+    Calculate rental revenue trend over time.
+    
+    Args:
+        filters (dict, optional): Filters to apply to the calculation
+            - from_date (str): Start date for calculation period
+            - to_date (str): End date for calculation period
+            - company (str, optional): Filter by company
+            - period (str, optional): Period for grouping ('Daily', 'Weekly', 'Monthly')
+    
+    Returns:
+        dict: {"labels": [period_labels], "datasets": [{"name": "Revenue", "values": [values]}]}
+    """
+    if not filters:
+        filters = {}
+        
+    # Default to last 6 months if not specified
+    from_date = filters.get("from_date") or add_months(nowdate(), -6)
+    to_date = filters.get("to_date") or nowdate()
+    period = filters.get("period") or "Monthly"
+    
+    # Placeholder data - replace with actual database query
+    if period == "Monthly":
+        # Generate 6 months of data
+        labels = []
+        current_date = getdate(from_date)
+        end_date = getdate(to_date)
+        
+        while current_date <= end_date:
+            labels.append(current_date.strftime("%b %Y"))
+            current_date = getdate(add_months(current_date, 1))
+        
+        # Generate random revenue values for each month
+        import random
+        revenues = [random.uniform(40000, 120000) for _ in labels]
+    else:
+        # Default to some weekly data
+        labels = ["Week 1", "Week 2", "Week 3", "Week 4", "Week 5", "Week 6"]
+        
+        # Generate random revenue values for each week
+        import random
+        revenues = [random.uniform(10000, 30000) for _ in labels]
+    
+    return {
+        "labels": labels,
+        "datasets": [
+            {
+                "name": "Revenue",
+                "values": revenues
+            }
+        ]
+    }
+
+def get_job_status_distribution(filters=None):
+    """
+    Calculate the distribution of rental jobs by status.
+    
+    Args:
+        filters (dict, optional): Filters to apply to the calculation
+            - as_of_date (str, optional): Date to check job status
+            - company (str, optional): Filter by company
+    
+    Returns:
+        dict: {"labels": [status_labels], "datasets": [{"name": "Jobs", "values": [counts]}]}
+    """
+    if not filters:
+        filters = {}
+        
+    # Default to current date if not specified
+    as_of_date = filters.get("as_of_date") or nowdate()
+    
+    # Placeholder data - replace with actual database query
+    statuses = ["Draft", "Confirmed", "In Progress", "Dispatched", "Active", "Overdue", "Completed", "Cancelled"]
+    
+    # Generate random counts for each status
+    import random
+    counts = [random.randint(5, 30) for _ in statuses]
+    
+    return {
+        "labels": statuses,
+        "datasets": [
+            {
+                "name": "Jobs",
+                "values": counts
+            }
+        ]
+    }
+
+def get_top_5_most_rented_items(filters=None):
+    """
+    Identify the top 5 most frequently rented items.
+    
+    Args:
+        filters (dict, optional): Filters to apply to the calculation
+            - from_date (str): Start date for calculation period
+            - to_date (str): End date for calculation period
+            - company (str, optional): Filter by company
+    
+    Returns:
+        dict: {"labels": [item_names], "datasets": [{"name": "Rental Count", "values": [counts]}]}
+    """
+    if not filters:
+        filters = {}
+        
+    # Default to last 30 days if not specified
+    from_date = filters.get("from_date") or add_days(nowdate(), -30)
+    to_date = filters.get("to_date") or nowdate()
+    
+    # Placeholder data - replace with actual database query
+    items = ["Generator 5kW", "Pressure Washer", "Concrete Mixer", "Floor Sander", "Scissor Lift"]
+    
+    # Generate random counts for each item
+    import random
+    counts = [random.randint(20, 100) for _ in items]
+    
+    # Sort by count (descending)
+    sorted_data = sorted(zip(items, counts), key=lambda x: x[1], reverse=True)
+    sorted_items, sorted_counts = zip(*sorted_data)
+    
+    return {
+        "labels": sorted_items,
+        "datasets": [
+            {
+                "name": "Rental Count",
+                "values": sorted_counts
+            }
+        ]
+    }
+
+def get_top_5_customers_by_rental_value(filters=None):
+    """
+    Identify the top 5 customers by rental value.
+    
+    Args:
+        filters (dict, optional): Filters to apply to the calculation
+            - from_date (str): Start date for calculation period
+            - to_date (str): End date for calculation period
+            - company (str, optional): Filter by company
+    
+    Returns:
+        dict: {"labels": [customer_names], "datasets": [{"name": "Rental Value", "values": [values]}]}
+    """
+    if not filters:
+        filters = {}
+        
+    # Default to last 30 days if not specified
+    from_date = filters.get("from_date") or add_days(nowdate(), -30)
+    to_date = filters.get("to_date") or nowdate()
+    
+    # Placeholder data - replace with actual database query
+    customers = ["ABC Construction", "XYZ Contractors", "123 Events", "City Builders", "Metro Developers"]
+    
+    # Generate random values for each customer
+    import random
+    values = [random.uniform(5000, 25000) for _ in customers]
+    
+    # Sort by value (descending)
+    sorted_data = sorted(zip(customers, values), key=lambda x: x[1], reverse=True)
+    sorted_customers, sorted_values = zip(*sorted_data)
+    
+    return {
+        "labels": sorted_customers,
+        "datasets": [
+            {
+                "name": "Rental Value",
+                "values": sorted_values
+            }
+        ]
+    }
+
+def get_damage_rate_by_item_group(filters=None):
+    """
+    Calculate damage rate by item group.
+    
+    Args:
+        filters (dict, optional): Filters to apply to the calculation
+            - from_date (str): Start date for calculation period
+            - to_date (str): End date for calculation period
+            - company (str, optional): Filter by company
+    
+    Returns:
+        dict: {"labels": [item_group_names], "datasets": [{"name": "Damage Rate %", "values": [rates]}]}
+    """
+    if not filters:
+        filters = {}
+        
+    # Default to last 30 days if not specified
+    from_date = filters.get("from_date") or add_days(nowdate(), -30)
+    to_date = filters.get("to_date") or nowdate()
+    
+    # Placeholder data - replace with actual database query
+    item_groups = ["Heavy Equipment", "Power Tools", "Vehicles", "Electronics", "Furniture"]
+    
+    # Generate random damage rates for each item group
+    import random
+    rates = [random.uniform(1, 10) for _ in item_groups]
+    
+    return {
+        "labels": item_groups,
+        "datasets": [
+            {
+                "name": "Damage Rate %",
+                "values": rates
+            }
+        ]
+    }
+
+def get_item_utilization_rate_trend(filters=None):
+    """
+    Calculate item utilization rate trend over time.
+    
+    Args:
+        filters (dict, optional): Filters to apply to the calculation
+            - from_date (str): Start date for calculation period
+            - to_date (str): End date for calculation period
+            - item_group (str, optional): Filter by item group
+            - company (str, optional): Filter by company
+            - period (str, optional): Period for grouping ('Daily', 'Weekly', 'Monthly')
+    
+    Returns:
+        dict: {"labels": [period_labels], "datasets": [{"name": "Utilization Rate %", "values": [rates]}]}
+    """
+    if not filters:
+        filters = {}
+        
+    # Default to last 6 months if not specified
+    from_date = filters.get("from_date") or add_months(nowdate(), -6)
+    to_date = filters.get("to_date") or nowdate()
+    period = filters.get("period") or "Monthly"
+    
+    # Placeholder data - replace with actual database query
+    if period == "Monthly":
+        # Generate 6 months of data
+        labels = []
+        current_date = getdate(from_date)
+        end_date = getdate(to_date)
+        
+        while current_date <= end_date:
+            labels.append(current_date.strftime("%b %Y"))
+            current_date = getdate(add_months(current_date, 1))
+        
+        # Generate random utilization rates for each month
+        import random
+        rates = [random.uniform(60, 85) for _ in labels]
+    else:
+        # Default to some weekly data
+        labels = ["Week 1", "Week 2", "Week 3", "Week 4", "Week 5", "Week 6"]
+        
+        # Generate random utilization rates for each week
+        import random
+        rates = [random.uniform(60, 85) for _ in labels]
+    
+    return {
+        "labels": labels,
+        "datasets": [
+            {
+                "name": "Utilization Rate %",
+                "values": rates
+            }
+        ]
+    }

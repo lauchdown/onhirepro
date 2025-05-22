@@ -1,0 +1,306 @@
+{% extends "templates/includes/rental_portal_base.html" %}
+
+{% block portal_content %}
+<div class="edit-booking-container">
+    <div class="row mb-4">
+        <div class="col-12">
+            <h2>Edit Booking</h2>
+            <p>Update your booking details below. Changes will require approval by our staff.</p>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-8">
+            <form id="edit-booking-form">
+                <input type="hidden" name="booking_id" value="{{ booking.name }}">
+                
+                <!-- Booking Details Section -->
+                <div class="card mb-4">
+                    <div class="card-header bg-primary text-white">
+                        <h5 class="card-title mb-0">Booking Details</h5>
+                    </div>
+                    <div class="card-body">
+                        {% for field in booking_fields %}
+                        <div class="mb-3">
+                            <label for="{{ field.fieldname }}" class="form-label">
+                                {{ field.label }}{% if field.required %} <span class="text-danger">*</span>{% endif %}
+                            </label>
+                            {% if field.fieldtype == "Data" %}
+                            <input type="text" class="form-control" id="{{ field.fieldname }}" name="{{ field.fieldname }}" 
+                                   {% if field.required %}required{% endif %}
+                                   value="{{ field.value or '' }}">
+                            {% elif field.fieldtype == "Date" %}
+                            <input type="date" class="form-control" id="{{ field.fieldname }}" name="{{ field.fieldname }}" 
+                                   {% if field.required %}required{% endif %}
+                                   value="{{ field.value or '' }}">
+                            {% elif field.fieldtype == "Text" %}
+                            <textarea class="form-control" id="{{ field.fieldname }}" name="{{ field.fieldname }}" rows="3"
+                                      {% if field.required %}required{% endif %}>{{ field.value or '' }}</textarea>
+                            {% endif %}
+                            {% if field.description %}
+                            <div class="form-text text-muted">{{ field.description }}</div>
+                            {% endif %}
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+
+                <!-- Job Reference Section -->
+                <div class="card mb-4">
+                    <div class="card-header bg-primary text-white">
+                        <h5 class="card-title mb-0">Job Reference</h5>
+                    </div>
+                    <div class="card-body">
+                        {% for field in job_reference_fields %}
+                        <div class="mb-3">
+                            <label for="{{ field.fieldname }}" class="form-label">
+                                {{ field.label }}{% if field.required %} <span class="text-danger">*</span>{% endif %}
+                            </label>
+                            {% if field.fieldtype == "Data" %}
+                            <input type="text" class="form-control" id="{{ field.fieldname }}" name="{{ field.fieldname }}" 
+                                   {% if field.required %}required{% endif %}
+                                   value="{{ field.value or '' }}">
+                            {% elif field.fieldtype == "Text" %}
+                            <textarea class="form-control" id="{{ field.fieldname }}" name="{{ field.fieldname }}" rows="3"
+                                      {% if field.required %}required{% endif %}>{{ field.value or '' }}</textarea>
+                            {% endif %}
+                            {% if field.description %}
+                            <div class="form-text text-muted">{{ field.description }}</div>
+                            {% endif %}
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+
+                <!-- Contact Details Section -->
+                <div class="card mb-4">
+                    <div class="card-header bg-primary text-white">
+                        <h5 class="card-title mb-0">Contact Details</h5>
+                    </div>
+                    <div class="card-body">
+                        {% for field in contact_fields %}
+                        <div class="mb-3">
+                            <label for="{{ field.fieldname }}" class="form-label">
+                                {{ field.label }}{% if field.required %} <span class="text-danger">*</span>{% endif %}
+                            </label>
+                            {% if field.fieldtype == "Data" %}
+                            <input type="{% if 'email' in field.fieldname %}email{% else %}text{% endif %}" 
+                                   class="form-control" id="{{ field.fieldname }}" name="{{ field.fieldname }}" 
+                                   {% if field.required %}required{% endif %}
+                                   value="{{ field.value or '' }}">
+                            {% elif field.fieldtype == "Text" %}
+                            <textarea class="form-control" id="{{ field.fieldname }}" name="{{ field.fieldname }}" rows="3"
+                                      {% if field.required %}required{% endif %}>{{ field.value or '' }}</textarea>
+                            {% endif %}
+                            {% if field.description %}
+                            <div class="form-text text-muted">{{ field.description }}</div>
+                            {% endif %}
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+
+                <!-- Delivery Options Section -->
+                <div class="card mb-4">
+                    <div class="card-header bg-primary text-white">
+                        <h5 class="card-title mb-0">Delivery Options</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="mb-3">
+                            <label class="form-label">Delivery Method</label>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="delivery_method" id="pickup" value="pickup" 
+                                       {% if booking.delivery_method == "pickup" or not booking.delivery_method %}checked{% endif %}>
+                                <label class="form-check-label" for="pickup">
+                                    Pickup from our location
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="delivery_method" id="delivery" value="delivery"
+                                       {% if booking.delivery_method == "delivery" %}checked{% endif %}>
+                                <label class="form-check-label" for="delivery">
+                                    Delivery to your location
+                                </label>
+                            </div>
+                        </div>
+                        
+                        <div id="delivery-address-container" class="{% if booking.delivery_method != 'delivery' %}d-none{% endif %}">
+                            <div class="mb-3">
+                                <label for="delivery_address" class="form-label">Delivery Address <span class="text-danger">*</span></label>
+                                <textarea class="form-control" id="delivery_address" name="delivery_address" rows="3">{{ booking.delivery_address or '' }}</textarea>
+                            </div>
+                            <div class="mb-3">
+                                <label for="delivery_instructions" class="form-label">Delivery Instructions</label>
+                                <textarea class="form-control" id="delivery_instructions" name="delivery_instructions" rows="2">{{ booking.delivery_instructions or '' }}</textarea>
+                                <div class="form-text text-muted">Any special instructions for delivery (e.g., access codes, loading dock information)</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Edit Reason Section -->
+                <div class="card mb-4">
+                    <div class="card-header bg-primary text-white">
+                        <h5 class="card-title mb-0">Reason for Changes</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="mb-3">
+                            <label for="edit_reason" class="form-label">Please provide a reason for these changes <span class="text-danger">*</span></label>
+                            <textarea class="form-control" id="edit_reason" name="edit_reason" rows="3" required></textarea>
+                            <div class="form-text text-muted">This helps our staff understand why you're updating your booking.</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="d-flex justify-content-between">
+                    <a href="/my-bookings" class="btn btn-outline-secondary">
+                        <i class="fa fa-arrow-left me-1"></i> Back to My Bookings
+                    </a>
+                    <button type="submit" class="btn btn-primary">
+                        <i class="fa fa-save me-1"></i> Save Changes
+                    </button>
+                </div>
+            </form>
+        </div>
+        
+        <div class="col-md-4">
+            <!-- Booking Summary -->
+            <div class="card mb-4">
+                <div class="card-header bg-primary text-white">
+                    <h5 class="card-title mb-0">Booking Summary</h5>
+                </div>
+                <div class="card-body p-0">
+                    <div class="list-group list-group-flush">
+                        {% for item in booking_items %}
+                        <div class="list-group-item">
+                            <div class="d-flex justify-content-between">
+                                <div>
+                                    <h6 class="mb-0">{{ item.item_name }}</h6>
+                                    <small class="text-muted">
+                                        {{ item.qty }} x {{ frappe.format_value(item.rate, {"fieldtype": "Currency"}) }}
+                                        {% if item.is_rental_item %}
+                                        /day
+                                        {% endif %}
+                                    </small>
+                                </div>
+                                <span>{{ frappe.format_value(item.amount, {"fieldtype": "Currency"}) }}</span>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <div class="d-flex justify-content-between">
+                        <span class="fw-bold">Total:</span>
+                        <span class="fw-bold">{{ frappe.format_value(booking.total_amount, {"fieldtype": "Currency"}) }}</span>
+                    </div>
+                    <div class="alert alert-info mt-3 mb-0">
+                        <i class="fa fa-info-circle me-2"></i> Note: You cannot modify items in this booking. To change items, please cancel this booking and create a new one.
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Need Help? -->
+            <div class="card">
+                <div class="card-header bg-light">
+                    <h5 class="card-title mb-0">Need Help?</h5>
+                </div>
+                <div class="card-body">
+                    <p>If you have any questions about editing your booking, please contact our customer service team:</p>
+                    <p><i class="fa fa-phone me-2"></i> (555) 123-4567</p>
+                    <p><i class="fa fa-envelope me-2"></i> support@example.com</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Edit Confirmation Modal -->
+<div class="modal fade" id="editConfirmationModal" tabindex="-1" aria-labelledby="editConfirmationModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header bg-success text-white">
+                <h5 class="modal-title" id="editConfirmationModalLabel">Changes Submitted</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="text-center mb-4">
+                    <i class="fa fa-check-circle fa-4x text-success"></i>
+                </div>
+                <p>Your booking changes have been submitted successfully. Our team will review your changes and update the booking status.</p>
+                <p>Booking Reference: <strong>{{ booking.booking_reference }}</strong></p>
+                <p>A confirmation email has been sent to your email address.</p>
+            </div>
+            <div class="modal-footer">
+                <a href="/my-bookings" class="btn btn-primary">Return to My Bookings</a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block script %}
+{{ super() }}
+<script>
+    $(document).ready(function() {
+        // Toggle delivery address based on delivery method
+        $('input[name="delivery_method"]').change(function() {
+            if ($(this).val() === 'delivery') {
+                $('#delivery-address-container').removeClass('d-none');
+                $('#delivery_address').prop('required', true);
+            } else {
+                $('#delivery-address-container').addClass('d-none');
+                $('#delivery_address').prop('required', false);
+            }
+        });
+        
+        // Date validation for booking dates
+        $('#booking_start_date').change(function() {
+            const startDate = $(this).val();
+            $('#booking_end_date').attr('min', startDate);
+            
+            // If end date is before start date, update it
+            if($('#booking_end_date').val() && $('#booking_end_date').val() < startDate) {
+                $('#booking_end_date').val(startDate);
+            }
+        });
+        
+        // Form submission
+        $('#edit-booking-form').submit(function(e) {
+            e.preventDefault();
+            
+            // Disable submit button to prevent double submission
+            $(this).find('button[type="submit"]').prop('disabled', true).html('<i class="fa fa-spinner fa-spin me-1"></i> Processing...');
+            
+            // Get form data
+            const formData = $(this).serialize();
+            
+            // Submit booking changes via AJAX
+            $.ajax({
+                url: '/api/method/onhire_pro.api.update_booking',
+                type: 'POST',
+                data: formData,
+                success: function(data) {
+                    // Show confirmation modal
+                    $('#editConfirmationModal').modal('show');
+                },
+                error: function(xhr) {
+                    // Re-enable submit button
+                    $('#edit-booking-form').find('button[type="submit"]').prop('disabled', false).html('<i class="fa fa-save me-1"></i> Save Changes');
+                    
+                    // Show error message
+                    let errorMsg = 'Failed to update booking. Please try again.';
+                    if (xhr.responseJSON && xhr.responseJSON._server_messages) {
+                        try {
+                            const messages = JSON.parse(xhr.responseJSON._server_messages);
+                            errorMsg = JSON.parse(messages[0]).message || errorMsg;
+                        } catch (e) {}
+                    }
+                    
+                    frappe.msgprint(errorMsg);
+                }
+            });
+        });
+    });
+</script>
+{% endblock %}

@@ -1,0 +1,10 @@
+{
+  "doctype": "Page",
+  "name": "xero-sync-dashboard",
+  "module": "OnHire Pro",
+  "page_name": "Xero Sync Dashboard",
+  "title": "Xero Sync Dashboard",
+  "standard": "Yes",
+  "icon": "fa fa-sync",
+  "developer_mode_only": 0
+}

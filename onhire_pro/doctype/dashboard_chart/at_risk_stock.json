@@ -1,0 +1,18 @@
+{
+    "doctype": "Dashboard Chart",
+    "name": "At Risk Stock",
+    "chart_name": "At Risk Stock",
+    "chart_type": "Number Card",
+    "source": "DCS - At Risk Stock",
+    "report_name": null,
+    "timeseries": 0,
+    "time_interval": "Daily",
+    "filters_json": "{}",
+    "custom_options": "{\"conditions\": [{\"color\": \"red\", \"value\": \">\", \"threshold_field\": \"at_risk_stock_threshold_critical\"}]}",
+    "module": "OnHire Pro",
+    "owner": "Administrator",
+    "restrict_to_roles": [
+        "Inventory Manager",
+        "Operations Manager"
+    ]
+}

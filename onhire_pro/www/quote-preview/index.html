@@ -1,0 +1,261 @@
+{% extends "templates/includes/rental_portal_base.html" %}
+
+{% block portal_content %}
+<div class="quote-preview-container">
+    <div class="row mb-4">
+        <div class="col-md-6">
+            <h2>Quote Preview</h2>
+            <p>Review your booking details and cost estimation before submitting.</p>
+        </div>
+        <div class="col-md-6 text-end">
+            <a href="/project-details?booking_id={{ booking_id }}" class="btn btn-outline-primary">
+                <i class="fa fa-arrow-left me-1"></i> Back to Project Details
+            </a>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-lg-8">
+            <!-- Quote Details -->
+            <div class="card mb-4">
+                <div class="card-header bg-primary text-white d-flex justify-content-between align-items-center">
+                    <h5 class="card-title mb-0">Quote Details</h5>
+                    <span class="badge bg-light text-primary">Quote #{{ quote_number }}</span>
+                </div>
+                <div class="card-body">
+                    <div class="row mb-4">
+                        <div class="col-md-6">
+                            <h6 class="text-muted mb-3">Customer Information</h6>
+                            <p class="mb-1"><strong>Customer:</strong> {{ customer.name }}</p>
+                            <p class="mb-1"><strong>Email:</strong> {{ customer.email }}</p>
+                            <p class="mb-1"><strong>Phone:</strong> {{ customer.phone }}</p>
+                        </div>
+                        <div class="col-md-6">
+                            <h6 class="text-muted mb-3">Booking Information</h6>
+                            <p class="mb-1"><strong>Booking Dates:</strong> {{ booking.start_date }} to {{ booking.end_date }}</p>
+                            <p class="mb-1"><strong>Duration:</strong> {{ booking.duration }} days</p>
+                            <p class="mb-1"><strong>Delivery Method:</strong> {{ booking.delivery_method|title }}</p>
+                        </div>
+                    </div>
+
+                    <!-- Project Details Summary -->
+                    <div class="row mb-4">
+                        <div class="col-12">
+                            <h6 class="text-muted mb-3">Project Details</h6>
+                            {% for field in project_details %}
+                            <p class="mb-1"><strong>{{ field.label }}:</strong> {{ field.value }}</p>
+                            {% endfor %}
+                        </div>
+                    </div>
+
+                    <!-- Items Table -->
+                    <div class="row mb-4">
+                        <div class="col-12">
+                            <h6 class="text-muted mb-3">Items</h6>
+                            <div class="table-responsive">
+                                <table class="table table-bordered">
+                                    <thead class="table-light">
+                                        <tr>
+                                            <th>Item</th>
+                                            <th>Type</th>
+                                            <th>Quantity</th>
+                                            <th>Rate</th>
+                                            <th class="text-end">Amount</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {% for item in booking.items %}
+                                        <tr>
+                                            <td>
+                                                <div class="fw-bold">{{ item.item_name }}</div>
+                                                <small class="text-muted">{{ item.item_code }}</small>
+                                            </td>
+                                            <td>
+                                                {% if item.is_rental_item %}
+                                                <span class="badge bg-primary">Rental</span>
+                                                {% else %}
+                                                <span class="badge bg-success">Purchase</span>
+                                                {% endif %}
+                                            </td>
+                                            <td>{{ item.qty }}</td>
+                                            <td>
+                                                {% if item.is_rental_item %}
+                                                {{ frappe.format_value(item.rate, {"fieldtype": "Currency"}) }}/day × {{ booking.duration }} days
+                                                {% else %}
+                                                {{ frappe.format_value(item.rate, {"fieldtype": "Currency"}) }}
+                                                {% endif %}
+                                            </td>
+                                            <td class="text-end">{{ frappe.format_value(item.amount, {"fieldtype": "Currency"}) }}</td>
+                                        </tr>
+                                        {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Cost Breakdown -->
+                    <div class="row">
+                        <div class="col-md-6 offset-md-6">
+                            <table class="table table-sm">
+                                <tbody>
+                                    <tr>
+                                        <td>Subtotal:</td>
+                                        <td class="text-end">{{ frappe.format_value(booking.subtotal, {"fieldtype": "Currency"}) }}</td>
+                                    </tr>
+                                    {% if booking.discount_amount > 0 %}
+                                    <tr>
+                                        <td>Discount ({{ booking.discount_percent }}%):</td>
+                                        <td class="text-end text-danger">-{{ frappe.format_value(booking.discount_amount, {"fieldtype": "Currency"}) }}</td>
+                                    </tr>
+                                    {% endif %}
+                                    <tr>
+                                        <td>Tax ({{ booking.tax_rate }}%):</td>
+                                        <td class="text-end">{{ frappe.format_value(booking.tax_amount, {"fieldtype": "Currency"}) }}</td>
+                                    </tr>
+                                    {% if booking.delivery_fee > 0 %}
+                                    <tr>
+                                        <td>Delivery Fee:</td>
+                                        <td class="text-end">{{ frappe.format_value(booking.delivery_fee, {"fieldtype": "Currency"}) }}</td>
+                                    </tr>
+                                    {% endif %}
+                                    <tr class="fw-bold">
+                                        <td>Total:</td>
+                                        <td class="text-end">{{ frappe.format_value(booking.total, {"fieldtype": "Currency"}) }}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <!-- Terms and Conditions -->
+                    <div class="row mt-4">
+                        <div class="col-12">
+                            <div class="card bg-light">
+                                <div class="card-body">
+                                    <h6 class="card-title">Terms and Conditions</h6>
+                                    <p class="card-text small">{{ terms_and_conditions|safe }}</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="d-flex justify-content-between mt-4">
+                        <a href="/project-details?booking_id={{ booking_id }}" class="btn btn-outline-secondary">
+                            <i class="fa fa-arrow-left me-1"></i> Back
+                        </a>
+                        <form id="submit-booking-form" method="POST" action="/api/method/onhire_pro.api.submit_booking_request">
+                            <input type="hidden" name="csrf_token" value="{{ frappe.session.csrf_token }}">
+                            <input type="hidden" name="booking_id" value="{{ booking_id }}">
+                            <button type="submit" class="btn btn-success">
+                                <i class="fa fa-check me-1"></i> Submit Booking Request
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-lg-4">
+            <!-- Booking Summary -->
+            <div class="card mb-4">
+                <div class="card-header bg-primary text-white">
+                    <h5 class="card-title mb-0">Booking Summary</h5>
+                </div>
+                <div class="card-body">
+                    <div class="d-flex justify-content-between mb-3">
+                        <span>Booking Dates:</span>
+                        <span class="fw-bold">{{ booking.start_date }} to {{ booking.end_date }}</span>
+                    </div>
+                    <div class="d-flex justify-content-between mb-3">
+                        <span>Duration:</span>
+                        <span class="fw-bold">{{ booking.duration }} days</span>
+                    </div>
+                    <div class="d-flex justify-content-between mb-3">
+                        <span>Items:</span>
+                        <span class="fw-bold">{{ booking.total_items }}</span>
+                    </div>
+                    <hr>
+                    <div class="d-flex justify-content-between mb-2">
+                        <span>Subtotal:</span>
+                        <span>{{ frappe.format_value(booking.subtotal, {"fieldtype": "Currency"}) }}</span>
+                    </div>
+                    {% if booking.discount_amount > 0 %}
+                    <div class="d-flex justify-content-between mb-2">
+                        <span>Discount:</span>
+                        <span class="text-danger">-{{ frappe.format_value(booking.discount_amount, {"fieldtype": "Currency"}) }}</span>
+                    </div>
+                    {% endif %}
+                    <div class="d-flex justify-content-between mb-2">
+                        <span>Tax ({{ booking.tax_rate }}%):</span>
+                        <span>{{ frappe.format_value(booking.tax_amount, {"fieldtype": "Currency"}) }}</span>
+                    </div>
+                    {% if booking.delivery_fee > 0 %}
+                    <div class="d-flex justify-content-between mb-2">
+                        <span>Delivery Fee:</span>
+                        <span>{{ frappe.format_value(booking.delivery_fee, {"fieldtype": "Currency"}) }}</span>
+                    </div>
+                    {% endif %}
+                    <div class="d-flex justify-content-between fw-bold">
+                        <span>Total:</span>
+                        <span>{{ frappe.format_value(booking.total, {"fieldtype": "Currency"}) }}</span>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Booking Steps -->
+            <div class="card">
+                <div class="card-header bg-light">
+                    <h5 class="card-title mb-0">Booking Steps</h5>
+                </div>
+                <div class="card-body p-0">
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                            <span>1. Cart Items</span>
+                            <span class="badge bg-success rounded-pill"><i class="fa fa-check"></i></span>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                            <span>2. Project Details</span>
+                            <span class="badge bg-success rounded-pill"><i class="fa fa-check"></i></span>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                            <span>3. Delivery Options</span>
+                            <span class="badge bg-success rounded-pill"><i class="fa fa-check"></i></span>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between align-items-center active">
+                            <span>4. Review & Submit</span>
+                            <span class="badge bg-primary rounded-pill"><i class="fa fa-arrow-right"></i></span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            
+            <!-- Approval Notice -->
+            <div class="card mt-4">
+                <div class="card-body">
+                    <div class="alert alert-info mb-0">
+                        <i class="fa fa-info-circle me-2"></i>
+                        <strong>Note:</strong> Your booking request will be reviewed by our staff before confirmation. You will receive an email notification once your booking is approved.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block script %}
+{{ super() }}
+<script>
+    $(document).ready(function() {
+        // Confirmation before submitting
+        $("#submit-booking-form").on("submit", function(e) {
+            if (!confirm("Are you sure you want to submit this booking request?")) {
+                e.preventDefault();
+                return false;
+            }
+            return true;
+        });
+    });
+</script>
+{% endblock %}

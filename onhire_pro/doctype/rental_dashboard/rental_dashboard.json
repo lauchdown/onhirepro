@@ -1,0 +1,107 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "autoname": "field:dashboard_name",
+ "creation": "2025-05-15 21:38:30",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "dashboard_name",
+  "description",
+  "is_default",
+  "section_break_4",
+  "charts",
+  "section_break_6",
+  "cards"
+ ],
+ "fields": [
+  {
+   "fieldname": "dashboard_name",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Dashboard Name",
+   "reqd": 1,
+   "unique": 1
+  },
+  {
+   "fieldname": "description",
+   "fieldtype": "Text",
+   "label": "Description"
+  },
+  {
+   "default": "0",
+   "fieldname": "is_default",
+   "fieldtype": "Check",
+   "label": "Is Default"
+  },
+  {
+   "fieldname": "section_break_4",
+   "fieldtype": "Section Break",
+   "label": "Charts"
+  },
+  {
+   "fieldname": "charts",
+   "fieldtype": "Table",
+   "label": "Charts",
+   "options": "Dashboard Chart Item"
+  },
+  {
+   "fieldname": "section_break_6",
+   "fieldtype": "Section Break",
+   "label": "Cards"
+  },
+  {
+   "fieldname": "cards",
+   "fieldtype": "Table",
+   "label": "Cards",
+   "options": "Dashboard Card Item"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2025-05-15 21:38:30",
+ "modified_by": "Administrator",
+ "module": "OnHire Pro",
+ "name": "Rental Dashboard",
+ "naming_rule": "By fieldname",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Rental Manager",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Rental User",
+   "share": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": [],
+ "track_changes": 1
+}

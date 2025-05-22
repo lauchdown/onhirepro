@@ -1,0 +1,18 @@
+{
+    "doctype": "Dashboard Chart",
+    "name": "Open Rental Quotation Value",
+    "chart_name": "Open Rental Quotation Value",
+    "chart_type": "Number Card",
+    "source": "DCS - Open Rental Quotation Value",
+    "report_name": null,
+    "timeseries": 0,
+    "time_interval": "Daily",
+    "filters_json": "{}",
+    "custom_options": "{}",
+    "module": "OnHire Pro",
+    "owner": "Administrator",
+    "restrict_to_roles": [
+        "Finance Manager",
+        "Sales Manager"
+    ]
+}

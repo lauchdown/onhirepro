@@ -1,0 +1,61 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "creation": "2025-05-15 21:53:40",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "quantity",
+  "condition_rating",
+  "notes",
+  "damage_severity",
+  "estimated_repair_cost"
+ ],
+ "fields": [
+  {
+   "fieldname": "quantity",
+   "fieldtype": "Float",
+   "in_list_view": 1,
+   "label": "Quantity",
+   "reqd": 1
+  },
+  {
+   "fieldname": "condition_rating",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "label": "Condition Rating",
+   "options": "Good\nWorn\nNeeds Repair\nDamaged\nLost",
+   "reqd": 1
+  },
+  {
+   "fieldname": "notes",
+   "fieldtype": "Text",
+   "label": "Notes"
+  },
+  {
+   "depends_on": "eval:doc.condition_rating=='Needs Repair' || doc.condition_rating=='Damaged'",
+   "fieldname": "damage_severity",
+   "fieldtype": "Select",
+   "label": "Damage Severity",
+   "options": "Minor\nModerate\nSevere\nCritical"
+  },
+  {
+   "depends_on": "eval:doc.condition_rating=='Needs Repair' || doc.condition_rating=='Damaged'",
+   "fieldname": "estimated_repair_cost",
+   "fieldtype": "Currency",
+   "label": "Estimated Repair Cost"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "istable": 1,
+ "links": [],
+ "modified": "2025-05-15 21:53:40",
+ "modified_by": "Administrator",
+ "module": "OnHire Pro",
+ "name": "Bulk Condition Split",
+ "owner": "Administrator",
+ "permissions": [],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

@@ -1,0 +1,15 @@
+{
+    "doctype": "Dashboard Chart Source",
+    "name": "DCS - Open Rental Quotation Value",
+    "chart_name": "Open Rental Quotation Value",
+    "source_name": "DCS - Open Rental Quotation Value",
+    "report_name": null,
+    "timeseries": 0,
+    "time_interval": "Daily",
+    "filters_json": "{}",
+    "data_source_type": "Python Method",
+    "source_type": "Python Method",
+    "method_name": "onhire_pro.utils.kpi_calculations.calculate_open_quotation_value",
+    "cache_seconds": 3600,
+    "module": "OnHire Pro"
+}

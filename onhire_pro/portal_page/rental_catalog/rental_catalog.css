@@ -1,0 +1,57 @@
+.rental-catalog-filters {
+    margin-bottom: 20px;
+    padding: 15px;
+    background-color: #f9f9f9;
+    border-radius: 4px;
+    border: 1px solid #eee;
+}
+
+.rental-item-card-wrapper {
+    margin-bottom: 30px;
+}
+
+.rental-item-card {
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    padding: 15px;
+    height: 100%; /* Ensure cards in a row have same height if using flexbox for row */
+    display: flex;
+    flex-direction: column;
+}
+
+.rental-item-image-container {
+    height: 200px; /* Fixed height for image container */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 15px;
+    overflow: hidden;
+    background-color: #f0f0f0;
+}
+
+.rental-item-image {
+    max-height: 100%;
+    max-width: 100%;
+    object-fit: contain; /* Or 'cover' depending on desired effect */
+}
+.rental-item-no-image {
+    color: #aaa;
+    font-style: italic;
+}
+
+.rental-item-card h5 {
+    margin-top: 0;
+    font-size: 1.1em;
+    font-weight: bold;
+}
+
+.rental-item-card .item-description {
+    font-size: 0.9em;
+    color: #555;
+    flex-grow: 1; /* Allows description to take up space pushing button down */
+    margin-bottom: 10px;
+}
+
+.rental-item-card .btn {
+    margin-top: auto; /* Pushes button to the bottom of the card */
+}

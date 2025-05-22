@@ -1,0 +1,15 @@
+{
+    "doctype": "Dashboard Chart Source",
+    "name": "DCS - Top 5 Most Rented Items",
+    "chart_name": "Top 5 Most Rented Items",
+    "source_name": "DCS - Top 5 Most Rented Items",
+    "report_name": null,
+    "timeseries": 1,
+    "time_interval": "Monthly",
+    "filters_json": "{\"filter_by\": \"Revenue\"}",
+    "data_source_type": "Python Method",
+    "source_type": "Python Method",
+    "method_name": "onhire_pro.utils.kpi_calculations.calculate_top_rented_items",
+    "cache_seconds": 3600,
+    "module": "OnHire Pro"
+}

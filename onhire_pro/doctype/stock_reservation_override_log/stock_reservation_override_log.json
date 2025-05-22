@@ -1,0 +1,132 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "autoname": "format:SROL-{####}",
+ "creation": "2025-05-15 22:02:15",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "reservation",
+  "item_code",
+  "serial_no",
+  "override_date",
+  "override_by",
+  "column_break_5",
+  "reference_doctype",
+  "reference_name",
+  "section_break_8",
+  "reason"
+ ],
+ "fields": [
+  {
+   "fieldname": "reservation",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Stock Reservation",
+   "options": "Stock Reservation",
+   "reqd": 1
+  },
+  {
+   "fieldname": "item_code",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Item Code",
+   "options": "Item",
+   "reqd": 1
+  },
+  {
+   "fieldname": "serial_no",
+   "fieldtype": "Link",
+   "label": "Serial No",
+   "options": "Serial No"
+  },
+  {
+   "default": "Now",
+   "fieldname": "override_date",
+   "fieldtype": "Datetime",
+   "label": "Override Date",
+   "reqd": 1
+  },
+  {
+   "default": "user",
+   "fieldname": "override_by",
+   "fieldtype": "Link",
+   "label": "Override By",
+   "options": "User",
+   "reqd": 1
+  },
+  {
+   "fieldname": "column_break_5",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "reference_doctype",
+   "fieldtype": "Link",
+   "label": "Reference DocType",
+   "options": "DocType"
+  },
+  {
+   "fieldname": "reference_name",
+   "fieldtype": "Dynamic Link",
+   "label": "Reference Name",
+   "options": "reference_doctype"
+  },
+  {
+   "fieldname": "section_break_8",
+   "fieldtype": "Section Break",
+   "label": "Reason"
+  },
+  {
+   "fieldname": "reason",
+   "fieldtype": "Text Editor",
+   "label": "Reason",
+   "reqd": 1
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2025-05-15 22:02:15",
+ "modified_by": "Administrator",
+ "module": "OnHire Pro",
+ "name": "Stock Reservation Override Log",
+ "naming_rule": "Expression",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "create": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Rental Manager",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Rental User",
+   "share": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": [],
+ "track_changes": 1
+}

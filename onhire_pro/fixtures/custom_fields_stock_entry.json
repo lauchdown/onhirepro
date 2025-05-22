@@ -1,0 +1,24 @@
+[
+    {
+        "doctype": "Custom Field",
+        "name": "Stock Entry-rental_job",
+        "dt": "Stock Entry",
+        "fieldname": "rental_job",
+        "fieldtype": "Link",
+        "label": "Rental Job",
+        "options": "Rental Job",
+        "insert_after": "purpose",
+        "depends_on": "eval:doc.purpose==\"Material Receipt\""
+    },
+    {
+        "doctype": "Custom Field",
+        "name": "Stock Entry Detail-condition_assessment",
+        "dt": "Stock Entry Detail",
+        "fieldname": "condition_assessment",
+        "fieldtype": "Link",
+        "label": "Condition Assessment",
+        "options": "Condition Assessment",
+        "insert_after": "serial_no",
+        "depends_on": "eval:doc.parenttype==\"Stock Entry\" && frappe.get_doc(doc.parenttype, doc.parent).purpose==\"Material Receipt\" && frappe.get_doc(doc.parenttype, doc.parent).rental_job"
+    }
+]

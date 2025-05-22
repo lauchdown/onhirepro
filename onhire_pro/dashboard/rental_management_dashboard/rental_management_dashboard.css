@@ -1,0 +1,44 @@
+/* rental_management_dashboard.css */
+
+/* General styling for dashboard cards/widgets if needed beyond standard Frappe dashboard styles */
+.dashboard-section {
+    margin-bottom: 20px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid #eee;
+}
+.dashboard-section:last-child {
+    border-bottom: none;
+}
+
+.dashboard-kpi-card {
+    /* Example styling for number cards if not using standard chart cards */
+    padding: 15px;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    text-align: center;
+    margin-bottom: 15px;
+}
+
+.dashboard-kpi-card .kpi-value {
+    font-size: 2em;
+    font-weight: bold;
+}
+
+.dashboard-kpi-card .kpi-label {
+    font-size: 0.9em;
+    color: #555;
+}
+
+/* Threshold highlighting examples (JS would add these classes) */
+.kpi-critical {
+    color: red !important; /* Or background-color */
+}
+.kpi-warning {
+    color: orange !important; /* Or background-color */
+}
+
+/* Ensure charts are responsive */
+.frappe-chart {
+    max-width: 100%;
+}

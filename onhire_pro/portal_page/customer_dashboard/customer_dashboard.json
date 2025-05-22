@@ -1,0 +1,19 @@
+{
+ "docstatus": 0,
+ "doctype": "Portal Page",
+ "name": "customer-dashboard",
+ "idx": 0,
+ "title": "My Dashboard",
+ "route": "dashboard", 
+ "module": "OnHire Pro",
+ "standard": "Yes",
+ "show_sidebar": 1, 
+ "public": 0,
+ "login_required": 1,
+ "css": "customer_dashboard.css",
+ "script": "customer_dashboard.js",
+ "owner": "Administrator",
+ "modified_by": "Administrator",
+ "creation": "2025-05-15 14:12:00.000000",
+ "modified": "2025-05-15 14:12:00.000000"
+}

@@ -1,0 +1,359 @@
+{
+ "actions": [],
+ "allow_rename": 0,
+ "autoname": "format:BKG-{YY}{MM}{####}",
+ "creation": "2025-05-16 15:56:30.000000",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "booking_reference",
+  "booking_title",
+  "customer",
+  "customer_name",
+  "column_break_4",
+  "status",
+  "booking_start_date",
+  "booking_end_date",
+  "section_break_8",
+  "items",
+  "section_break_10",
+  "total_amount",
+  "column_break_12",
+  "total_tax",
+  "grand_total",
+  "contact_details_section",
+  "contact_name",
+  "contact_email",
+  "contact_phone",
+  "column_break_18",
+  "alternate_contact_name",
+  "alternate_contact_phone",
+  "job_reference_section",
+  "job_reference_number",
+  "project_name",
+  "column_break_24",
+  "department",
+  "delivery_details_section",
+  "delivery_method",
+  "delivery_address",
+  "column_break_29",
+  "delivery_instructions",
+  "notes_section",
+  "booking_notes",
+  "edit_reason",
+  "cancellation_reason",
+  "staff_notes",
+  "approval_section",
+  "approved_by",
+  "approved_date",
+  "column_break_38",
+  "rejected_by",
+  "rejected_date",
+  "rejection_reason"
+ ],
+ "fields": [
+  {
+   "fieldname": "booking_reference",
+   "fieldtype": "Data",
+   "label": "Booking Reference",
+   "read_only": 1
+  },
+  {
+   "fieldname": "booking_title",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Booking Title",
+   "reqd": 1
+  },
+  {
+   "fieldname": "customer",
+   "fieldtype": "Link",
+   "label": "Customer",
+   "options": "Customer",
+   "reqd": 1
+  },
+  {
+   "fetch_from": "customer.customer_name",
+   "fieldname": "customer_name",
+   "fieldtype": "Data",
+   "label": "Customer Name",
+   "read_only": 1
+  },
+  {
+   "fieldname": "column_break_4",
+   "fieldtype": "Column Break"
+  },
+  {
+   "default": "Pending Approval",
+   "fieldname": "status",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "label": "Status",
+   "options": "Pending Approval\nApproved\nRejected\nIn Progress\nCompleted\nCancelled",
+   "reqd": 1
+  },
+  {
+   "fieldname": "booking_start_date",
+   "fieldtype": "Date",
+   "in_list_view": 1,
+   "label": "Start Date",
+   "reqd": 1
+  },
+  {
+   "fieldname": "booking_end_date",
+   "fieldtype": "Date",
+   "in_list_view": 1,
+   "label": "End Date",
+   "reqd": 1
+  },
+  {
+   "fieldname": "section_break_8",
+   "fieldtype": "Section Break",
+   "label": "Items"
+  },
+  {
+   "fieldname": "items",
+   "fieldtype": "Table",
+   "label": "Items",
+   "options": "Rental Booking Item",
+   "reqd": 1
+  },
+  {
+   "fieldname": "section_break_10",
+   "fieldtype": "Section Break",
+   "label": "Totals"
+  },
+  {
+   "fieldname": "total_amount",
+   "fieldtype": "Currency",
+   "label": "Total Amount",
+   "read_only": 1
+  },
+  {
+   "fieldname": "column_break_12",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "total_tax",
+   "fieldtype": "Currency",
+   "label": "Total Tax",
+   "read_only": 1
+  },
+  {
+   "fieldname": "grand_total",
+   "fieldtype": "Currency",
+   "label": "Grand Total",
+   "read_only": 1
+  },
+  {
+   "fieldname": "contact_details_section",
+   "fieldtype": "Section Break",
+   "label": "Contact Details"
+  },
+  {
+   "fieldname": "contact_name",
+   "fieldtype": "Data",
+   "label": "Contact Name",
+   "reqd": 1
+  },
+  {
+   "fieldname": "contact_email",
+   "fieldtype": "Data",
+   "label": "Contact Email",
+   "reqd": 1
+  },
+  {
+   "fieldname": "contact_phone",
+   "fieldtype": "Data",
+   "label": "Contact Phone",
+   "reqd": 1
+  },
+  {
+   "fieldname": "column_break_18",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "alternate_contact_name",
+   "fieldtype": "Data",
+   "label": "Alternate Contact Name"
+  },
+  {
+   "fieldname": "alternate_contact_phone",
+   "fieldtype": "Data",
+   "label": "Alternate Contact Phone"
+  },
+  {
+   "fieldname": "job_reference_section",
+   "fieldtype": "Section Break",
+   "label": "Job Reference"
+  },
+  {
+   "fieldname": "job_reference_number",
+   "fieldtype": "Data",
+   "label": "Job Reference Number"
+  },
+  {
+   "fieldname": "project_name",
+   "fieldtype": "Data",
+   "label": "Project Name"
+  },
+  {
+   "fieldname": "column_break_24",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "department",
+   "fieldtype": "Data",
+   "label": "Department"
+  },
+  {
+   "fieldname": "delivery_details_section",
+   "fieldtype": "Section Break",
+   "label": "Delivery Details"
+  },
+  {
+   "default": "pickup",
+   "fieldname": "delivery_method",
+   "fieldtype": "Select",
+   "label": "Delivery Method",
+   "options": "pickup\ndelivery",
+   "reqd": 1
+  },
+  {
+   "depends_on": "eval:doc.delivery_method == 'delivery'",
+   "fieldname": "delivery_address",
+   "fieldtype": "Text",
+   "label": "Delivery Address",
+   "mandatory_depends_on": "eval:doc.delivery_method == 'delivery'"
+  },
+  {
+   "fieldname": "column_break_29",
+   "fieldtype": "Column Break"
+  },
+  {
+   "depends_on": "eval:doc.delivery_method == 'delivery'",
+   "fieldname": "delivery_instructions",
+   "fieldtype": "Text",
+   "label": "Delivery Instructions"
+  },
+  {
+   "fieldname": "notes_section",
+   "fieldtype": "Section Break",
+   "label": "Notes"
+  },
+  {
+   "fieldname": "booking_notes",
+   "fieldtype": "Text",
+   "label": "Booking Notes"
+  },
+  {
+   "fieldname": "edit_reason",
+   "fieldtype": "Text",
+   "label": "Edit Reason",
+   "read_only": 1
+  },
+  {
+   "fieldname": "cancellation_reason",
+   "fieldtype": "Text",
+   "label": "Cancellation Reason",
+   "read_only": 1
+  },
+  {
+   "fieldname": "staff_notes",
+   "fieldtype": "Text",
+   "label": "Staff Notes"
+  },
+  {
+   "fieldname": "approval_section",
+   "fieldtype": "Section Break",
+   "label": "Approval Details"
+  },
+  {
+   "fieldname": "approved_by",
+   "fieldtype": "Link",
+   "label": "Approved By",
+   "options": "User",
+   "read_only": 1
+  },
+  {
+   "fieldname": "approved_date",
+   "fieldtype": "Datetime",
+   "label": "Approved Date",
+   "read_only": 1
+  },
+  {
+   "fieldname": "column_break_38",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "rejected_by",
+   "fieldtype": "Link",
+   "label": "Rejected By",
+   "options": "User",
+   "read_only": 1
+  },
+  {
+   "fieldname": "rejected_date",
+   "fieldtype": "Datetime",
+   "label": "Rejected Date",
+   "read_only": 1
+  },
+  {
+   "fieldname": "rejection_reason",
+   "fieldtype": "Text",
+   "label": "Rejection Reason",
+   "read_only": 1
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2025-05-16 15:56:30.000000",
+ "modified_by": "Administrator",
+ "module": "OnHire Pro",
+ "name": "Rental Booking Request",
+ "naming_rule": "Expression",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "create": 1,
+   "delete": 0,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Sales User",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "create": 0,
+   "delete": 0,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Customer",
+   "share": 0,
+   "write": 0
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": [],
+ "track_changes": 1
+}

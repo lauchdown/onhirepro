@@ -1,0 +1,100 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "autoname": "format:GCE-{####}",
+ "creation": "2025-05-15 22:04:55",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "reference_doctype",
+  "reference_name",
+  "google_event_id",
+  "last_sync_datetime",
+  "sync_status"
+ ],
+ "fields": [
+  {
+   "fieldname": "reference_doctype",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Reference DocType",
+   "options": "DocType",
+   "reqd": 1
+  },
+  {
+   "fieldname": "reference_name",
+   "fieldtype": "Dynamic Link",
+   "in_list_view": 1,
+   "label": "Reference Name",
+   "options": "reference_doctype",
+   "reqd": 1
+  },
+  {
+   "fieldname": "google_event_id",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Google Event ID",
+   "reqd": 1,
+   "unique": 1
+  },
+  {
+   "fieldname": "last_sync_datetime",
+   "fieldtype": "Datetime",
+   "label": "Last Sync Datetime"
+  },
+  {
+   "default": "Success",
+   "fieldname": "sync_status",
+   "fieldtype": "Select",
+   "label": "Sync Status",
+   "options": "Success\nFailed\nPending"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2025-05-15 22:04:55",
+ "modified_by": "Administrator",
+ "module": "OnHire Pro",
+ "name": "Google Calendar Event",
+ "naming_rule": "Expression",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Rental Manager",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Rental User",
+   "share": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": [],
+ "track_changes": 1
+}

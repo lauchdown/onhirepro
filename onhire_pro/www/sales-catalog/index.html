@@ -1,0 +1,337 @@
+{% extends "templates/includes/rental_portal_base.html" %}
+
+{% block portal_content %}
+<div class="sales-catalog-container">
+    <div class="row">
+        <div class="col-md-3 filter-sidebar">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Filter Products</h5>
+                    <form id="filter-form">
+                        <div class="form-group mt-3">
+                            <label for="category">Category</label>
+                            <select class="form-control" id="category" name="category">
+                                <option value="">All Categories</option>
+                                {% for category in categories %}
+                                <option value="{{ category.name }}" {% if filters.category == category.name %}selected{% endif %}>{{ category.name }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                        <div class="form-group mt-3">
+                            <label for="search">Search</label>
+                            <input type="text" class="form-control" id="search" name="search" placeholder="Search products..." value="{{ filters.search }}">
+                        </div>
+                        <button type="submit" class="btn btn-primary mt-3 w-100">Apply Filters</button>
+                    </form>
+                </div>
+            </div>
+            
+            <!-- Shopping Cart Preview -->
+            <div class="card mt-4">
+                <div class="card-header bg-primary text-white">
+                    <h5 class="card-title mb-0">
+                        <i class="fa fa-shopping-cart me-2"></i> Your Cart
+                    </h5>
+                </div>
+                <div class="card-body" id="cart-preview">
+                    {% if cart.items and cart.items|length > 0 %}
+                        <ul class="list-group list-group-flush">
+                            {% for item in cart.items %}
+                            <li class="list-group-item d-flex justify-content-between align-items-center">
+                                <div>
+                                    <span class="fw-bold">{{ item.item_name }}</span>
+                                    <br>
+                                    <small>{{ item.qty }} x {{ frappe.format_value(item.rate, {"fieldtype": "Currency"}) }}</small>
+                                </div>
+                                <span>{{ frappe.format_value(item.amount, {"fieldtype": "Currency"}) }}</span>
+                            </li>
+                            {% endfor %}
+                        </ul>
+                        <div class="d-flex justify-content-between align-items-center mt-3">
+                            <span class="fw-bold">Total:</span>
+                            <span class="fw-bold">{{ frappe.format_value(cart.total, {"fieldtype": "Currency"}) }}</span>
+                        </div>
+                        <div class="d-grid gap-2 mt-3">
+                            <a href="/cart" class="btn btn-primary">View Cart</a>
+                            <a href="/checkout" class="btn btn-success">Checkout</a>
+                        </div>
+                    {% else %}
+                        <p class="text-center mb-0">Your cart is empty</p>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+        <div class="col-md-9">
+            <div class="row mb-3">
+                <div class="col">
+                    <h2>Sales Catalog</h2>
+                    <p>Browse our products available for purchase. Add items to your cart and combine with rental equipment in a single booking.</p>
+                </div>
+            </div>
+            
+            <!-- Pagination info -->
+            <div class="row mb-3">
+                <div class="col-md-6">
+                    <p>Showing {{ pagination.showing_start }} to {{ pagination.showing_end }} of {{ pagination.total_items }} items</p>
+                </div>
+                <div class="col-md-6 text-end">
+                    <div class="btn-group" role="group">
+                        <button type="button" class="btn btn-outline-secondary" {% if not pagination.has_prev %}disabled{% endif %} onclick="window.location.href='{{ frappe.utils.get_url_to_form_with_filters("sales-catalog", filters, {"page": pagination.prev_page}) }}'">
+                            <i class="fa fa-chevron-left"></i> Previous
+                        </button>
+                        <button type="button" class="btn btn-outline-secondary" {% if not pagination.has_next %}disabled{% endif %} onclick="window.location.href='{{ frappe.utils.get_url_to_form_with_filters("sales-catalog", filters, {"page": pagination.next_page}) }}'">
+                            Next <i class="fa fa-chevron-right"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="row" id="items-container">
+                {% if items %}
+                    {% for item in items %}
+                    <div class="col-md-4 mb-4 item-card" data-category="{{ item.item_group }}">
+                        <div class="card h-100">
+                            {% if item.image %}
+                            <img src="{{ item.image }}" class="card-img-top" alt="{{ item.item_name }}">
+                            {% else %}
+                            <div class="card-img-top bg-light d-flex align-items-center justify-content-center" style="height: 200px;">
+                                <i class="fa fa-image fa-3x text-muted"></i>
+                            </div>
+                            {% endif %}
+                            <div class="card-body">
+                                <div class="category-label mb-2">
+                                    <span class="badge bg-secondary">{{ item.item_group }}</span>
+                                </div>
+                                <h5 class="card-title">{{ item.item_name }}</h5>
+                                <p class="card-text">{{ item.description | truncate(100) }}</p>
+                                
+                                <!-- Pricing display -->
+                                <div class="pricing-display mb-3">
+                                    <h4 class="text-primary mb-0">{{ frappe.format_value(item.rate, {"fieldtype": "Currency"}) }}</h4>
+                                    <small class="text-muted">per {{ item.stock_uom }}</small>
+                                </div>
+                                
+                                <!-- Availability status indicator -->
+                                <div class="availability-status mt-3">
+                                    {% if item.in_stock %}
+                                    <span class="badge bg-success">In Stock</span>
+                                    {% else %}
+                                    <span class="badge bg-danger">Out of Stock</span>
+                                    {% endif %}
+                                </div>
+                            </div>
+                            <div class="card-footer">
+                                <div class="d-flex">
+                                    <div class="input-group me-2">
+                                        <button class="btn btn-outline-secondary qty-btn" type="button" data-action="decrease">-</button>
+                                        <input type="number" class="form-control text-center qty-input" value="1" min="1" max="99" data-item-code="{{ item.name }}">
+                                        <button class="btn btn-outline-secondary qty-btn" type="button" data-action="increase">+</button>
+                                    </div>
+                                    <button class="btn btn-primary add-to-cart-btn" {% if not item.in_stock %}disabled{% endif %} data-item-code="{{ item.name }}" data-item-name="{{ item.item_name }}" data-item-rate="{{ item.rate }}">
+                                        <i class="fa fa-cart-plus"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                {% else %}
+                <div class="col-12">
+                    <div class="alert alert-info">
+                        <i class="fa fa-info-circle me-2"></i> No products found matching your criteria. Please try different filters.
+                    </div>
+                </div>
+                {% endif %}
+            </div>
+            
+            <!-- Pagination controls -->
+            {% if pagination.total_pages > 1 %}
+            <div class="row mt-3">
+                <div class="col-12">
+                    <nav aria-label="Page navigation">
+                        <ul class="pagination justify-content-center">
+                            <li class="page-item {% if not pagination.has_prev %}disabled{% endif %}">
+                                <a class="page-link" href="{{ frappe.utils.get_url_to_form_with_filters('sales-catalog', filters, {'page': pagination.prev_page}) }}" aria-label="Previous">
+                                    <span aria-hidden="true">&laquo;</span>
+                                </a>
+                            </li>
+                            
+                            {% for page_num in range(1, pagination.total_pages + 1) %}
+                            <li class="page-item {% if page_num == pagination.current_page %}active{% endif %}">
+                                <a class="page-link" href="{{ frappe.utils.get_url_to_form_with_filters('sales-catalog', filters, {'page': page_num}) }}">{{ page_num }}</a>
+                            </li>
+                            {% endfor %}
+                            
+                            <li class="page-item {% if not pagination.has_next %}disabled{% endif %}">
+                                <a class="page-link" href="{{ frappe.utils.get_url_to_form_with_filters('sales-catalog', filters, {'page': pagination.next_page}) }}" aria-label="Next">
+                                    <span aria-hidden="true">&raquo;</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+</div>
+
+<!-- Add to Cart Success Modal -->
+<div class="modal fade" id="addToCartModal" tabindex="-1" aria-labelledby="addToCartModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header bg-success text-white">
+                <h5 class="modal-title" id="addToCartModalLabel">Item Added to Cart</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p>The item has been added to your cart successfully.</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Continue Shopping</button>
+                <a href="/cart" class="btn btn-primary">View Cart</a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block script %}
+{{ super() }}
+<script>
+    $(document).ready(function() {
+        // Filter form submission
+        $("#filter-form").submit(function(e) {
+            e.preventDefault();
+            var formData = $(this).serialize();
+            window.location.href = '/sales-catalog?' + formData;
+        });
+        
+        // Enhanced client-side search filtering
+        $("#search").on("keyup", function() {
+            var value = $(this).val().toLowerCase();
+            $(".item-card").filter(function() {
+                $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1);
+            });
+            
+            // Show no results message if all items are filtered out
+            if($(".item-card:visible").length === 0) {
+                if($("#no-results-message").length === 0) {
+                    $("#items-container").append('<div id="no-results-message" class="col-12"><div class="alert alert-info"><i class="fa fa-info-circle me-2"></i> No products found matching your search. Please try different keywords.</div></div>');
+                }
+            } else {
+                $("#no-results-message").remove();
+            }
+        });
+        
+        // Category filtering with animation
+        $("#category").change(function() {
+            var category = $(this).val();
+            $(".item-card").hide().removeClass("show");
+            
+            if(category) {
+                $(".item-card[data-category='" + category + "']").show().addClass("show");
+            } else {
+                $(".item-card").show().addClass("show");
+            }
+            
+            // Show no results message if all items are filtered out
+            if($(".item-card:visible").length === 0) {
+                if($("#no-results-message").length === 0) {
+                    $("#items-container").append('<div id="no-results-message" class="col-12"><div class="alert alert-info"><i class="fa fa-info-circle me-2"></i> No products found in this category. Please try a different category.</div></div>');
+                }
+            } else {
+                $("#no-results-message").remove();
+            }
+        });
+        
+        // Quantity buttons
+        $(".qty-btn").click(function() {
+            var input = $(this).closest('.input-group').find('.qty-input');
+            var currentVal = parseInt(input.val());
+            
+            if($(this).data('action') === 'increase') {
+                input.val(currentVal + 1);
+            } else {
+                if(currentVal > 1) {
+                    input.val(currentVal - 1);
+                }
+            }
+        });
+        
+        // Add to cart functionality
+        $(".add-to-cart-btn").click(function() {
+            var btn = $(this);
+            var itemCode = btn.data('item-code');
+            var itemName = btn.data('item-name');
+            var itemRate = parseFloat(btn.data('item-rate'));
+            var qty = parseInt(btn.closest('.card-footer').find('.qty-input').val());
+            
+            // Disable button to prevent multiple clicks
+            btn.prop('disabled', true);
+            
+            // Add to cart via AJAX
+            $.ajax({
+                url: '/api/method/onhire_pro.api.add_to_cart',
+                type: 'POST',
+                data: {
+                    item_code: itemCode,
+                    item_name: itemName,
+                    qty: qty,
+                    rate: itemRate,
+                    is_sales_item: 1
+                },
+                success: function(data) {
+                    // Update cart preview
+                    updateCartPreview(data.message);
+                    
+                    // Show success modal
+                    $('#addToCartModal').modal('show');
+                    
+                    // Re-enable button
+                    btn.prop('disabled', false);
+                },
+                error: function() {
+                    // Show error message
+                    frappe.msgprint(__('Failed to add item to cart. Please try again.'));
+                    
+                    // Re-enable button
+                    btn.prop('disabled', false);
+                }
+            });
+        });
+        
+        // Function to update cart preview
+        function updateCartPreview(cart) {
+            var html = '';
+            
+            if(cart.items && cart.items.length > 0) {
+                html += '<ul class="list-group list-group-flush">';
+                
+                for(var i=0; i<cart.items.length; i++) {
+                    var item = cart.items[i];
+                    html += '<li class="list-group-item d-flex justify-content-between align-items-center">';
+                    html += '<div><span class="fw-bold">' + item.item_name + '</span><br>';
+                    html += '<small>' + item.qty + ' x ' + frappe.format_value(item.rate, {"fieldtype": "Currency"}) + '</small></div>';
+                    html += '<span>' + frappe.format_value(item.amount, {"fieldtype": "Currency"}) + '</span>';
+                    html += '</li>';
+                }
+                
+                html += '</ul>';
+                html += '<div class="d-flex justify-content-between align-items-center mt-3">';
+                html += '<span class="fw-bold">Total:</span>';
+                html += '<span class="fw-bold">' + frappe.format_value(cart.total, {"fieldtype": "Currency"}) + '</span>';
+                html += '</div>';
+                html += '<div class="d-grid gap-2 mt-3">';
+                html += '<a href="/cart" class="btn btn-primary">View Cart</a>';
+                html += '<a href="/checkout" class="btn btn-success">Checkout</a>';
+                html += '</div>';
+            } else {
+                html += '<p class="text-center mb-0">Your cart is empty</p>';
+            }
+            
+            $('#cart-preview').html(html);
+        }
+    });
+</script>
+{% endblock %}

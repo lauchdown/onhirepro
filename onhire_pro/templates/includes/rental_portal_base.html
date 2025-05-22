@@ -1,0 +1,216 @@
+{% extends "templates/web.html" %}
+
+{% block title %}{{ settings.portal_title or "Rental Customer Portal" }}{% endblock %}
+
+{% block head_include %}
+<style>
+    :root {
+        --primary-color: {{ settings.primary_color or "#0d6efd" }};
+        --secondary-color: {{ settings.secondary_color or "#6c757d" }};
+    }
+    
+    /* Custom CSS from admin settings */
+    {{ settings.custom_css or "" }}
+</style>
+{% endblock %}
+
+{% block page_content %}
+<div class="rental-portal-container">
+    <!-- Branded Header -->
+    <div class="row mb-4">
+        <div class="col-12">
+            <div class="rentalhub-header">
+                <div class="d-flex justify-content-between align-items-center">
+                    <div class="rentalhub-logo">
+                        {% if settings.portal_logo %}
+                        <img src="{{ settings.portal_logo }}" alt="{{ settings.portal_title or 'RentalHub' }}" class="portal-logo">
+                        {% else %}
+                        <h1><span class="text-primary">Rental</span>Hub</h1>
+                        {% endif %}
+                    </div>
+                    <div class="header-actions d-none d-md-flex">
+                        {% if settings.show_support_link %}
+                        <a href="/support" class="btn btn-outline-primary me-2">
+                            <i class="fa fa-headset me-1"></i> Support
+                        </a>
+                        {% endif %}
+                        {% if settings.allow_booking_requests %}
+                        <a href="/rental-booking-request" class="btn btn-primary">
+                            <i class="fa fa-plus me-1"></i> New Booking
+                        </a>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Navigation Bar -->
+    <div class="row mb-4">
+        <div class="col-12">
+            <nav class="rentalhub-nav">
+                <ul class="nav nav-pills nav-fill">
+                    {% for nav_item in nav_items %}
+                    <li class="nav-item">
+                        <a class="nav-link {% if request.path == nav_item.url %}active{% endif %}" href="{{ nav_item.url }}">
+                            <i class="{{ nav_item.icon }} me-1"></i> {{ nav_item.label }}
+                        </a>
+                    </li>
+                    {% endfor %}
+                </ul>
+            </nav>
+        </div>
+    </div>
+
+    <!-- Welcome Message/Banner if enabled -->
+    {% if settings.portal_welcome_message %}
+    <div class="row mb-4">
+        <div class="col-12">
+            <div class="welcome-banner">
+                {{ settings.portal_welcome_message }}
+            </div>
+        </div>
+    </div>
+    {% endif %}
+
+    <!-- Breadcrumb Navigation if enabled -->
+    {% if settings.enable_breadcrumb_navigation and breadcrumbs %}
+    <div class="row mb-3">
+        <div class="col-12">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    {% for breadcrumb in breadcrumbs %}
+                    <li class="breadcrumb-item {% if loop.last %}active{% endif %}" {% if loop.last %}aria-current="page"{% endif %}>
+                        {% if not loop.last %}
+                        <a href="{{ breadcrumb.url }}">{{ breadcrumb.label }}</a>
+                        {% else %}
+                        {{ breadcrumb.label }}
+                        {% endif %}
+                    </li>
+                    {% endfor %}
+                </ol>
+            </nav>
+        </div>
+    </div>
+    {% endif %}
+
+    <!-- Search Bar if enabled -->
+    {% if settings.enable_portal_search %}
+    <div class="row mb-4">
+        <div class="col-12">
+            <div class="search-container">
+                <form id="portal-search-form" class="d-flex">
+                    <input type="text" class="form-control me-2" id="portal-search" placeholder="Search...">
+                    <button type="submit" class="btn btn-outline-primary">
+                        <i class="fa fa-search"></i>
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+    {% endif %}
+
+    <!-- Main Content Container -->
+    <div class="row">
+        <div class="col-12">
+            {% block portal_content %}
+            <!-- This will be replaced by specific page content -->
+            {% endblock %}
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block style %}
+<style>
+    /* RentalHub Branded Header */
+    .rentalhub-header {
+        padding: 15px 0;
+        border-bottom: 1px solid #eee;
+        margin-bottom: 20px;
+    }
+    
+    .rentalhub-logo h1 {
+        font-weight: 700;
+        margin: 0;
+    }
+    
+    .rentalhub-logo span {
+        color: var(--primary-color);
+    }
+    
+    .portal-logo {
+        max-height: 50px;
+        max-width: 200px;
+    }
+    
+    /* Navigation */
+    .rentalhub-nav {
+        margin-bottom: 20px;
+    }
+    
+    .rentalhub-nav .nav-pills {
+        border-radius: 8px;
+        overflow: hidden;
+        box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    }
+    
+    .rentalhub-nav .nav-link {
+        border-radius: 0;
+        padding: 12px 15px;
+        font-weight: 500;
+        color: var(--secondary-color);
+        transition: all 0.3s ease;
+    }
+    
+    .rentalhub-nav .nav-link:hover {
+        background-color: rgba(13, 110, 253, 0.1);
+    }
+    
+    .rentalhub-nav .nav-link.active {
+        background-color: var(--primary-color);
+        color: white;
+    }
+    
+    /* Welcome Banner */
+    .welcome-banner {
+        padding: 15px;
+        border-radius: 8px;
+        background-color: #f8f9fa;
+        border-left: 4px solid var(--primary-color);
+    }
+    
+    /* Search Container */
+    .search-container {
+        margin-bottom: 20px;
+    }
+    
+    /* Responsive styles */
+    @media (max-width: 768px) {
+        .rentalhub-nav {
+            overflow-x: auto;
+            white-space: nowrap;
+            flex-wrap: nowrap;
+        }
+        
+        .rentalhub-nav .nav-item {
+            display: inline-block;
+        }
+    }
+</style>
+{% endblock %}
+
+{% block script %}
+<script>
+    $(document).ready(function() {
+        // Portal search functionality
+        $("#portal-search-form").submit(function(e) {
+            e.preventDefault();
+            const searchTerm = $("#portal-search").val().trim();
+            if (searchTerm) {
+                window.location.href = '/portal-search?q=' + encodeURIComponent(searchTerm);
+            }
+        });
+    });
+</script>
+{% endblock %}

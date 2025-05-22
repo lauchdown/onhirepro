@@ -1,0 +1,18 @@
+{
+    "doctype": "Dashboard Chart",
+    "name": "Average Revenue per Rental Job",
+    "chart_name": "Average Revenue per Rental Job",
+    "chart_type": "Number Card",
+    "source": "DCS - Average Revenue per Rental Job",
+    "report_name": null,
+    "timeseries": 0,
+    "time_interval": "Daily",
+    "filters_json": "{}",
+    "custom_options": "{}",
+    "module": "OnHire Pro",
+    "owner": "Administrator",
+    "restrict_to_roles": [
+        "Finance Manager",
+        "Sales Manager"
+    ]
+}

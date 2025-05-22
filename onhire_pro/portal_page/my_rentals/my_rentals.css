@@ -1,0 +1,70 @@
+.my-rentals-filters {
+    margin-bottom: 20px;
+    padding: 15px;
+    background-color: #f9f9f9;
+    border-radius: 4px;
+    border: 1px solid #eee;
+}
+
+.my-rental-item {
+    margin-bottom: 10px;
+    border-radius: 4px;
+}
+
+.my-rental-item:hover {
+    background-color: #f5f5f5;
+}
+
+.my-rental-item .list-group-item-heading {
+    font-weight: bold;
+    color: #337ab7; /* Link color */
+}
+
+.rental-status-draft, 
+.rental-status-quotation,
+.rental-status-on-hold {
+    background-color: #8D99AE; /* Light Gray */
+    color: white;
+}
+.rental-status-order-confirmed {
+    background-color: #77DD77; /* Pastel Green */
+    color: white;
+}
+.rental-status-ready-for-dispatch {
+    background-color: #FFB347; /* Pastel Orange */
+    color: #333;
+}
+.rental-status-dispatched,
+.rental-status-in-use { /* Assuming 'In Use' is a possible status */
+    background-color: #50C878; /* Emerald Green */
+    color: white;
+}
+.rental-status-items-returned {
+    background-color: #FDFD96; /* Pastel Yellow */
+    color: #333;
+}
+.rental-status-inspection-pending {
+    background-color: #C3B1E1; /* Lavender */
+    color: white;
+}
+.rental-status-invoice-pending {
+    background-color: #FFD1DC; /* Pastel Pink */
+    color: #333;
+}
+.rental-status-invoiced {
+    background-color: #B2DFDB; /* Pale Cyan */
+    color: #333;
+}
+.rental-status-completed {
+    background-color: #D3D3D3;  /* LightGray (Completed) */
+    color: #333;
+}
+.rental-status-cancelled {
+    background-color: #FF6961; /* Pastel Red */
+    color: white;
+}
+
+.rental-status-reason {
+    margin-top: 5px;
+    font-style: italic;
+}

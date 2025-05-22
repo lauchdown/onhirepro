@@ -1,0 +1,29 @@
+.my-document-list .table {
+    margin-top: 20px;
+}
+
+.my-document-list .table th {
+    font-weight: bold;
+}
+
+/* Status label colors (can be expanded) */
+.status-draft, .status-pending {
+    background-color: #f0ad4e; /* Orange */
+    color: white;
+}
+.status-submitted, .status-open, .status-active, .status-confirmed {
+    background-color: #5cb85c; /* Green */
+    color: white;
+}
+.status-cancelled {
+    background-color: #d9534f; /* Red */
+    color: white;
+}
+.status-completed, .status-paid, .status-closed {
+    background-color: #777; /* Gray */
+    color: white;
+}
+.status-overdue {
+    background-color: #d9534f; /* Red */
+    color: white;
+}

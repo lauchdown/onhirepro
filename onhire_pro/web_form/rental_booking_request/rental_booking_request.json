@@ -1,0 +1,132 @@
+{
+ "docstatus": 0,
+ "doctype": "Web Form",
+ "idx": 0,
+ "is_standard": 1,
+ "title": "Rental Booking Request",
+ "module": "OnHire Pro",
+ "route": "rental-booking-request",
+ "doc_type": "Quotation",
+ "allow_multiple": 1,
+ "show_list": 0,
+ "show_sidebar": 0,
+ "allow_edit": 0,
+ "allow_delete": 0,
+ "allow_print": 0,
+ "allow_comments": 0,
+ "login_required": 1,
+ "show_attachments": 1,
+ "success_message": "Thank you for your booking request. We will review it and send you a formal quotation shortly.",
+ "button_label": "Submit Request",
+ "owner": "Administrator",
+ "modified_by": "Administrator",
+ "creation": "2025-05-15 13:47:00.000000",
+ "modified": "2025-05-15 13:47:00.000000",
+ "custom_is_rental_request": 1,
+ "web_form_fields": [
+  {
+   "fieldname": "customer",
+   "label": "Customer",
+   "fieldtype": "Link",
+   "options": "Customer",
+   "reqd": 1,
+   "hidden": 1,
+   "read_only": 1,
+   "default": "" 
+  },
+  {
+   "fieldname": "order_type",
+   "label": "Order Type",
+   "fieldtype": "Select",
+   "options": "Sales\nMaintenance\nShopping Cart\nRental",
+   "default": "Rental",
+   "reqd": 1,
+   "hidden": 0,
+   "read_only": 1
+  },
+  {
+   "fieldname": "company",
+   "label": "Company",
+   "fieldtype": "Link",
+   "options": "Company",
+   "reqd": 1,
+   "hidden": 1,
+   "read_only": 1
+  },
+  {
+   "fieldname": "sec_dates",
+   "label": "Rental Period",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "custom_rental_start_date",
+   "label": "Rental Start Date",
+   "fieldtype": "Date",
+   "reqd": 1
+  },
+  {
+   "fieldname": "custom_rental_end_date",
+   "label": "Rental End Date",
+   "fieldtype": "Date",
+   "reqd": 1
+  },
+  {
+   "fieldname": "sec_items",
+   "label": "Items for Rent",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "items",
+   "label": "Items",
+   "fieldtype": "Table",
+   "options": "Quotation Item",
+   "reqd": 1,
+   "hidden": 0,
+   "table_columns": [
+    {"fieldname": "item_code", "label": "Item Code", "fieldtype": "Link", "options": "Item", "reqd": 1, "in_list_view": 1, "width": 150, "filters": {"is_rental_item": 1}},
+    {"fieldname": "item_name", "label": "Item Name", "fieldtype": "Data", "read_only": 1, "in_list_view": 1, "width": 200},
+    {"fieldname": "qty", "label": "Quantity", "fieldtype": "Float", "reqd": 1, "in_list_view": 1, "width": 80},
+    {"fieldname": "uom", "label": "UOM", "fieldtype": "Link", "options":"UOM", "read_only": 1, "in_list_view": 1, "width": 80},
+    {"fieldname": "rate", "label": "Rate (per day)", "fieldtype": "Currency", "read_only": 1, "in_list_view": 1, "width": 120},
+    {"fieldname": "amount", "label": "Amount", "fieldtype": "Currency", "read_only": 1, "in_list_view": 1, "width": 120}
+   ]
+  },
+  {
+   "fieldname": "sec_delivery",
+   "label": "Delivery Information",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "shipping_address_name",
+   "label": "Shipping Address",
+   "fieldtype": "Link",
+   "options": "Address",
+   "description": "Select or create your shipping address."
+  },
+  {
+   "fieldname": "customer_address",
+   "label": "Billing Address",
+   "fieldtype": "Link",
+   "options": "Address",
+   "description": "Select or create your billing address."
+  },
+  {
+   "fieldname": "notes",
+   "label": "Additional Notes or Instructions",
+   "fieldtype": "TextEditor",
+   "reqd": 0
+  },
+  {
+    "fieldname": "sec_quote_preview",
+    "label": "Estimated Quote Preview",
+    "fieldtype": "Section Break",
+    "description": "This is an estimate. Final charges may vary."
+   },
+   {
+    "fieldname": "custom_quote_preview_html",
+    "label": "Quote Preview",
+    "fieldtype": "HTML",
+    "read_only": 1
+   }
+ ]
+}

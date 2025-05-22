@@ -1,0 +1,15 @@
+{
+    "doctype": "Dashboard Chart Source",
+    "name": "DCS - Items in Maintenance",
+    "chart_name": "Items in Maintenance",
+    "source_name": "DCS - Items in Maintenance",
+    "report_name": null,
+    "timeseries": 0,
+    "time_interval": "Daily",
+    "filters_json": "{}",
+    "data_source_type": "Python Method",
+    "source_type": "Python Method",
+    "method_name": "onhire_pro.utils.kpi_calculations.calculate_items_in_maintenance",
+    "cache_seconds": 300,
+    "module": "OnHire Pro"
+}

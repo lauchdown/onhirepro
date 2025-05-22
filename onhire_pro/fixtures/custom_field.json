@@ -1,0 +1,134 @@
+[
+    {
+        "doctype": "Custom Field",
+        "name": "Quotation-is_rental_quotation",
+        "dt": "Quotation",
+        "fieldname": "is_rental_quotation",
+        "fieldtype": "Check",
+        "label": "Is Rental Quotation",
+        "insert_after": "status"
+    },
+    {
+        "doctype": "Custom Field",
+        "name": "Quotation-rental_start_date",
+        "dt": "Quotation",
+        "fieldname": "rental_start_date",
+        "fieldtype": "Date",
+        "label": "Rental Start Date",
+        "depends_on": "eval:doc.is_rental_quotation",
+        "insert_after": "is_rental_quotation"
+    },
+    {
+        "doctype": "Custom Field",
+        "name": "Quotation-rental_end_date",
+        "dt": "Quotation",
+        "fieldname": "rental_end_date",
+        "fieldtype": "Date",
+        "label": "Rental End Date",
+        "depends_on": "eval:doc.is_rental_quotation",
+        "insert_after": "rental_start_date"
+    },
+    {
+        "doctype": "Custom Field",
+        "name": "Quotation-calculated_total_rental_duration_display",
+        "dt": "Quotation",
+        "fieldname": "calculated_total_rental_duration_display",
+        "fieldtype": "Data",
+        "label": "Total Rental Duration",
+        "read_only": 1,
+        "depends_on": "eval:doc.is_rental_quotation",
+        "insert_after": "rental_end_date"
+    },
+    {
+        "doctype": "Custom Field",
+        "name": "Quotation-rental_terms_and_conditions",
+        "dt": "Quotation",
+        "fieldname": "rental_terms_and_conditions",
+        "fieldtype": "Link",
+        "label": "Rental Terms and Conditions",
+        "options": "Terms and Conditions",
+        "depends_on": "eval:doc.is_rental_quotation",
+        "insert_after": "calculated_total_rental_duration_display"
+    },
+    {
+        "doctype": "Custom Field",
+        "name": "Quotation Item-item_type",
+        "dt": "Quotation Item",
+        "fieldname": "item_type",
+        "fieldtype": "Select",
+        "label": "Item Type",
+        "options": "Rental\nSale\nSOR - Sale or Return",
+        "reqd": 1,
+        "insert_after": "item_name",
+        "in_list_view": 1
+    },
+    {
+        "doctype": "Custom Field",
+        "name": "Quotation Item-rental_item_start_date",
+        "dt": "Quotation Item",
+        "fieldname": "rental_item_start_date",
+        "fieldtype": "Date",
+        "label": "Rental Item Start Date",
+        "insert_after": "item_type"
+    },
+    {
+        "doctype": "Custom Field",
+        "name": "Quotation Item-rental_item_end_date",
+        "dt": "Quotation Item",
+        "fieldname": "rental_item_end_date",
+        "fieldtype": "Date",
+        "label": "Rental Item End Date",
+        "insert_after": "rental_item_start_date"
+    },
+    {
+        "doctype": "Custom Field",
+        "name": "Quotation Item-rental_item_duration",
+        "dt": "Quotation Item",
+        "fieldname": "rental_item_duration",
+        "fieldtype": "Float",
+        "label": "Rental Item Duration",
+        "read_only": 1,
+        "insert_after": "rental_item_end_date"
+    },
+    {
+        "doctype": "Custom Field",
+        "name": "Quotation Item-rate_per_unit_duration",
+        "dt": "Quotation Item",
+        "fieldname": "rate_per_unit_duration",
+        "fieldtype": "Currency",
+        "label": "Rate Per Unit Duration",
+        "insert_after": "rental_item_duration"
+    },
+    {
+        "doctype": "Custom Field",
+        "name": "Quotation Item-rental_period_unit",
+        "dt": "Quotation Item",
+        "fieldname": "rental_period_unit",
+        "fieldtype": "Select",
+        "label": "Rental Period Unit",
+        "options": "Hour\nDay\nWeek",
+        "insert_after": "rate_per_unit_duration"
+    },
+    {
+        "doctype": "Custom Field",
+        "name": "Stock Entry-rental_job",
+        "dt": "Stock Entry",
+        "fieldname": "rental_job",
+        "fieldtype": "Link",
+        "label": "Rental Job",
+        "options": "Rental Job",
+        "insert_after": "purpose",
+        "depends_on": "eval:doc.purpose==\"Material Receipt\""
+    },
+    {
+        "doctype": "Custom Field",
+        "name": "Stock Entry Detail-condition_assessment",
+        "dt": "Stock Entry Detail",
+        "fieldname": "condition_assessment",
+        "fieldtype": "Link",
+        "label": "Condition Assessment",
+        "options": "Condition Assessment",
+        "insert_after": "serial_no",
+        "depends_on": "eval:doc.parenttype==\"Stock Entry\" && frappe.get_doc(doc.parenttype, doc.parent).purpose==\"Material Receipt\" && frappe.get_doc(doc.parenttype, doc.parent).rental_job"
+    }
+]

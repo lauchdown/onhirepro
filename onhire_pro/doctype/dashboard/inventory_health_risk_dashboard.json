@@ -1,0 +1,49 @@
+{
+    "doctype": "Dashboard",
+    "name": "Inventory Health Risk Dashboard",
+    "dashboard_name": "Inventory Health & Risk",
+    "module": "OnHire Pro",
+    "charts": [
+        {
+            "chart": "At Risk Stock",
+            "width": "Half"
+        },
+        {
+            "chart": "Stock Reservation Conflicts",
+            "width": "Half"
+        },
+        {
+            "chart": "Items Awaiting Condition Assessment",
+            "width": "Half"
+        },
+        {
+            "chart": "Items in Maintenance",
+            "width": "Half"
+        },
+        {
+            "chart": "Maintenance Turnaround Time",
+            "width": "Half"
+        },
+        {
+            "chart": "Item Utilization Rate (Overall)",
+            "width": "Half"
+        },
+        {
+            "chart": "Damage Rate by Item Group",
+            "width": "Full"
+        },
+        {
+            "chart": "Item Utilization Rate Trend",
+            "width": "Full"
+        }
+    ],
+    "cards": [],
+    "roles": [
+        {
+            "role": "Inventory Manager"
+        },
+        {
+            "role": "Operations Manager"
+        }
+    ]
+}

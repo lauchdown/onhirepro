@@ -1,0 +1,18 @@
+{
+    "doctype": "Dashboard Chart",
+    "name": "Active Rental Jobs",
+    "chart_name": "Active Rental Jobs",
+    "chart_type": "Number Card",
+    "source": "DCS - Active Rental Jobs",
+    "report_name": null,
+    "timeseries": 0,
+    "time_interval": "Daily",
+    "filters_json": "{}",
+    "custom_options": "{}",
+    "module": "OnHire Pro",
+    "owner": "Administrator",
+    "restrict_to_roles": [
+        "Operations Manager",
+        "Rental Staff"
+    ]
+}

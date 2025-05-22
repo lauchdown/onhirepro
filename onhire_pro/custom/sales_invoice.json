@@ -1,0 +1,43 @@
+{
+  "custom_fields": [
+    {
+      "fieldname": "xero_invoice_id",
+      "fieldtype": "Data",
+      "label": "Xero Invoice ID",
+      "read_only": 1,
+      "hidden": 0,
+      "insert_after": "amended_from",
+      "no_copy": 1
+    },
+    {
+      "fieldname": "xero_sync_status",
+      "fieldtype": "Select",
+      "label": "Xero Sync Status",
+      "options": "Not Synced\nIn Progress\nSynced\nFailed",
+      "default": "Not Synced",
+      "read_only": 1,
+      "hidden": 0,
+      "insert_after": "xero_invoice_id",
+      "no_copy": 1
+    },
+    {
+      "fieldname": "xero_last_sync_attempt",
+      "fieldtype": "Datetime",
+      "label": "Last Xero Sync Attempt",
+      "read_only": 1,
+      "hidden": 0,
+      "insert_after": "xero_sync_status",
+      "no_copy": 1
+    },
+    {
+      "fieldname": "xero_sync_attempts",
+      "fieldtype": "Int",
+      "label": "Xero Sync Attempts",
+      "read_only": 1,
+      "hidden": 0,
+      "insert_after": "xero_last_sync_attempt",
+      "default": 0,
+      "no_copy": 1
+    }
+  ]
+}

@@ -1,0 +1,33 @@
+{
+ "docstatus": 0,
+ "doctype": "Notification",
+ "name": "Rental Overdue Customer",
+ "module": "OnHire Pro",
+ "subject": "Action Required: Your Rental Items for Job {{ doc.name }} are Overdue",
+ "document_type": "Rental Job",
+ "send_to_all_assignees": 0,
+ "send_system_notification": 1,
+ "send_email": 1,
+ "event": "Date Change", 
+ "date_changed": "scheduled_return_date", 
+ "days_in_advance": -1, 
+ "channel": "Email",
+ "message_type": "HTML",
+ "message": "Dear {{ doc.customer_name }},<br><br>Our records indicate that the items for your Rental Job ({{ doc.name }}) were due for return on {{ frappe.utils.formatdate(doc.scheduled_return_date) }} and are now overdue.<br><br>Please contact us immediately to arrange for their return or to discuss an extension if applicable. Late fees may apply as per our terms and conditions.<br><br>View rental job details: {{ frappe.utils.get_link_to_form('Rental Job', doc.name) }}<br><br>Thank you,<br>The OnHire Pro Team",
+ "enabled": 1,
+ "condition": "doc.status in ['Dispatched', 'In Use'] and frappe.utils.getdate(doc.scheduled_return_date) < frappe.utils.today()",
+ "recipients": [
+  {
+   "receiver_by_document_field": "customer_email",
+   "condition": "doc.customer_email"
+  },
+  {
+   "receiver_by_document_field": "customer",
+   "condition": "!doc.customer_email"
+  }
+ ],
+ "owner": "Administrator",
+ "modified_by": "Administrator",
+ "creation": "2025-05-15 13:57:00.000000",
+ "modified": "2025-05-15 13:57:00.000000"
+}

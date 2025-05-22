@@ -1,0 +1,18 @@
+{
+    "doctype": "Dashboard Chart",
+    "name": "Stock Reservation Conflicts",
+    "chart_name": "Stock Reservation Conflicts",
+    "chart_type": "Number Card",
+    "source": "DCS - Stock Reservation Conflicts",
+    "report_name": null,
+    "timeseries": 0,
+    "time_interval": "Daily",
+    "filters_json": "{}",
+    "custom_options": "{\"conditions\": [{\"color\": \"orange\", \"value\": \">\", \"threshold_field\": \"reservation_conflicts_threshold_warning\"}]}",
+    "module": "OnHire Pro",
+    "owner": "Administrator",
+    "restrict_to_roles": [
+        "Inventory Manager",
+        "Operations Manager"
+    ]
+}

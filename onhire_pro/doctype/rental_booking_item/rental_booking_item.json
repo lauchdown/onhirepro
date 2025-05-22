@@ -1,0 +1,127 @@
+{
+ "actions": [],
+ "allow_rename": 0,
+ "creation": "2025-05-16 16:01:30.000000",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "parent",
+  "parenttype",
+  "parentfield",
+  "item_code",
+  "item_name",
+  "description",
+  "column_break_6",
+  "qty",
+  "rate",
+  "amount",
+  "section_break_10",
+  "is_sales_item",
+  "is_rental_item",
+  "serial_no"
+ ],
+ "fields": [
+  {
+   "fieldname": "parent",
+   "fieldtype": "Data",
+   "hidden": 1,
+   "label": "Parent"
+  },
+  {
+   "fieldname": "parenttype",
+   "fieldtype": "Data",
+   "hidden": 1,
+   "label": "Parenttype"
+  },
+  {
+   "fieldname": "parentfield",
+   "fieldtype": "Data",
+   "hidden": 1,
+   "label": "Parentfield"
+  },
+  {
+   "fieldname": "item_code",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Item Code",
+   "options": "Item",
+   "reqd": 1
+  },
+  {
+   "fetch_from": "item_code.item_name",
+   "fieldname": "item_name",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Item Name",
+   "read_only": 1
+  },
+  {
+   "fetch_from": "item_code.description",
+   "fieldname": "description",
+   "fieldtype": "Text",
+   "label": "Description",
+   "read_only": 1
+  },
+  {
+   "fieldname": "column_break_6",
+   "fieldtype": "Column Break"
+  },
+  {
+   "default": "1",
+   "fieldname": "qty",
+   "fieldtype": "Int",
+   "in_list_view": 1,
+   "label": "Quantity",
+   "reqd": 1
+  },
+  {
+   "fieldname": "rate",
+   "fieldtype": "Currency",
+   "in_list_view": 1,
+   "label": "Rate",
+   "reqd": 1
+  },
+  {
+   "fieldname": "amount",
+   "fieldtype": "Currency",
+   "in_list_view": 1,
+   "label": "Amount",
+   "read_only": 1
+  },
+  {
+   "fieldname": "section_break_10",
+   "fieldtype": "Section Break"
+  },
+  {
+   "default": "0",
+   "fieldname": "is_sales_item",
+   "fieldtype": "Check",
+   "label": "Is Sales Item"
+  },
+  {
+   "default": "0",
+   "fieldname": "is_rental_item",
+   "fieldtype": "Check",
+   "label": "Is Rental Item"
+  },
+  {
+   "depends_on": "eval:doc.is_rental_item == 1",
+   "fieldname": "serial_no",
+   "fieldtype": "Small Text",
+   "label": "Serial No"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "istable": 1,
+ "links": [],
+ "modified": "2025-05-16 16:01:30.000000",
+ "modified_by": "Administrator",
+ "module": "OnHire Pro",
+ "name": "Rental Booking Item",
+ "owner": "Administrator",
+ "permissions": [],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

@@ -1,0 +1,37 @@
+{
+    "doctype": "Dashboard",
+    "name": "Operational Overview Dashboard",
+    "dashboard_name": "Operational Overview",
+    "module": "OnHire Pro",
+    "charts": [
+        {
+            "chart": "Active Rental Jobs",
+            "width": "Half"
+        },
+        {
+            "chart": "Jobs Due for Dispatch Today/This Week",
+            "width": "Half"
+        },
+        {
+            "chart": "Jobs Due for Return Today/This Week",
+            "width": "Half"
+        },
+        {
+            "chart": "Overdue Returns Rate Count",
+            "width": "Half"
+        },
+        {
+            "chart": "Booking Conversion Rate",
+            "width": "Full"
+        }
+    ],
+    "cards": [],
+    "roles": [
+        {
+            "role": "Operations Manager"
+        },
+        {
+            "role": "Rental Staff"
+        }
+    ]
+}

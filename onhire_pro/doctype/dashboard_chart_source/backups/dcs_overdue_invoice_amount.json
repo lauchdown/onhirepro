@@ -1,0 +1,15 @@
+{
+    "doctype": "Dashboard Chart Source",
+    "name": "DCS - Overdue Invoice Amount",
+    "chart_name": "Overdue Invoice Amount",
+    "source_name": "DCS - Overdue Invoice Amount",
+    "report_name": null,
+    "timeseries": 0,
+    "time_interval": "Daily",
+    "filters_json": "{}",
+    "data_source_type": "Python Method",
+    "source_type": "Python Method",
+    "method_name": "onhire_pro.utils.kpi_calculations.calculate_overdue_invoice_amount",
+    "cache_seconds": 3600,
+    "module": "OnHire Pro"
+}

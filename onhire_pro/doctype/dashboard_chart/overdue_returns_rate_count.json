@@ -1,0 +1,18 @@
+{
+    "doctype": "Dashboard Chart",
+    "name": "Overdue Returns Rate Count",
+    "chart_name": "Overdue Returns Rate Count",
+    "chart_type": "Number Card",
+    "source": "DCS - Overdue Returns Rate Count",
+    "report_name": null,
+    "timeseries": 0,
+    "time_interval": "Daily",
+    "filters_json": "{}",
+    "custom_options": "{\"conditions\": [{\"color\": \"red\", \"value\": \">\", \"threshold_field\": \"overdue_returns_threshold_critical\"}]}",
+    "module": "OnHire Pro",
+    "owner": "Administrator",
+    "restrict_to_roles": [
+        "Operations Manager",
+        "Rental Staff"
+    ]
+}

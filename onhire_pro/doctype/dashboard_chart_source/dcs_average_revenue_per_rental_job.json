@@ -1,0 +1,15 @@
+{
+    "doctype": "Dashboard Chart Source",
+    "name": "DCS - Average Revenue per Rental Job",
+    "chart_name": "Average Revenue per Rental Job",
+    "source_name": "DCS - Average Revenue per Rental Job",
+    "report_name": null,
+    "timeseries": 0,
+    "time_interval": "Daily",
+    "filters_json": "{}",
+    "data_source_type": "Python Method",
+    "source_type": "Python Method",
+    "method_name": "onhire_pro.reports.kpi_utils.calculate_average_revenue_per_job",
+    "cache_seconds": 3600,
+    "module": "OnHire Pro"
+}

@@ -1,0 +1,15 @@
+{
+    "doctype": "Dashboard Chart Source",
+    "name": "DCS - Item Utilization Rate",
+    "chart_name": "Item Utilization Rate",
+    "source_name": "DCS - Item Utilization Rate",
+    "report_name": null,
+    "timeseries": 0,
+    "time_interval": "Daily",
+    "filters_json": "{}",
+    "data_source_type": "Python Method",
+    "source_type": "Python Method",
+    "method_name": "onhire_pro.utils.kpi_calculations.calculate_item_utilization_rate",
+    "cache_seconds": 3600,
+    "module": "OnHire Pro"
+}

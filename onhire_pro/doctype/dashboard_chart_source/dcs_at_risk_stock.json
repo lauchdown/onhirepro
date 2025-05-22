@@ -1,0 +1,15 @@
+{
+    "doctype": "Dashboard Chart Source",
+    "name": "DCS - At Risk Stock",
+    "chart_name": "At Risk Stock",
+    "source_name": "DCS - At Risk Stock",
+    "report_name": null,
+    "timeseries": 0,
+    "time_interval": "Daily",
+    "filters_json": "{}",
+    "data_source_type": "Python Method",
+    "source_type": "Python Method",
+    "method_name": "onhire_pro.reports.kpi_utils.calculate_at_risk_stock",
+    "cache_seconds": 300,
+    "module": "OnHire Pro"
+}

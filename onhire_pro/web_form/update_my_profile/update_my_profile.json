@@ -1,0 +1,111 @@
+{
+ "docstatus": 0,
+ "doctype": "Web Form",
+ "idx": 0,
+ "is_standard": 1,
+ "title": "Update My Profile",
+ "module": "OnHire Pro",
+ "route": "my-profile",
+ "doc_type": "Contact",
+ "allow_edit": 1,
+ "allow_multiple": 0, 
+ "show_list": 0,
+ "show_sidebar": 0,
+ "allow_delete": 0,
+ "allow_print": 0,
+ "allow_comments": 0,
+ "login_required": 1,
+ "success_message": "Your profile has been updated. Some changes may require admin approval.",
+ "button_label": "Update Profile",
+ "owner": "Administrator",
+ "modified_by": "Administrator",
+ "creation": "2025-05-15 14:10:00.000000",
+ "modified": "2025-05-15 14:10:00.000000",
+ "web_form_fields": [
+  {
+   "fieldname": "first_name",
+   "label": "First Name",
+   "fieldtype": "Data",
+   "reqd": 1
+  },
+  {
+   "fieldname": "last_name",
+   "label": "Last Name",
+   "fieldtype": "Data"
+  },
+  {
+   "fieldname": "email_id",
+   "label": "Email (Cannot be changed here)",
+   "fieldtype": "Data",
+   "options": "Email",
+   "read_only": 1, 
+   "description": "To change your primary email, please contact support."
+  },
+  {
+   "fieldname": "phone",
+   "label": "Primary Phone",
+   "fieldtype": "Data",
+   "options": "Phone"
+  },
+  {
+   "fieldname": "mobile_no",
+   "label": "Mobile Number",
+   "fieldtype": "Data",
+   "options": "Phone"
+  },
+  {
+   "fieldname": "address_section",
+   "label": "Primary Address (Linked to Contact)",
+   "fieldtype": "Section Break",
+   "description": "Changes to address might require approval."
+  },
+  {
+   "fieldname": "address_html",
+   "fieldtype": "HTML",
+   "label": "Current Address",
+   "options": "<div id='current_address_display'>Loading address...</div>"
+  },
+  {
+   "fieldname": "notification_prefs_section",
+   "label": "Notification Preferences",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "custom_sms_opt_in",
+   "label": "SMS Opt-In for Critical Alerts",
+   "fieldtype": "Check"
+  },
+  {
+   "fieldname": "custom_whatsapp_opt_in",
+   "label": "WhatsApp Opt-In for Critical Alerts",
+   "fieldtype": "Check"
+  },
+  {
+   "fieldname": "custom_notify_booking_updates",
+   "label": "Notify: Booking Updates",
+   "fieldtype": "Check"
+  },
+  {
+   "fieldname": "custom_notify_return_reminders",
+   "label": "Notify: Return Reminders",
+   "fieldtype": "Check"
+  },
+  {
+   "fieldname": "custom_disable_all_notifications",
+   "label": "Disable All Portal Notifications",
+   "fieldtype": "Check",
+   "description": "Overrides individual preferences above."
+  },
+  {
+    "fieldname": "security_section",
+    "label": "Security Settings",
+    "fieldtype": "Section Break"
+   },
+   {
+    "fieldname": "two_fa_setup_html",
+    "label": "Two-Factor Authentication (2FA)",
+    "fieldtype": "HTML",
+    "options": "<p>Secure your account by enabling Two-Factor Authentication.</p><a href='/app/user-profile' class='btn btn-default btn-sm'>Manage 2FA & Password</a>"
+   }
+ ]
+}

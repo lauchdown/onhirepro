@@ -1,0 +1,32 @@
+{
+ "docstatus": 0,
+ "doctype": "Notification",
+ "name": "SOR Item Pending Return Customer",
+ "module": "OnHire Pro",
+ "subject": "Action Required: Sale or Return Items Pending for Job {{ doc.name }}",
+ "document_type": "Rental Job",
+ "send_to_all_assignees": 0,
+ "send_system_notification": 1,
+ "send_email": 1,
+ "event": "Value Change", 
+ "value_changed": "custom_sor_items_pending_return",
+ "channel": "Email",
+ "message_type": "HTML",
+ "message": "Dear {{ doc.customer_name }},<br><br>This is a reminder regarding Sale or Return (SOR) items associated with your Rental Job ({{ doc.name }}).<br><br>Our records indicate there are SOR items pending return or decision. Please contact us to arrange for their return or purchase as per the agreed terms.<br><br>View rental job details: {{ frappe.utils.get_link_to_form('Rental Job', doc.name) }}<br><br>Thank you,<br>The OnHire Pro Team",
+ "enabled": 1,
+ "condition": "doc.custom_sor_items_pending_return == 1", 
+ "recipients": [
+  {
+   "receiver_by_document_field": "customer_email",
+   "condition": "doc.customer_email"
+  },
+  {
+   "receiver_by_document_field": "customer",
+   "condition": "!doc.customer_email"
+  }
+ ],
+ "owner": "Administrator",
+ "modified_by": "Administrator",
+ "creation": "2025-05-15 14:00:00.000000",
+ "modified": "2025-05-15 14:00:00.000000"
+}

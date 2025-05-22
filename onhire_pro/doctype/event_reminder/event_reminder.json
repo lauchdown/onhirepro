@@ -1,0 +1,163 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "creation": "2025-05-15 22:00:45",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "reference_doctype",
+  "reference_name",
+  "reminder_type",
+  "recipient_user",
+  "recipient_contact",
+  "recipient_email",
+  "column_break_6",
+  "send_via",
+  "lead_time_value",
+  "lead_time_unit",
+  "reminder_datetime",
+  "is_sent",
+  "section_break_12",
+  "message_template"
+ ],
+ "fields": [
+  {
+   "fieldname": "reference_doctype",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "label": "Reference DocType",
+   "options": "Rental Job\nRental Event\nMaintenance Task",
+   "reqd": 1
+  },
+  {
+   "fieldname": "reference_name",
+   "fieldtype": "Dynamic Link",
+   "in_list_view": 1,
+   "label": "Reference Name",
+   "options": "reference_doctype",
+   "reqd": 1
+  },
+  {
+   "fieldname": "reminder_type",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Reminder Type",
+   "reqd": 1
+  },
+  {
+   "fieldname": "recipient_user",
+   "fieldtype": "Link",
+   "label": "Recipient User",
+   "options": "User"
+  },
+  {
+   "fieldname": "recipient_contact",
+   "fieldtype": "Link",
+   "label": "Recipient Contact",
+   "options": "Contact"
+  },
+  {
+   "fieldname": "recipient_email",
+   "fieldtype": "Data",
+   "label": "Recipient Email",
+   "options": "Email"
+  },
+  {
+   "fieldname": "column_break_6",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "send_via",
+   "fieldtype": "Select",
+   "label": "Send Via",
+   "options": "Email\nSystem Notification\nSMS\nEmail and System Notification\nEmail and SMS\nSystem Notification and SMS\nAll",
+   "reqd": 1
+  },
+  {
+   "fieldname": "lead_time_value",
+   "fieldtype": "Int",
+   "in_list_view": 1,
+   "label": "Lead Time Value",
+   "reqd": 1
+  },
+  {
+   "fieldname": "lead_time_unit",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "label": "Lead Time Unit",
+   "options": "Minutes\nHours\nDays",
+   "reqd": 1
+  },
+  {
+   "fieldname": "reminder_datetime",
+   "fieldtype": "Datetime",
+   "label": "Reminder Datetime",
+   "read_only": 1
+  },
+  {
+   "default": "0",
+   "fieldname": "is_sent",
+   "fieldtype": "Check",
+   "label": "Is Sent",
+   "read_only": 1
+  },
+  {
+   "fieldname": "section_break_12",
+   "fieldtype": "Section Break",
+   "label": "Message"
+  },
+  {
+   "fieldname": "message_template",
+   "fieldtype": "Link",
+   "label": "Message Template",
+   "options": "Email Template"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2025-05-15 22:00:45",
+ "modified_by": "Administrator",
+ "module": "OnHire Pro",
+ "name": "Event Reminder",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Rental Manager",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "create": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Rental User",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

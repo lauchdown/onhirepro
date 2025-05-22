@@ -1,0 +1,15 @@
+{
+    "doctype": "Dashboard Chart Source",
+    "name": "DCS - Customer Churn Rate",
+    "chart_name": "Customer Churn Rate",
+    "source_name": "DCS - Customer Churn Rate",
+    "report_name": null,
+    "timeseries": 0,
+    "time_interval": "Daily",
+    "filters_json": "{}",
+    "data_source_type": "Python Method",
+    "source_type": "Python Method",
+    "method_name": "onhire_pro.reports.kpi_utils.calculate_customer_churn_retention_rate",
+    "cache_seconds": 86400,
+    "module": "OnHire Pro"
+}

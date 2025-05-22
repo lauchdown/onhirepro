@@ -1,0 +1,20 @@
+{
+ "docstatus": 0,
+ "doctype": "Portal Page",
+ "name": "my-rental-calendar",
+ "idx": 0,
+ "title": "My Rental Calendar",
+ "route": "my-rental-calendar",
+ "module": "OnHire Pro",
+ "reference_doctype": "Rental Job", 
+ "standard": "Yes",
+ "show_sidebar": 0, 
+ "public": 0,
+ "login_required": 1,
+ "css": "my_rental_calendar.css",
+ "script": "my_rental_calendar.js",
+ "owner": "Administrator",
+ "modified_by": "Administrator",
+ "creation": "2025-05-15 14:11:00.000000",
+ "modified": "2025-05-15 14:11:00.000000"
+}

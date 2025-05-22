@@ -1,0 +1,19 @@
+{
+ "docstatus": 0,
+ "doctype": "Portal Page",
+ "name": "rental-catalog",
+ "idx": 0,
+ "title": "Rental Catalog",
+ "route": "rental-catalog",
+ "module": "OnHire Pro",
+ "reference_doctype": "Item",
+ "standard": "Yes",
+ "show_sidebar": 1,
+ "public": 1,
+ "css": "rental_catalog.css",
+ "script": "rental_catalog.js",
+ "owner": "Administrator",
+ "modified_by": "Administrator",
+ "creation": "2025-05-15 12:35:00.000000",
+ "modified": "2025-05-15 12:35:00.000000"
+}

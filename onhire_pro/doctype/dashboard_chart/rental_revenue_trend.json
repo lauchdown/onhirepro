@@ -1,0 +1,19 @@
+{
+    "doctype": "Dashboard Chart",
+    "name": "Rental Revenue Trend",
+    "chart_name": "Rental Revenue Trend",
+    "chart_type": "Line",
+    "source": "DCS - Rental Revenue Trend",
+    "report_name": null,
+    "timeseries": 1,
+    "time_interval": "Monthly",
+    "filters_json": "{\"time_interval\": \"Monthly\"}",
+    "custom_options": "{}",
+    "module": "OnHire Pro",
+    "owner": "Administrator",
+    "restrict_to_roles": [
+        "Finance Manager",
+        "Sales Manager",
+        "Operations Manager"
+    ]
+}

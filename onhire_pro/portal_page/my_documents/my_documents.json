@@ -1,0 +1,19 @@
+{
+ "docstatus": 0,
+ "doctype": "Portal Page",
+ "name": "my-documents",
+ "idx": 0,
+ "title": "My Documents",
+ "route": "my-documents",
+ "module": "OnHire Pro",
+ "standard": "Yes",
+ "show_sidebar": 1,
+ "public": 0,
+ "login_required": 1,
+ "css": "my_documents.css",
+ "script": "my_documents.js",
+ "owner": "Administrator",
+ "modified_by": "Administrator",
+ "creation": "2025-05-15 14:07:00.000000",
+ "modified": "2025-05-15 14:07:00.000000"
+}

@@ -1,0 +1,15 @@
+{
+    "doctype": "Dashboard Chart Source",
+    "name": "DCS - Job Status Distribution",
+    "chart_name": "Job Status Distribution",
+    "source_name": "DCS - Job Status Distribution",
+    "report_name": null,
+    "timeseries": 0,
+    "time_interval": "Daily",
+    "filters_json": "{}",
+    "data_source_type": "Python Method",
+    "source_type": "Python Method",
+    "method_name": "onhire_pro.reports.kpi_utils.calculate_job_status_distribution",
+    "cache_seconds": 300,
+    "module": "OnHire Pro"
+}

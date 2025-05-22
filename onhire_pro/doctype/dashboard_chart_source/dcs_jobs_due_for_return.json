@@ -1,0 +1,15 @@
+{
+    "doctype": "Dashboard Chart Source",
+    "name": "DCS - Jobs Due for Return",
+    "chart_name": "Jobs Due for Return",
+    "source_name": "DCS - Jobs Due for Return",
+    "report_name": null,
+    "timeseries": 0,
+    "time_interval": "Daily",
+    "filters_json": "{}",
+    "data_source_type": "Python Method",
+    "source_type": "Python Method",
+    "method_name": "onhire_pro.reports.kpi_utils.calculate_jobs_due_return",
+    "cache_seconds": 300,
+    "module": "OnHire Pro"
+}

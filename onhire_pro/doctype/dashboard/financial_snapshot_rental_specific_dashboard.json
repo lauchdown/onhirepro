@@ -1,0 +1,41 @@
+{
+    "doctype": "Dashboard",
+    "name": "Financial Snapshot Rental Specific Dashboard",
+    "dashboard_name": "Financial Snapshot (Rental Specific)",
+    "module": "OnHire Pro",
+    "charts": [
+        {
+            "chart": "Total Rental Revenue (MTD/QTD)",
+            "width": "Half"
+        },
+        {
+            "chart": "Open Rental Quotation Value",
+            "width": "Half"
+        },
+        {
+            "chart": "Overdue Invoice Amount (from Rental Jobs)",
+            "width": "Half"
+        },
+        {
+            "chart": "Average Revenue per Rental Job",
+            "width": "Half"
+        },
+        {
+            "chart": "Rental Revenue Trend",
+            "width": "Full"
+        },
+        {
+            "chart": "Top 5 Customers by Rental Value",
+            "width": "Full"
+        }
+    ],
+    "cards": [],
+    "roles": [
+        {
+            "role": "Finance Manager"
+        },
+        {
+            "role": "Sales Manager"
+        }
+    ]
+}

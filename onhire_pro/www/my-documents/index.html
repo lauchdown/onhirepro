@@ -1,0 +1,199 @@
+{% extends "templates/includes/rental_portal_base.html" %}
+
+{% block portal_content %}
+<div class="my-documents-container">
+    <div class="row mb-4">
+        <div class="col-md-6">
+            <h2>My Documents</h2>
+            <p>Access and manage your contracts, invoices, receipts, and other documents.</p>
+        </div>
+        <div class="col-md-6 text-end">
+            <a href="/my-bookings-dashboard" class="btn btn-outline-primary">
+                <i class="fa fa-tachometer-alt me-1"></i> Bookings Dashboard
+            </a>
+        </div>
+    </div>
+
+    {% if error_message %}
+    <div class="row">
+        <div class="col-12">
+            <div class="alert alert-warning">
+                <i class="fa fa-exclamation-triangle me-2"></i> {{ error_message }}
+            </div>
+        </div>
+    </div>
+    {% else %}
+    
+    <!-- Pending Signatures Alert -->
+    {% if pending_signatures %}
+    <div class="row mb-4">
+        <div class="col-12">
+            <div class="alert alert-warning">
+                <div class="d-flex justify-content-between align-items-center">
+                    <div>
+                        <h5 class="alert-heading"><i class="fa fa-signature me-2"></i> Pending Signatures</h5>
+                        <p class="mb-0">You have {{ pending_signatures|length }} document(s) pending your signature.</p>
+                    </div>
+                    <button class="btn btn-warning" type="button" data-bs-toggle="collapse" data-bs-target="#pendingSignatures" aria-expanded="false" aria-controls="pendingSignatures">
+                        View Documents
+                    </button>
+                </div>
+                <div class="collapse mt-3" id="pendingSignatures">
+                    <div class="card card-body">
+                        <div class="list-group">
+                            {% for doc in pending_signatures %}
+                            <div class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
+                                <div>
+                                    <h6 class="mb-1">{{ doc.title }}</h6>
+                                    <small class="text-muted">Reference: {{ doc.reference }}</small>
+                                </div>
+                                <a href="{{ doc.url }}" class="btn btn-sm btn-primary">
+                                    <i class="fa fa-signature me-1"></i> Sign Now
+                                </a>
+                            </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endif %}
+
+    <!-- Document Filters -->
+    <div class="row mb-4">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-body">
+                    <form id="document-filter-form" class="d-flex flex-wrap justify-content-between align-items-center">
+                        <div class="btn-group" role="group">
+                            {% for option in doc_type_options %}
+                            <a href="/my-documents?type={{ option.value }}" class="btn btn-outline-primary {% if active_doc_type == option.value %}active{% endif %}">
+                                {{ option.label }}
+                            </a>
+                            {% endfor %}
+                        </div>
+                        <div class="mt-2 mt-md-0">
+                            <div class="input-group">
+                                <input type="text" class="form-control" id="document-search" placeholder="Search documents...">
+                                <button class="btn btn-outline-secondary" type="button">
+                                    <i class="fa fa-search"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Documents List -->
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header bg-primary text-white">
+                    <h5 class="card-title mb-0">Documents</h5>
+                </div>
+                <div class="card-body p-0">
+                    {% if documents %}
+                    <div class="table-responsive">
+                        <table class="table table-hover mb-0" id="documents-table">
+                            <thead>
+                                <tr>
+                                    <th>Date</th>
+                                    <th>Document</th>
+                                    <th>Type</th>
+                                    <th>Status</th>
+                                    <th>Amount</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for doc in documents %}
+                                <tr class="document-row" data-title="{{ doc.title }}">
+                                    <td>{{ doc.date }}</td>
+                                    <td>{{ doc.title }}</td>
+                                    <td>
+                                        <span class="badge bg-{{ doc.type | replace('invoice', 'primary') | replace('receipt', 'success') | replace('contract', 'warning') | replace('condition', 'info') | replace('other', 'secondary') }}">
+                                            {{ doc.type | title }}
+                                        </span>
+                                    </td>
+                                    <td>
+                                        {% if doc.type == 'invoice' %}
+                                            {% if doc.outstanding == 0 %}
+                                            <span class="badge bg-success">Paid</span>
+                                            {% else %}
+                                            <span class="badge bg-danger">Outstanding: {{ frappe.format_value(doc.outstanding, {"fieldtype": "Currency"}) }}</span>
+                                            {% endif %}
+                                        {% elif doc.type == 'contract' %}
+                                            {% if doc.is_signed %}
+                                            <span class="badge bg-success">Signed</span>
+                                            {% else %}
+                                            <span class="badge bg-warning">Signature Required</span>
+                                            {% endif %}
+                                        {% else %}
+                                            <span class="badge bg-secondary">{{ doc.status }}</span>
+                                        {% endif %}
+                                    </td>
+                                    <td>
+                                        {% if doc.amount > 0 %}
+                                        {{ frappe.format_value(doc.amount, {"fieldtype": "Currency"}) }}
+                                        {% else %}
+                                        -
+                                        {% endif %}
+                                    </td>
+                                    <td>
+                                        <div class="btn-group" role="group">
+                                            {% if doc.url %}
+                                            <a href="{{ doc.url }}" class="btn btn-sm btn-outline-primary" target="_blank">
+                                                <i class="fa fa-eye me-1"></i> View
+                                            </a>
+                                            {% endif %}
+                                            
+                                            {% if doc.can_download %}
+                                            <a href="{{ doc.url }}&format=pdf" class="btn btn-sm btn-outline-secondary" target="_blank">
+                                                <i class="fa fa-download me-1"></i> Download
+                                            </a>
+                                            {% endif %}
+                                            
+                                            {% if doc.can_sign %}
+                                            <a href="/sign-document?document={{ doc.name }}&type={{ doc.type }}" class="btn btn-sm btn-outline-success">
+                                                <i class="fa fa-signature me-1"></i> Sign
+                                            </a>
+                                            {% endif %}
+                                        </div>
+                                    </td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                    {% else %}
+                    <div class="text-center py-5">
+                        <i class="fa fa-file-alt fa-4x text-muted mb-3"></i>
+                        <h3>No documents found</h3>
+                        <p class="text-muted">You don't have any {{ active_doc_type }} documents at the moment.</p>
+                    </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endif %}
+</div>
+{% endblock %}
+
+{% block script %}
+{{ super() }}
+<script>
+    $(document).ready(function() {
+        // Document search functionality
+        $("#document-search").on("keyup", function() {
+            var value = $(this).val().toLowerCase();
+            $("#documents-table .document-row").filter(function() {
+                $(this).toggle($(this).data("title").toLowerCase().indexOf(value) > -1);
+            });
+        });
+    });
+</script>
+{% endblock %}

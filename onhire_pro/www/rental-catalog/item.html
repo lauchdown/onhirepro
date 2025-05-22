@@ -1,0 +1,460 @@
+{% extends "templates/web.html" %}
+
+{% block title %}{{ item.item_name }} - RentalHub{% endblock %}
+
+{% block page_content %}
+<div class="rental-item-container">
+    <!-- Branded Header -->
+    <div class="row mb-4">
+        <div class="col-12">
+            <div class="rentalhub-header">
+                <div class="d-flex justify-content-between align-items-center">
+                    <div class="rentalhub-logo">
+                        <h1><span class="text-primary">Rental</span>Hub</h1>
+                    </div>
+                    <div class="header-actions d-none d-md-flex">
+                        <a href="/support" class="btn btn-outline-primary me-2">
+                            <i class="fa fa-headset me-1"></i> Support
+                        </a>
+                        <a href="/rental-booking-request" class="btn btn-primary">
+                            <i class="fa fa-plus me-1"></i> New Booking
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Navigation Bar -->
+    <div class="row mb-4">
+        <div class="col-12">
+            <nav class="rentalhub-nav">
+                <ul class="nav nav-pills nav-fill">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/dashboard">Dashboard</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="/rental-catalog">Rental Catalog</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/sales-catalog">Sales Catalog</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/my-bookings">My Bookings</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/my-rentals">My Rentals</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/calendar">Calendar</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/documents">Documents</a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+    
+    <div class="row">
+        <div class="col-12">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="/rental-catalog">Rental Catalog</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">{{ item.item_name }}</li>
+                </ol>
+            </nav>
+        </div>
+    </div>
+    
+    <div class="row">
+        <div class="col-md-6">
+            <div class="item-image-container">
+                {% if item.image %}
+                <img src="{{ item.image }}" class="img-fluid rounded" alt="{{ item.item_name }}">
+                {% else %}
+                <div class="placeholder-image bg-light d-flex align-items-center justify-content-center rounded" style="height: 400px;">
+                    <i class="fa fa-image fa-5x text-muted"></i>
+                </div>
+                {% endif %}
+                
+                {% if item.additional_images %}
+                <div class="additional-images mt-3">
+                    <div class="row">
+                        {% for img in item.additional_images %}
+                        <div class="col-3">
+                            <img src="{{ img }}" class="img-thumbnail thumbnail-image" alt="Additional view">
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+                {% endif %}
+            </div>
+        </div>
+        
+        <div class="col-md-6">
+            <div class="item-details">
+                <div class="item-category mb-2">
+                    <span class="badge bg-secondary">{{ item.item_group }}</span>
+                </div>
+                
+                <h1>{{ item.item_name }}</h1>
+                
+                <!-- Availability status indicator -->
+                <div class="availability-status mb-3">
+                    {% if item.available %}
+                    <span class="badge bg-success">In Stock</span>
+                    {% else %}
+                    <span class="badge bg-danger">Currently Unavailable</span>
+                    {% endif %}
+                </div>
+                
+                <!-- Multiple pricing options display -->
+                <div class="pricing-options mb-4">
+                    <h5>Rental Rates</h5>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="price-card">
+                                <div class="price-header">Daily</div>
+                                <div class="price-amount">{{ frappe.format_value(item.daily_rate or item.rate, {"fieldtype": "Currency"}) }}</div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="price-card">
+                                <div class="price-header">Weekly</div>
+                                <div class="price-amount">{{ frappe.format_value(item.weekly_rate or (item.rate * 5), {"fieldtype": "Currency"}) }}</div>
+                                <div class="price-savings">Save {{ frappe.format_value((item.daily_rate or item.rate) * 7 - (item.weekly_rate or (item.rate * 5)), {"fieldtype": "Currency"}) }}</div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="price-card">
+                                <div class="price-header">Monthly</div>
+                                <div class="price-amount">{{ frappe.format_value(item.monthly_rate or (item.rate * 20), {"fieldtype": "Currency"}) }}</div>
+                                <div class="price-savings">Save {{ frappe.format_value((item.daily_rate or item.rate) * 30 - (item.monthly_rate or (item.rate * 20)), {"fieldtype": "Currency"}) }}</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="item-description mb-4">
+                    <h5>Description</h5>
+                    <p>{{ item.description or "No description available." }}</p>
+                </div>
+                
+                <div class="item-specifications mb-4">
+                    <h5>Specifications</h5>
+                    <table class="table table-sm">
+                        <tbody>
+                            {% for spec in item.specifications %}
+                            <tr>
+                                <th scope="row">{{ spec.label }}</th>
+                                <td>{{ spec.value }}</td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+                
+                <div class="availability-check mb-4">
+                    <h5>Check Availability</h5>
+                    <form id="availability-form" class="row g-3">
+                        <div class="col-md-6">
+                            <label for="check-start-date" class="form-label">Start Date</label>
+                            <input type="date" class="form-control" id="check-start-date" name="start_date" value="{{ frappe.utils.today() }}" required>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="check-end-date" class="form-label">End Date</label>
+                            <input type="date" class="form-control" id="check-end-date" name="end_date" value="{{ frappe.utils.add_days(frappe.utils.today(), 7) }}" required>
+                        </div>
+                        <div class="col-12">
+                            <button type="submit" class="btn btn-outline-primary">Check Availability</button>
+                        </div>
+                    </form>
+                    
+                    <div id="availability-result" class="mt-3" style="display: none;">
+                        <!-- Availability results will be shown here -->
+                    </div>
+                </div>
+                
+                <div class="booking-actions">
+                    {% if item.available %}
+                    <a href="/rental-booking-request?item={{ item.name }}" class="btn btn-primary btn-lg">Book Now</a>
+                    {% else %}
+                    <button class="btn btn-secondary btn-lg" disabled>Currently Unavailable</button>
+                    {% endif %}
+                    <a href="/rental-catalog" class="btn btn-outline-secondary btn-lg ms-2">Back to Catalog</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    {% if item.rental_terms %}
+    <div class="row mt-5">
+        <div class="col-12">
+            <div class="rental-terms">
+                <h3>Rental Terms</h3>
+                <div class="card">
+                    <div class="card-body">
+                        {{ item.rental_terms }}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endif %}
+    
+    {% if similar_items %}
+    <div class="row mt-5">
+        <div class="col-12">
+            <h3>Similar Equipment</h3>
+        </div>
+        
+        {% for similar in similar_items %}
+        <div class="col-md-3 mb-4">
+            <div class="card h-100">
+                {% if similar.image %}
+                <img src="{{ similar.image }}" class="card-img-top" alt="{{ similar.item_name }}">
+                {% else %}
+                <div class="card-img-top bg-light d-flex align-items-center justify-content-center" style="height: 150px;">
+                    <i class="fa fa-image fa-2x text-muted"></i>
+                </div>
+                {% endif %}
+                <div class="card-body">
+                    <div class="category-label mb-2">
+                        <span class="badge bg-secondary">{{ similar.item_group }}</span>
+                    </div>
+                    <h5 class="card-title">{{ similar.item_name }}</h5>
+                    <div class="pricing-options mt-2">
+                        <div class="row">
+                            <div class="col-4 text-center">
+                                <small>Daily</small>
+                                <div>{{ frappe.format_value(similar.daily_rate or similar.rate, {"fieldtype": "Currency"}) }}</div>
+                            </div>
+                            <div class="col-4 text-center">
+                                <small>Weekly</small>
+                                <div>{{ frappe.format_value(similar.weekly_rate or (similar.rate * 5), {"fieldtype": "Currency"}) }}</div>
+                            </div>
+                            <div class="col-4 text-center">
+                                <small>Monthly</small>
+                                <div>{{ frappe.format_value(similar.monthly_rate or (similar.rate * 20), {"fieldtype": "Currency"}) }}</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <a href="/rental-catalog/item/{{ similar.name }}" class="btn btn-outline-primary btn-sm">View Details</a>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    {% endif %}
+</div>
+{% endblock %}
+
+{% block style %}
+<style>
+    /* RentalHub Branded Header */
+    .rentalhub-header {
+        padding: 15px 0;
+        border-bottom: 1px solid #eee;
+    }
+    
+    .rentalhub-logo h1 {
+        font-weight: 700;
+        margin: 0;
+    }
+    
+    .rentalhub-nav {
+        margin-bottom: 20px;
+    }
+    
+    .rentalhub-nav .nav-link {
+        border-radius: 0;
+        padding: 10px 15px;
+        font-weight: 500;
+    }
+    
+    .rentalhub-nav .nav-link.active {
+        background-color: #0d6efd;
+    }
+    
+    /* Item details */
+    .rental-item-container {
+        padding: 20px 0;
+    }
+    
+    .item-image-container {
+        margin-bottom: 20px;
+    }
+    
+    .item-image-container img {
+        max-height: 400px;
+        object-fit: contain;
+        width: 100%;
+        border: 1px solid #eee;
+    }
+    
+    .placeholder-image {
+        border: 1px solid #dee2e6;
+        border-radius: 8px;
+    }
+    
+    .thumbnail-image {
+        cursor: pointer;
+        transition: opacity 0.3s ease;
+        height: 80px;
+        object-fit: cover;
+    }
+    
+    .thumbnail-image:hover {
+        opacity: 0.7;
+    }
+    
+    /* Category label */
+    .category-label .badge {
+        font-size: 0.8rem;
+        font-weight: 500;
+    }
+    
+    /* Availability status */
+    .availability-status .badge {
+        font-size: 0.8rem;
+        padding: 5px 10px;
+    }
+    
+    /* Pricing options */
+    .pricing-options {
+        margin: 20px 0;
+    }
+    
+    .price-card {
+        background-color: #f8f9fa;
+        border-radius: 8px;
+        padding: 15px;
+        text-align: center;
+        height: 100%;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    
+    .price-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    }
+    
+    .price-header {
+        font-weight: 600;
+        color: #6c757d;
+        margin-bottom: 5px;
+    }
+    
+    .price-amount {
+        font-size: 1.5rem;
+        font-weight: 700;
+        color: #28a745;
+        margin-bottom: 5px;
+    }
+    
+    .price-savings {
+        font-size: 0.8rem;
+        color: #dc3545;
+        font-weight: 500;
+    }
+    
+    /* Booking actions */
+    .booking-actions {
+        margin-top: 30px;
+    }
+    
+    /* Specifications table */
+    .item-specifications table {
+        border-radius: 8px;
+        overflow: hidden;
+    }
+    
+    .item-specifications th {
+        width: 40%;
+    }
+    
+    /* Responsive styles */
+    @media (max-width: 768px) {
+        .booking-actions .btn {
+            display: block;
+            width: 100%;
+            margin-bottom: 10px;
+        }
+        
+        .booking-actions .btn.ms-2 {
+            margin-left: 0 !important;
+        }
+        
+        .rentalhub-nav {
+            overflow-x: auto;
+            white-space: nowrap;
+            flex-wrap: nowrap;
+        }
+        
+        .rentalhub-nav .nav-item {
+            display: inline-block;
+        }
+    }
+</style>
+{% endblock %}
+
+{% block script %}
+<script>
+    $(document).ready(function() {
+        // Initialize date pickers with today as minimum date
+        var today = new Date().toISOString().split('T')[0];
+        $("#check-start-date").attr('min', today);
+        $("#check-end-date").attr('min', today);
+        
+        // Set end date min value when start date changes
+        $("#check-start-date").change(function() {
+            $("#check-end-date").attr('min', $(this).val());
+            if($("#check-end-date").val() && $("#check-end-date").val() < $(this).val()) {
+                $("#check-end-date").val($(this).val());
+            }
+        });
+        
+        // Thumbnail image click handler
+        $(".thumbnail-image").click(function() {
+            var imgSrc = $(this).attr('src');
+            $(".item-image-container img:first").attr('src', imgSrc);
+        });
+        
+        // Availability check form submission
+        $("#availability-form").submit(function(e) {
+            e.preventDefault();
+            var startDate = $("#check-start-date").val();
+            var endDate = $("#check-end-date").val();
+            
+            // Show loading indicator
+            $("#availability-result").html('<div class="spinner-border text-primary" role="status"><span class="visually-hidden">Loading...</span></div>').show();
+            
+            // Make AJAX call to check availability
+            $.ajax({
+                url: '/api/method/onhire_pro.api.check_item_availability',
+                type: 'POST',
+                data: {
+                    item_code: '{{ item.name }}',
+                    start_date: startDate,
+                    end_date: endDate
+                },
+                success: function(data) {
+                    if(data.message.available) {
+                        $("#availability-result").html('<div class="alert alert-success"><i class="fa fa-check-circle me-2"></i> This item is available for your selected dates!</div>');
+                        $(".booking-actions .btn-primary").prop('disabled', false).attr('href', '/rental-booking-request?item={{ item.name }}&start_date=' + startDate + '&end_date=' + endDate);
+                    } else {
+                        $("#availability-result").html('<div class="alert alert-danger"><i class="fa fa-times-circle me-2"></i> Sorry, this item is not available for your selected dates.</div>');
+                        $(".booking-actions .btn-primary").prop('disabled', true);
+                    }
+                },
+                error: function() {
+                    $("#availability-result").html('<div class="alert alert-danger"><i class="fa fa-exclamation-circle me-2"></i> Error checking availability. Please try again.</div>');
+                }
+            });
+        });
+    });
+</script>
+{% endblock %}

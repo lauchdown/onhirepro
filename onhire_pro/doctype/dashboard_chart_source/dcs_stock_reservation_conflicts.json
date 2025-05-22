@@ -1,0 +1,15 @@
+{
+    "doctype": "Dashboard Chart Source",
+    "name": "DCS - Stock Reservation Conflicts",
+    "chart_name": "Stock Reservation Conflicts",
+    "source_name": "DCS - Stock Reservation Conflicts",
+    "report_name": null,
+    "timeseries": 0,
+    "time_interval": "Daily",
+    "filters_json": "{}",
+    "data_source_type": "Python Method",
+    "source_type": "Python Method",
+    "method_name": "onhire_pro.reports.kpi_utils.calculate_stock_reservation_conflicts",
+    "cache_seconds": 3600,
+    "module": "OnHire Pro"
+}

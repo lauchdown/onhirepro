@@ -1,0 +1,15 @@
+{
+    "doctype": "Dashboard Chart Source",
+    "name": "DCS - Overdue Returns Rate Count",
+    "chart_name": "Overdue Returns Rate Count",
+    "source_name": "DCS - Overdue Returns Rate Count",
+    "report_name": null,
+    "timeseries": 0,
+    "time_interval": "Daily",
+    "filters_json": "{}",
+    "data_source_type": "Python Method",
+    "source_type": "Python Method",
+    "method_name": "onhire_pro.utils.kpi_calculations.calculate_overdue_returns_rate_count",
+    "cache_seconds": 3600,
+    "module": "OnHire Pro"
+}

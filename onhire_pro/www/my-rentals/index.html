@@ -1,0 +1,268 @@
+{% extends "templates/includes/rental_portal_base.html" %}
+
+{% block portal_content %}
+<div class="my-rentals-container">
+    <div class="row mb-4">
+        <div class="col-md-6">
+            <h2>My Rentals</h2>
+            <p>View and manage your active, upcoming, and past rentals.</p>
+        </div>
+        <div class="col-md-6 text-end">
+            <a href="/my-bookings-dashboard" class="btn btn-outline-primary me-2">
+                <i class="fa fa-tachometer-alt me-1"></i> Bookings Dashboard
+            </a>
+            <a href="/rental-catalog" class="btn btn-success">
+                <i class="fa fa-plus me-1"></i> New Rental
+            </a>
+        </div>
+    </div>
+
+    {% if error_message %}
+    <div class="row">
+        <div class="col-12">
+            <div class="alert alert-warning">
+                <i class="fa fa-exclamation-triangle me-2"></i> {{ error_message }}
+            </div>
+        </div>
+    </div>
+    {% else %}
+    <!-- Rental Statistics -->
+    <div class="row mb-4">
+        <div class="col-md-3 mb-3">
+            <div class="card h-100 border-primary">
+                <div class="card-body text-center">
+                    <h1 class="display-4 text-primary">{{ rental_stats.active_rentals }}</h1>
+                    <p class="card-text">Active Rentals</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3 mb-3">
+            <div class="card h-100 border-success">
+                <div class="card-body text-center">
+                    <h1 class="display-4 text-success">{{ rental_stats.upcoming_rentals }}</h1>
+                    <p class="card-text">Upcoming Rentals</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3 mb-3">
+            <div class="card h-100 border-info">
+                <div class="card-body text-center">
+                    <h1 class="display-4 text-info">{{ rental_stats.total_rental_days }}</h1>
+                    <p class="card-text">Total Rental Days</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3 mb-3">
+            <div class="card h-100 border-dark">
+                <div class="card-body text-center">
+                    <h1 class="display-4">{{ frappe.format_value(rental_stats.total_rental_value, {"fieldtype": "Currency"}) }}</h1>
+                    <p class="card-text">Total Rental Value</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- View Tabs -->
+    <div class="row mb-4">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header bg-primary text-white">
+                    <ul class="nav nav-tabs card-header-tabs">
+                        <li class="nav-item">
+                            <a class="nav-link {% if active_view == 'active' %}active bg-white text-primary{% else %}text-white{% endif %}" href="/my-rentals?view=active">
+                                <i class="fa fa-play-circle me-1"></i> Active Rentals
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link {% if active_view == 'upcoming' %}active bg-white text-primary{% else %}text-white{% endif %}" href="/my-rentals?view=upcoming">
+                                <i class="fa fa-clock me-1"></i> Upcoming Rentals
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link {% if active_view == 'past' %}active bg-white text-primary{% else %}text-white{% endif %}" href="/my-rentals?view=past">
+                                <i class="fa fa-history me-1"></i> Past Rentals
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="card-body">
+                    {% if rentals %}
+                        {% if active_view == 'active' %}
+                            <!-- Active Rentals View -->
+                            {% for rental in rentals %}
+                            <div class="card mb-4 rental-card">
+                                <div class="card-header d-flex justify-content-between align-items-center">
+                                    <h5 class="mb-0">{{ rental.booking_title }}</h5>
+                                    <span class="badge bg-primary">In Progress</span>
+                                </div>
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <p><strong>Booking Reference:</strong> {{ rental.booking_reference }}</p>
+                                            <p><strong>Dates:</strong> {{ rental.booking_start_date }} to {{ rental.booking_end_date }}</p>
+                                            <p><strong>Delivery Method:</strong> {{ rental.delivery_method|title }}</p>
+                                            
+                                            <!-- Progress Bar -->
+                                            <div class="mb-3">
+                                                <label class="form-label d-flex justify-content-between">
+                                                    <span>Rental Progress</span>
+                                                    <span>{{ rental.days_elapsed }} of {{ rental.total_days }} days ({{ rental.days_remaining }} days remaining)</span>
+                                                </label>
+                                                <div class="progress">
+                                                    <div class="progress-bar bg-success" role="progressbar" style="width: {{ rental.progress_percent }}%" 
+                                                         aria-valuenow="{{ rental.progress_percent }}" aria-valuemin="0" aria-valuemax="100">
+                                                        {{ rental.progress_percent }}%
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <p><strong>Rental Items:</strong></p>
+                                            <ul class="list-group">
+                                                {% for item in rental.items %}
+                                                <li class="list-group-item d-flex justify-content-between align-items-center">
+                                                    <div>
+                                                        {{ item.item_name }}
+                                                        {% if item.serial_no %}
+                                                        <small class="d-block text-muted">S/N: {{ item.serial_no }}</small>
+                                                        {% endif %}
+                                                    </div>
+                                                    <span>{{ item.qty }} x {{ frappe.format_value(item.rate, {"fieldtype": "Currency"}) }}/day</span>
+                                                </li>
+                                                {% endfor %}
+                                            </ul>
+                                            <p class="mt-3"><strong>Total Amount:</strong> {{ frappe.format_value(rental.total_amount, {"fieldtype": "Currency"}) }}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="card-footer">
+                                    <div class="d-flex justify-content-end">
+                                        <a href="/my-bookings/view?booking={{ rental.name }}" class="btn btn-outline-primary">
+                                            <i class="fa fa-eye me-1"></i> View Details
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                            {% endfor %}
+                        {% elif active_view == 'upcoming' %}
+                            <!-- Upcoming Rentals View -->
+                            {% for rental in rentals %}
+                            <div class="card mb-4 rental-card">
+                                <div class="card-header d-flex justify-content-between align-items-center">
+                                    <h5 class="mb-0">{{ rental.booking_title }}</h5>
+                                    <span class="badge bg-success">Approved</span>
+                                </div>
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <p><strong>Booking Reference:</strong> {{ rental.booking_reference }}</p>
+                                            <p><strong>Dates:</strong> {{ rental.booking_start_date }} to {{ rental.booking_end_date }}</p>
+                                            <p><strong>Delivery Method:</strong> {{ rental.delivery_method|title }}</p>
+                                            <p><strong>Starting In:</strong> <span class="text-success">{{ rental.days_until_start }} days</span></p>
+                                            <p><strong>Rental Duration:</strong> {{ rental.total_rental_days }} days</p>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <p><strong>Rental Items:</strong></p>
+                                            <ul class="list-group">
+                                                {% for item in rental.items %}
+                                                <li class="list-group-item d-flex justify-content-between align-items-center">
+                                                    <div>
+                                                        {{ item.item_name }}
+                                                        {% if item.serial_no %}
+                                                        <small class="d-block text-muted">S/N: {{ item.serial_no }}</small>
+                                                        {% endif %}
+                                                    </div>
+                                                    <span>{{ item.qty }} x {{ frappe.format_value(item.rate, {"fieldtype": "Currency"}) }}/day</span>
+                                                </li>
+                                                {% endfor %}
+                                            </ul>
+                                            <p class="mt-3"><strong>Total Amount:</strong> {{ frappe.format_value(rental.total_amount, {"fieldtype": "Currency"}) }}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="card-footer">
+                                    <div class="d-flex justify-content-end">
+                                        <a href="/my-bookings/view?booking={{ rental.name }}" class="btn btn-outline-primary">
+                                            <i class="fa fa-eye me-1"></i> View Details
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                            {% endfor %}
+                        {% elif active_view == 'past' %}
+                            <!-- Past Rentals View -->
+                            {% for rental in rentals %}
+                            <div class="card mb-4 rental-card">
+                                <div class="card-header d-flex justify-content-between align-items-center">
+                                    <h5 class="mb-0">{{ rental.booking_title }}</h5>
+                                    <span class="badge bg-{{ 'info' if rental.status == 'Completed' else 'primary' }}">{{ rental.status }}</span>
+                                </div>
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <p><strong>Booking Reference:</strong> {{ rental.booking_reference }}</p>
+                                            <p><strong>Dates:</strong> {{ rental.booking_start_date }} to {{ rental.booking_end_date }}</p>
+                                            <p><strong>Delivery Method:</strong> {{ rental.delivery_method|title }}</p>
+                                            <p><strong>Completed:</strong> {{ rental.days_since_end }} days ago</p>
+                                            <p><strong>Rental Duration:</strong> {{ rental.total_rental_days }} days</p>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <p><strong>Rental Items:</strong></p>
+                                            <ul class="list-group">
+                                                {% for item in rental.items %}
+                                                <li class="list-group-item d-flex justify-content-between align-items-center">
+                                                    <div>
+                                                        {{ item.item_name }}
+                                                        {% if item.serial_no %}
+                                                        <small class="d-block text-muted">S/N: {{ item.serial_no }}</small>
+                                                        {% endif %}
+                                                    </div>
+                                                    <span>{{ item.qty }} x {{ frappe.format_value(item.rate, {"fieldtype": "Currency"}) }}/day</span>
+                                                </li>
+                                                {% endfor %}
+                                            </ul>
+                                            <p class="mt-3"><strong>Total Amount:</strong> {{ frappe.format_value(rental.total_amount, {"fieldtype": "Currency"}) }}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="card-footer">
+                                    <div class="d-flex justify-content-end">
+                                        <a href="/my-bookings/view?booking={{ rental.name }}" class="btn btn-outline-primary me-2">
+                                            <i class="fa fa-eye me-1"></i> View Details
+                                        </a>
+                                        <a href="/rental-catalog" class="btn btn-outline-success">
+                                            <i class="fa fa-redo me-1"></i> Rent Again
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                            {% endfor %}
+                        {% endif %}
+                    {% else %}
+                        <div class="text-center py-5">
+                            <i class="fa fa-box-open fa-4x text-muted mb-3"></i>
+                            <h3>No {{ active_view }} rentals found</h3>
+                            <p class="text-muted">You don't have any {{ active_view }} rentals at the moment.</p>
+                            <div class="mt-4">
+                                <a href="/rental-catalog" class="btn btn-primary">
+                                    <i class="fa fa-plus me-1"></i> Browse Rental Catalog
+                                </a>
+                            </div>
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endif %}
+</div>
+{% endblock %}
+
+{% block script %}
+{{ super() }}
+<script>
+    $(document).ready(function() {
+        // Initialize any rentals-specific JavaScript here
+    });
+</script>
+{% endblock %}

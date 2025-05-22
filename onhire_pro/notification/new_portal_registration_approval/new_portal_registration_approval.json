@@ -1,0 +1,31 @@
+{
+ "docstatus": 0,
+ "doctype": "Notification",
+ "name": "New Portal Registration Approval",
+ "module": "OnHire Pro",
+ "subject": "New Portal Registration: {{ doc.name }}",
+ "document_type": "Lead",
+ "send_to_all_assignees": 0,
+ "send_system_notification": 1,
+ "send_email": 1,
+ "event": "New",
+ "method": "",
+ "message": "A new portal registration has been submitted and requires your approval.\n\nLead Name: {{ doc.lead_name }}\nCompany: {{ doc.company_name }}\nEmail: {{ doc.email_id }}\n\nPlease review: {{ frappe.utils.get_link_to_form('Lead', doc.name) }}",
+ "enabled": 1,
+ "condition": "doc.portal_registration_status == 'Pending Approval'",
+ "value_changed": "",
+ "set_property_after_alert": "",
+ "property_value": "",
+ "attach_print": 0,
+ "days_in_advance": 0,
+ "date_changed": "",
+ "recipients": [
+  {
+   "receiver_by_role": "System Manager"
+  }
+ ],
+ "owner": "Administrator",
+ "modified_by": "Administrator",
+ "creation": "2025-05-15 12:32:00.000000",
+ "modified": "2025-05-15 12:32:00.000000"
+}

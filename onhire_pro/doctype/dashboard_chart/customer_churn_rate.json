@@ -1,0 +1,18 @@
+{
+    "doctype": "Dashboard Chart",
+    "name": "Customer Churn Rate",
+    "chart_name": "Customer Churn Rate",
+    "chart_type": "Number Card",
+    "source": "DCS - Customer Churn Rate",
+    "report_name": null,
+    "timeseries": 0,
+    "time_interval": "Daily",
+    "filters_json": "{}",
+    "custom_options": "{}",
+    "module": "OnHire Pro",
+    "owner": "Administrator",
+    "restrict_to_roles": [
+        "Sales Manager",
+        "Operations Manager"
+    ]
+}

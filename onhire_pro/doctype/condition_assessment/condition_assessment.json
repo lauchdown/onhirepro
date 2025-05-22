@@ -1,0 +1,218 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "autoname": "format:CA-{####}",
+ "creation": "2025-05-15 21:31:30",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "item_code",
+  "item_name",
+  "serial_no",
+  "customer",
+  "assessment_date",
+  "column_break_5",
+  "rental_order",
+  "rental_return",
+  "assessment_type",
+  "status",
+  "section_break_10",
+  "checklist_template",
+  "checklist_items",
+  "section_break_13",
+  "overall_condition",
+  "damage_description",
+  "column_break_16",
+  "damage_charges",
+  "charge_customer",
+  "section_break_19",
+  "photos",
+  "amended_from"
+ ],
+ "fields": [
+  {
+   "fieldname": "item_code",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Item Code",
+   "options": "Item",
+   "reqd": 1
+  },
+  {
+   "fetch_from": "item_code.item_name",
+   "fieldname": "item_name",
+   "fieldtype": "Data",
+   "label": "Item Name",
+   "read_only": 1
+  },
+  {
+   "fieldname": "serial_no",
+   "fieldtype": "Link",
+   "label": "Serial No",
+   "options": "Serial No"
+  },
+  {
+   "fieldname": "customer",
+   "fieldtype": "Link",
+   "label": "Customer",
+   "options": "Customer"
+  },
+  {
+   "default": "Today",
+   "fieldname": "assessment_date",
+   "fieldtype": "Date",
+   "label": "Assessment Date",
+   "reqd": 1
+  },
+  {
+   "fieldname": "column_break_5",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "rental_order",
+   "fieldtype": "Link",
+   "label": "Rental Order",
+   "options": "Sales Order"
+  },
+  {
+   "fieldname": "rental_return",
+   "fieldtype": "Link",
+   "label": "Rental Return",
+   "options": "Delivery Note"
+  },
+  {
+   "fieldname": "assessment_type",
+   "fieldtype": "Select",
+   "label": "Assessment Type",
+   "options": "Pre-Rental\nPost-Rental\nMaintenance\nInventory",
+   "reqd": 1
+  },
+  {
+   "default": "Draft",
+   "fieldname": "status",
+   "fieldtype": "Select",
+   "label": "Status",
+   "options": "Draft\nIn Progress\nCompleted\nCancelled",
+   "reqd": 1
+  },
+  {
+   "fieldname": "section_break_10",
+   "fieldtype": "Section Break",
+   "label": "Checklist"
+  },
+  {
+   "fieldname": "checklist_template",
+   "fieldtype": "Link",
+   "label": "Checklist Template",
+   "options": "Condition Assessment Template"
+  },
+  {
+   "fieldname": "checklist_items",
+   "fieldtype": "Table",
+   "label": "Checklist Items",
+   "options": "Condition Checklist Item"
+  },
+  {
+   "fieldname": "section_break_13",
+   "fieldtype": "Section Break",
+   "label": "Condition Details"
+  },
+  {
+   "fieldname": "overall_condition",
+   "fieldtype": "Select",
+   "label": "Overall Condition",
+   "options": "Excellent\nGood\nFair\nPoor\nDamaged",
+   "reqd": 1
+  },
+  {
+   "fieldname": "damage_description",
+   "fieldtype": "Text Editor",
+   "label": "Damage Description"
+  },
+  {
+   "fieldname": "column_break_16",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "damage_charges",
+   "fieldtype": "Currency",
+   "label": "Damage Charges"
+  },
+  {
+   "default": "0",
+   "fieldname": "charge_customer",
+   "fieldtype": "Check",
+   "label": "Charge Customer"
+  },
+  {
+   "fieldname": "section_break_19",
+   "fieldtype": "Section Break",
+   "label": "Photos"
+  },
+  {
+   "fieldname": "photos",
+   "fieldtype": "Table",
+   "label": "Photos",
+   "options": "Condition Photo"
+  },
+  {
+   "fieldname": "amended_from",
+   "fieldtype": "Link",
+   "label": "Amended From",
+   "no_copy": 1,
+   "options": "Condition Assessment",
+   "print_hide": 1,
+   "read_only": 1
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "is_submittable": 1,
+ "links": [],
+ "modified": "2025-05-15 21:31:30",
+ "modified_by": "Administrator",
+ "module": "OnHire Pro",
+ "name": "Condition Assessment",
+ "naming_rule": "Expression",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Rental Manager",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "create": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Rental User",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": [],
+ "track_changes": 1
+}

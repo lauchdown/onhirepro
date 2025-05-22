@@ -1,0 +1,18 @@
+{
+    "doctype": "Dashboard Chart",
+    "name": "Items in Maintenance",
+    "chart_name": "Items in Maintenance",
+    "chart_type": "Number Card",
+    "source": "DCS - Items in Maintenance",
+    "report_name": null,
+    "timeseries": 0,
+    "time_interval": "Daily",
+    "filters_json": "{}",
+    "custom_options": "{}",
+    "module": "OnHire Pro",
+    "owner": "Administrator",
+    "restrict_to_roles": [
+        "Inventory Manager",
+        "Operations Manager"
+    ]
+}

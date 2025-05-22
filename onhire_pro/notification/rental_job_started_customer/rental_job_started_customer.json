@@ -1,0 +1,32 @@
+{
+ "docstatus": 0,
+ "doctype": "Notification",
+ "name": "Rental Job Started Customer",
+ "module": "OnHire Pro",
+ "subject": "Your Rental Items for Job {{ doc.name }} are on their way!",
+ "document_type": "Rental Job",
+ "send_to_all_assignees": 0,
+ "send_system_notification": 1,
+ "send_email": 1,
+ "event": "Value Change",
+ "value_changed": "status",
+ "channel": "Email",
+ "message_type": "HTML",
+ "message": "Dear {{ doc.customer_name }},<br><br>The items for your Rental Job ({{ doc.name }}) have been dispatched and your rental period has started (or is about to start).<br><br>Dispatch Date: {{ frappe.utils.formatdate(doc.scheduled_dispatch_date) }}<br>Expected Return Date: {{ frappe.utils.formatdate(doc.scheduled_return_date) }}<br><br>You can view your rental job details here: {{ frappe.utils.get_link_to_form('Rental Job', doc.name) }}<br><br>Thank you,<br>The OnHire Pro Team",
+ "enabled": 1,
+ "condition": "doc.status in ['Dispatched', 'In Use'] and doc.get_doc_before_save().status not in ['Dispatched', 'In Use']",
+ "recipients": [
+  {
+   "receiver_by_document_field": "customer_email",
+   "condition": "doc.customer_email"
+  },
+  {
+   "receiver_by_document_field": "customer",
+   "condition": "!doc.customer_email"
+  }
+ ],
+ "owner": "Administrator",
+ "modified_by": "Administrator",
+ "creation": "2025-05-15 13:55:00.000000",
+ "modified": "2025-05-15 13:55:00.000000"
+}

@@ -1,0 +1,120 @@
+{
+ "docstatus": 0,
+ "doctype": "Web Form",
+ "idx": 0,
+ "is_standard": 1,
+ "title": "Portal Registration",
+ "module": "OnHire Pro",
+ "route": "portal-registration",
+ "doc_type": "Lead",
+ "allow_multiple": 1,
+ "show_list": 0,
+ "show_sidebar": 0,
+ "allow_edit": 0,
+ "allow_delete": 0,
+ "allow_print": 0,
+ "allow_comments": 0,
+ "login_required": 0,
+ "show_attachments": 0,
+ "success_message": "Thank you for registering. We will review your application and get back to you shortly.",
+ "button_label": "Register",
+ "owner": "Administrator",
+ "modified_by": "Administrator",
+ "creation": "2025-05-15 12:31:00.000000",
+ "modified": "2025-05-15 12:31:00.000000",
+ "web_form_fields": [
+  {
+   "fieldname": "company_name",
+   "label": "Company Name",
+   "fieldtype": "Data",
+   "reqd": 1,
+   "options": "",
+   "hidden": 0,
+   "read_only": 0,
+   "default": "",
+   "description": "Your company's official name."
+  },
+  {
+   "fieldname": "lead_name",
+   "label": "Contact Person Name",
+   "fieldtype": "Data",
+   "reqd": 1,
+   "options": "",
+   "hidden": 0,
+   "read_only": 0,
+   "default": "",
+   "description": "Full name of the primary contact person."
+  },
+  {
+   "fieldname": "email_id",
+   "label": "Email Address",
+   "fieldtype": "Data",
+   "reqd": 1,
+   "options": "Email",
+   "hidden": 0,
+   "read_only": 0,
+   "default": "",
+   "description": "Your primary email address for communication."
+  },
+  {
+   "fieldname": "phone",
+   "label": "Phone Number",
+   "fieldtype": "Data",
+   "reqd": 0,
+   "options": "Phone",
+   "hidden": 0,
+   "read_only": 0,
+   "default": "",
+   "description": "Your primary contact phone number."
+  },
+  {
+   "fieldname": "address_section",
+   "label": "Company Address",
+   "fieldtype": "Section Break",
+   "hidden": 0
+  },
+  {
+   "fieldname": "address_line1",
+   "label": "Address Line 1",
+   "fieldtype": "Data",
+   "reqd": 0,
+   "hidden": 0
+  },
+  {
+   "fieldname": "address_line2",
+   "label": "Address Line 2",
+   "fieldtype": "Data",
+   "reqd": 0,
+   "hidden": 0
+  },
+  {
+   "fieldname": "city",
+   "label": "City",
+   "fieldtype": "Data",
+   "reqd": 0,
+   "hidden": 0
+  },
+  {
+   "fieldname": "state",
+   "label": "State/Province",
+   "fieldtype": "Data",
+   "reqd": 0,
+   "hidden": 0
+  },
+  {
+   "fieldname": "pincode",
+   "label": "Postal Code/Zip Code",
+   "fieldtype": "Data",
+   "reqd": 0,
+   "hidden": 0
+  },
+  {
+   "fieldname": "country",
+   "label": "Country",
+   "fieldtype": "Link",
+   "options": "Country",
+   "reqd": 0,
+   "hidden": 0
+  }
+ ]
+}

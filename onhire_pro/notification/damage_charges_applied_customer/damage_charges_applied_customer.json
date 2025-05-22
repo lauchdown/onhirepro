@@ -1,0 +1,33 @@
+{
+ "docstatus": 0,
+ "doctype": "Notification",
+ "name": "Damage Charges Applied Customer",
+ "module": "OnHire Pro",
+ "subject": "Notification: Damage Charges Applied for Rental Job {{ doc.custom_linked_rental_job }}",
+ "document_type": "Sales Invoice",
+ "send_to_all_assignees": 0,
+ "send_system_notification": 1,
+ "send_email": 1,
+ "event": "Submit",
+ "channel": "Email",
+ "message_type": "HTML",
+ "message": "Dear {{ doc.customer_name }},<br><br>This email is to inform you that damage charges have been applied related to Rental Job {{ doc.custom_linked_rental_job }}.<br><br>Invoice Number: {{ doc.name }}<br>Amount: {{ frappe.utils.format_currency(doc.grand_total, doc.currency) }}<br><br>Please review the invoice for details. You can view it here: {{ frappe.utils.get_link_to_form('Sales Invoice', doc.name) }}<br><br>If you have any questions, please contact us.<br><br>Regards,<br>The OnHire Pro Team",
+ "enabled": 1,
+ "condition": "doc.custom_is_damage_charge_invoice == 1 and doc.custom_linked_rental_job",
+ "recipients": [
+  {
+   "receiver_by_document_field": "contact_email",
+   "condition": "doc.contact_email"
+  },
+  {
+   "receiver_by_document_field": "customer",
+   "condition": "!doc.contact_email"
+  }
+ ],
+ "attach_print": 1,
+ "print_format": "Standard", 
+ "owner": "Administrator",
+ "modified_by": "Administrator",
+ "creation": "2025-05-15 13:58:00.000000",
+ "modified": "2025-05-15 13:58:00.000000"
+}

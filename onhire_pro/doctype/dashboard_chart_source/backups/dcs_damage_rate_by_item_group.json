@@ -1,0 +1,15 @@
+{
+    "doctype": "Dashboard Chart Source",
+    "name": "DCS - Damage Rate by Item Group",
+    "chart_name": "Damage Rate by Item Group",
+    "source_name": "DCS - Damage Rate by Item Group",
+    "report_name": null,
+    "timeseries": 1,
+    "time_interval": "Monthly",
+    "filters_json": "{}",
+    "data_source_type": "Python Method",
+    "source_type": "Python Method",
+    "method_name": "onhire_pro.utils.kpi_calculations.calculate_damage_rate_by_group",
+    "cache_seconds": 3600,
+    "module": "OnHire Pro"
+}

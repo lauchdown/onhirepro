@@ -1,0 +1,15 @@
+{
+    "doctype": "Dashboard Chart Source",
+    "name": "DCS - Maintenance Turnaround Time",
+    "chart_name": "Maintenance Turnaround Time",
+    "source_name": "DCS - Maintenance Turnaround Time",
+    "report_name": null,
+    "timeseries": 0,
+    "time_interval": "Daily",
+    "filters_json": "{}",
+    "data_source_type": "Python Method",
+    "source_type": "Python Method",
+    "method_name": "onhire_pro.reports.kpi_utils.calculate_maintenance_turnaround_time",
+    "cache_seconds": 3600,
+    "module": "OnHire Pro"
+}

@@ -1,0 +1,105 @@
+{
+ "name": "Maintenance Task",
+ "module": "OnHire Pro",
+ "doctype": "DocType",
+ "owner": "Administrator",
+ "permissions": [
+  {"role": "System Manager", "read": 1, "write": 1, "create": 1, "delete": 1, "share": 1, "submit": 1, "cancel": 1},
+  {"role": "Maintenance Manager", "read": 1, "write": 1, "create": 1, "delete": 1, "share": 1, "submit": 1, "cancel": 1},
+  {"role": "Maintenance User", "read": 1, "write": 1, "create": 1, "share": 1}
+ ],
+ "autoname": "MTASK-.#####",
+ "naming_rule": "Autoname",
+ "track_changes": 1,
+ "engine": "InnoDB",
+ "fields": [
+  {
+   "fieldname": "subject",
+   "label": "Subject / Title",
+   "fieldtype": "Data",
+   "reqd": 1,
+   "in_list_view": 1
+  },
+  {
+   "fieldname": "status",
+   "label": "Status",
+   "fieldtype": "Select",
+   "options": "Open\nIn Progress\nOn Hold\nCompleted\nCancelled",
+   "default": "Open",
+   "reqd": 1,
+   "in_list_view": 1
+  },
+  {
+   "fieldname": "priority",
+   "label": "Priority",
+   "fieldtype": "Select",
+   "options": "Low\nMedium\nHigh",
+   "default": "Medium"
+  },
+  {
+   "fieldname": "item_code",
+   "label": "Item Code",
+   "fieldtype": "Link",
+   "options": "Item",
+   "in_list_view": 1
+  },
+  {
+   "fieldname": "serial_no",
+   "label": "Serial Number",
+   "fieldtype": "Link",
+   "options": "Serial No",
+   "get_query": "return {'filters': {'item_code': locals().get('item_code')}}",
+   "in_list_view": 1
+  },
+  {
+   "fieldname": "maintenance_type",
+   "label": "Maintenance Type",
+   "fieldtype": "Link",
+   "options": "Maintenance Type"
+  },
+  {
+   "fieldname": "description",
+   "label": "Description",
+   "fieldtype": "TextEditor"
+  },
+  {
+   "fieldname": "start_date",
+   "label": "Start Date",
+   "fieldtype": "Datetime"
+  },
+  {
+   "fieldname": "completion_date",
+   "label": "Completion Date",
+   "fieldtype": "Datetime"
+  },
+  {
+   "fieldname": "due_date",
+   "label": "Due Date",
+   "fieldtype": "Date"
+  },
+  {
+   "fieldname": "assigned_to",
+   "label": "Assigned To",
+   "fieldtype": "Link",
+   "options": "User"
+  },
+  {
+   "fieldname": "company",
+   "label": "Company",
+   "fieldtype": "Link",
+   "options": "Company",
+   "default": ":Company",
+   "reqd": 1
+  },
+  {
+   "fieldname": "notes",
+   "label": "Notes / Resolution Details",
+   "fieldtype": "Text"
+  }
+ ],
+ "title_field": "subject",
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "allow_rename": 1,
+ "is_submittable": 1 
+}

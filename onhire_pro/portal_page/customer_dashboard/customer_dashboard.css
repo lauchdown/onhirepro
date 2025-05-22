@@ -1,0 +1,74 @@
+/* customer_dashboard.css */
+.customer-dashboard-container .section-divider {
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid #eee;
+}
+.customer-dashboard-container .section-divider:last-child {
+    border-bottom: none;
+    margin-bottom: 0;
+}
+
+.customer-dashboard-container h4 {
+    margin-bottom: 15px;
+    font-weight: 600;
+    color: #333;
+}
+
+.dashboard-stat, .dashboard-tile {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 4px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+    text-align: center;
+    margin-bottom: 15px; /* For mobile stacking */
+}
+
+.dashboard-stat .stat-value, .dashboard-tile .tile-value {
+    font-size: 2em;
+    font-weight: bold;
+    display: block;
+    color: #337ab7; /* Primary color */
+}
+.dashboard-stat .stat-label, .dashboard-tile .tile-label {
+    font-size: 0.9em;
+    color: #777;
+    display: block;
+    margin-top: 5px;
+}
+
+.dashboard-tile .tile-link {
+    display: block;
+    margin-top: 10px;
+    font-size: 0.9em;
+}
+
+
+#portal-alerts-widget .alert-list .list-group-item {
+    margin-bottom: 10px;
+    border-radius: 3px;
+}
+#portal-alerts-widget .alert-list .list-group-item strong {
+    display: block;
+    margin-bottom: 3px;
+}
+
+
+.chart-container {
+    background-color: #fff;
+    padding: 15px;
+    border-radius: 4px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+    margin-bottom: 15px;
+}
+.chart-container h5 {
+    text-align: center;
+    margin-bottom: 15px;
+    font-weight: 500;
+}
+
+/* Quick action buttons styling */
+.customer-dashboard-container .btn-default {
+    margin-right: 10px;
+    margin-bottom: 10px; /* For wrapping on smaller screens */
+}

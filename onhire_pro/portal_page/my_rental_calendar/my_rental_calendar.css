@@ -1,0 +1,22 @@
+/* my_rental_calendar.css */
+#customer-rental-calendar {
+    max-width: 100%;
+    margin: 0 auto; /* Center calendar if a max-width is set */
+}
+
+/* Additional styling for event popovers or specific elements if needed */
+.fc-event-popover {
+    z-index: 1050; /* Ensure popover is above other elements if necessary */
+}
+
+/* Ensure calendar toolbar buttons are adequately spaced on mobile */
+@media (max-width: 576px) {
+    #customer-rental-calendar .fc-header-toolbar .fc-button-group {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center; /* Center buttons if they wrap */
+    }
+    #customer-rental-calendar .fc-header-toolbar .fc-button {
+        margin: 2px; /* Add small margin between wrapped buttons */
+    }
+}

@@ -1,0 +1,18 @@
+{
+    "doctype": "Dashboard Chart",
+    "name": "Quick Links - Operations",
+    "chart_name": "Quick Links - Operations",
+    "chart_type": "Links",
+    "source": null,
+    "report_name": null,
+    "timeseries": 0,
+    "time_interval": "Daily",
+    "filters_json": "{}",
+    "custom_options": "{\"links\": [{\"label\": \"New Rental Job\", \"type\": \"doctype\", \"name\": \"Rental Job\", \"is_query_report\": false, \"dependencies\": \"Rental Job\"},{\"label\": \"View Rental Calendar\", \"type\": \"page\", \"name\": \"rental-calendar\"},{\"label\": \"Open Quotations\", \"type\": \"report\", \"name\": \"Quotation\", \"is_query_report\": true, \"filters\": {\"status\": \"Open\"}}]}",
+    "module": "OnHire Pro",
+    "owner": "Administrator",
+    "restrict_to_roles": [
+        "Operations Manager",
+        "Rental Staff"
+    ]
+}

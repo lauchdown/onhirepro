@@ -1,0 +1,19 @@
+{
+    "doctype": "Dashboard Chart",
+    "name": "Top 5 Customers by Rental Value",
+    "chart_name": "Top 5 Customers by Rental Value",
+    "chart_type": "Bar",
+    "source": "DCS - Top 5 Customers by Rental Value",
+    "report_name": null,
+    "timeseries": 1,
+    "time_interval": "Monthly",
+    "filters_json": "{}",
+    "custom_options": "{}",
+    "module": "OnHire Pro",
+    "owner": "Administrator",
+    "restrict_to_roles": [
+        "Sales Manager",
+        "Finance Manager",
+        "Operations Manager"
+    ]
+}

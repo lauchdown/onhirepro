@@ -1,0 +1,15 @@
+{
+    "doctype": "Dashboard Chart Source",
+    "name": "DCS - Rental Revenue Trend",
+    "chart_name": "Rental Revenue Trend",
+    "source_name": "DCS - Rental Revenue Trend",
+    "report_name": null,
+    "timeseries": 1,
+    "time_interval": "Monthly",
+    "filters_json": "{}",
+    "data_source_type": "Python Method",
+    "source_type": "Python Method",
+    "method_name": "onhire_pro.utils.kpi_calculations.calculate_rental_revenue_trend",
+    "cache_seconds": 3600,
+    "module": "OnHire Pro"
+}

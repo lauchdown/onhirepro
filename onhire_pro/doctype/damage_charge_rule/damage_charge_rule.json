@@ -1,0 +1,128 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "autoname": "format:DCR-{####}",
+ "creation": "2025-05-15 21:54:10",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "rule_name",
+  "item_group",
+  "damage_level",
+  "charge_type",
+  "charge_percentage",
+  "fixed_charge_amount",
+  "charge_item_code",
+  "description",
+  "is_active"
+ ],
+ "fields": [
+  {
+   "fieldname": "rule_name",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Rule Name",
+   "reqd": 1,
+   "unique": 1
+  },
+  {
+   "fieldname": "item_group",
+   "fieldtype": "Link",
+   "label": "Item Group",
+   "options": "Item Group"
+  },
+  {
+   "fieldname": "damage_level",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "label": "Damage Level",
+   "options": "Minor\nModerate\nSevere\nCritical",
+   "reqd": 1
+  },
+  {
+   "fieldname": "charge_type",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "label": "Charge Type",
+   "options": "Percentage of Item Value\nFixed Amount",
+   "reqd": 1
+  },
+  {
+   "depends_on": "eval:doc.charge_type=='Percentage of Item Value'",
+   "fieldname": "charge_percentage",
+   "fieldtype": "Float",
+   "label": "Charge Percentage"
+  },
+  {
+   "depends_on": "eval:doc.charge_type=='Fixed Amount'",
+   "fieldname": "fixed_charge_amount",
+   "fieldtype": "Currency",
+   "label": "Fixed Charge Amount"
+  },
+  {
+   "fieldname": "charge_item_code",
+   "fieldtype": "Link",
+   "label": "Charge Item Code",
+   "options": "Item",
+   "reqd": 1
+  },
+  {
+   "fieldname": "description",
+   "fieldtype": "Text",
+   "label": "Description"
+  },
+  {
+   "default": "1",
+   "fieldname": "is_active",
+   "fieldtype": "Check",
+   "label": "Is Active"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2025-05-15 21:54:10",
+ "modified_by": "Administrator",
+ "module": "OnHire Pro",
+ "name": "Damage Charge Rule",
+ "naming_rule": "Expression",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Rental Manager",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Rental User",
+   "share": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": [],
+ "track_changes": 1
+}

@@ -1,0 +1,15 @@
+{
+    "doctype": "Dashboard Chart Source",
+    "name": "DCS - Top 5 Customers by Rental Value",
+    "chart_name": "Top 5 Customers by Rental Value",
+    "source_name": "DCS - Top 5 Customers by Rental Value",
+    "report_name": null,
+    "timeseries": 1,
+    "time_interval": "Monthly",
+    "filters_json": "{}",
+    "data_source_type": "Python Method",
+    "source_type": "Python Method",
+    "method_name": "onhire_pro.utils.kpi_calculations.calculate_top_customers_by_value",
+    "cache_seconds": 3600,
+    "module": "OnHire Pro"
+}

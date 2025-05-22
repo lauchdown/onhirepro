@@ -1,0 +1,31 @@
+{
+ "docstatus": 0,
+ "doctype": "Notification",
+ "name": "Booking Request Submitted Customer",
+ "module": "OnHire Pro",
+ "subject": "Your Rental Booking Request {{ doc.name }} has been received!",
+ "document_type": "Quotation",
+ "send_to_all_assignees": 0,
+ "send_system_notification": 1,
+ "send_email": 1,
+ "event": "Submit",
+ "channel": "Email",
+ "message_type": "HTML",
+ "message": "Dear {{ doc.contact_person or doc.customer_name }},<br><br>Thank you for your rental booking request ({{ doc.name }}). We have received it and will get back to you with a formal quotation or update shortly.<br><br>You can view your request details here: {{ frappe.utils.get_link_to_form('Quotation', doc.name) }}<br><br>Thank you,<br>The OnHire Pro Team",
+ "enabled": 1,
+ "condition": "doc.custom_is_rental_request == 1",
+ "recipients": [
+  {
+   "receiver_by_document_field": "email_id",
+   "condition": "doc.contact_email" 
+  },
+  {
+   "receiver_by_document_field": "customer",
+   "condition": "!doc.contact_email" 
+  }
+ ],
+ "owner": "Administrator",
+ "modified_by": "Administrator",
+ "creation": "2025-05-15 13:53:00.000000",
+ "modified": "2025-05-15 13:53:00.000000"
+}

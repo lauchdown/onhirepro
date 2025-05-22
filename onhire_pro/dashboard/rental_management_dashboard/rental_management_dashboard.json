@@ -1,0 +1,33 @@
+{
+ "cards_label": "Key Metrics",
+ "charts": [],
+ "creation": "2025-05-15 15:16:00.000000",
+ "dashboard_name": "Rental Management Dashboard",
+ "docstatus": 0,
+ "doctype": "Dashboard",
+ "idx": 0,
+ "is_default": 0,
+ "is_standard": 1,
+ "modified": "2025-05-15 15:16:00.000000",
+ "modified_by": "Administrator",
+ "module": "OnHire Pro",
+ "name": "Rental Management Dashboard",
+ "owner": "Administrator",
+ "roles": [
+  {
+   "role": "Rental Manager"
+  },
+  {
+   "role": "Operations Manager"
+  },
+  {
+   "role": "Stock Manager"
+  },
+  {
+   "role": "Sales Manager"
+  },
+  {
+   "role": "Accounts Manager"
+  }
+ ]
+}

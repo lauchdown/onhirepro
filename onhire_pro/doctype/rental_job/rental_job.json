@@ -1,0 +1,185 @@
+{
+    "actions": [],
+    "allow_rename": 1,
+    "autoname": "format:RJ-{YYYY}-{MM}-{#####}",
+    "creation": "2025-05-16 05:07:21",
+    "doctype": "DocType",
+    "engine": "InnoDB",
+    "field_order": [
+        "sales_order",
+        "customer",
+        "project_name",
+        "job_status",
+        "column_break_1",
+        "scheduled_dispatch_date",
+        "scheduled_return_date",
+        "actual_dispatch_date",
+        "actual_return_date",
+        "assigned_technician",
+        "items_section",
+        "items",
+        "notes_section",
+        "notes",
+        "amended_from"
+    ],
+    "fields": [
+        {
+            "fieldname": "sales_order",
+            "fieldtype": "Link",
+            "label": "Sales Order",
+            "options": "Sales Order",
+            "reqd": 1,
+            "in_list_view": 1
+        },
+        {
+            "fieldname": "customer",
+            "fieldtype": "Link",
+            "label": "Customer",
+            "options": "Customer",
+            "fetch_from": "sales_order.customer",
+            "read_only": 1,
+            "in_list_view": 1
+        },
+        {
+            "fieldname": "project_name",
+            "fieldtype": "Data",
+            "label": "Project/Production Name",
+            "fetch_from": "sales_order.project"
+        },
+        {
+            "fieldname": "job_status",
+            "fieldtype": "Select",
+            "label": "Job Status",
+            "options": "Pending Preparation\nPreparation in Progress\nReady for Dispatch\nDispatched\nPartially Returned\nReturned\nPending Condition Assessment\nCondition Assessment Complete\nPending Invoicing\nInvoiced\nCompleted\nCancelled",
+            "default": "Pending Preparation",
+            "reqd": 1,
+            "in_list_view": 1
+        },
+        {
+            "fieldname": "column_break_1",
+            "fieldtype": "Column Break"
+        },
+        {
+            "fieldname": "scheduled_dispatch_date",
+            "fieldtype": "Datetime",
+            "label": "Scheduled Dispatch Date",
+            "reqd": 1,
+            "in_list_view": 1
+        },
+        {
+            "fieldname": "scheduled_return_date",
+            "fieldtype": "Datetime",
+            "label": "Scheduled Return Date",
+            "reqd": 1,
+            "in_list_view": 1
+        },
+        {
+            "fieldname": "actual_dispatch_date",
+            "fieldtype": "Datetime",
+            "label": "Actual Dispatch Date"
+        },
+        {
+            "fieldname": "actual_return_date",
+            "fieldtype": "Datetime",
+            "label": "Actual Return Date"
+        },
+        {
+            "fieldname": "assigned_technician",
+            "fieldtype": "Link",
+            "label": "Assigned Technician",
+            "options": "User"
+        },
+        {
+            "fieldname": "items_section",
+            "fieldtype": "Section Break",
+            "label": "Items"
+        },
+        {
+            "fieldname": "items",
+            "fieldtype": "Table",
+            "label": "Items",
+            "options": "Rental Job Item",
+            "reqd": 1
+        },
+        {
+            "fieldname": "notes_section",
+            "fieldtype": "Section Break",
+            "label": "Notes"
+        },
+        {
+            "fieldname": "notes",
+            "fieldtype": "TextEditor",
+            "label": "Notes"
+        },
+        {
+            "fieldname": "amended_from",
+            "fieldtype": "Link",
+            "label": "Amended From",
+            "no_copy": 1,
+            "options": "Rental Job",
+            "print_hide": 1,
+            "read_only": 1
+        }
+    ],
+    "index_web_pages_for_search": 1,
+    "is_submittable": 1,
+    "links": [
+        {
+            "link_doctype": "Sales Order",
+            "link_fieldname": "sales_order"
+        }
+    ],
+    "modified": "2025-05-16 05:07:21",
+    "modified_by": "Administrator",
+    "module": "OnHire Pro",
+    "name": "Rental Job",
+    "naming_rule": "By "format" string",
+    "owner": "Administrator",
+    "permissions": [
+        {
+            "create": 1,
+            "delete": 1,
+            "email": 1,
+            "export": 1,
+            "print": 1,
+            "read": 1,
+            "report": 1,
+            "role": "System Manager",
+            "share": 1,
+            "submit": 1,
+            "cancel": 1,
+            "amend": 1,
+            "write": 1
+        },
+        {
+            "create": 1,
+            "delete": 1,
+            "email": 1,
+            "export": 1,
+            "print": 1,
+            "read": 1,
+            "report": 1,
+            "role": "Rental Manager",
+            "share": 1,
+            "submit": 1,
+            "cancel": 1,
+            "amend": 1,
+            "write": 1
+        },
+        {
+            "create": 1,
+            "read": 1,
+            "role": "Rental User",
+            "share": 1,
+            "write": 1
+        }
+    ],
+    "sort_field": "modified",
+    "sort_order": "DESC",
+    "track_changes": 1,
+    "track_seen": 1,
+    "track_views": 1,
+    "website": {
+        "has_sidebar": 1
+    }
+}
